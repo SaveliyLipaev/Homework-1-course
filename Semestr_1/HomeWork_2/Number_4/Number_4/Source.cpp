@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <cstdlib>
 
-void swap(int &x1, int &x2);
-void sortingForAssignment(int *mas, int length);
+int sortingForAssignment(int *mas, int length);
 void printMas(int *mas, int length);
+bool test(void);
 
 int main()
 {
@@ -29,35 +29,41 @@ int main()
 
 	sortingForAssignment(mas, length);
 
-	printf("Array after processing:\n");
+	printf("\nArray after processing:\n");
 	printMas(mas, length);
+
+	if (test())
+	{
+		printf("\nThe test was successful\n");
+	}
+	else
+	{
+		printf("\nThe test was failed\n");
+	}
 
 	delete[] mas;
 	return 0;
 }
 
-void swap(int &x1, int &x2)
+int sortingForAssignment(int *mas, int length)
 {
-	int b = x1;
-	x1 = x2;
-	x2 = b;
-}
+	int firstVariable = mas[0]; 
+	int helpVariable = 1;
 
-void sortingForAssignment(int *mas, int length)
-{
-	int firstVeriable = mas[0], helpVeriable = 1;
 	for (int i = 1; i < length; ++i)
 	{
-		if (mas[i] < firstVeriable)
+		if (mas[i] < firstVariable)
 		{
-			swap(mas[i], mas[i - helpVeriable]);
+			const int buffer = mas[i];
+			mas[i] = mas[i - helpVariable];
+			mas[i - helpVariable] = buffer;
 		}
 		else
 		{
-			++helpVeriable;
+			++helpVariable;
 		}
 	}
-
+	return helpVariable;
 }
 
 void printMas(int *mas, int length)
@@ -67,4 +73,11 @@ void printMas(int *mas, int length)
 		printf("%d ", mas[i]);
 	}
 	printf("\n");
+}
+
+bool test(void)
+{
+	int array1[6]{ 6, 7, -5, 0, 3, 8 };
+	int array2[8]{ 2, 3, 4, 5, 6, 7, -1, 8 };
+	return sortingForAssignment(array1, 6) == 3 && sortingForAssignment(array2, 8) == 7;
 }
