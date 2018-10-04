@@ -36,7 +36,7 @@ void bubble(int *mas, int length)
 		{
 			if (mas[j] < mas[j - 1])
 			{
-				int buffer = mas[j];
+				const int buffer = mas[j];
 				mas[j] = mas[j - 1];
 				mas[j - 1] = buffer;
 			}
@@ -68,14 +68,14 @@ void sortingCounting(int *mas, int length)
 		++helpMasPos[mas[i] + abs(min)];
 	}
 
-	int helpVariable = 0;
+	int indexInMainArrayToFill = 0;
 
 	for (int i = 0; i <= max + abs(min); ++i)
 	{
 		for (int j = 0; j < helpMasPos[i]; ++j)
 		{
-			mas[helpVariable] = i - abs(min);
-			++helpVariable;
+			mas[indexInMainArrayToFill] = i - abs(min);
+			++indexInMainArrayToFill;
 		}
 	}
 
@@ -92,8 +92,8 @@ bool test(void(*ptrFunction)(int*, int))
 	{
 		if ((array1[i] > array1[i + 1]) || (array2[i] > array2[i + 1]))
 		{
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
