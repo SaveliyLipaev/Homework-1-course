@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <cmath>
 
-void swap(int &x1, int &x2);
 void bubble(int *mas, int length);
 void sortingCounting(int *mas, int length);
 bool test(void(*ptrFunction)(int*, int));
@@ -28,13 +28,6 @@ int main()
 	return 0;
 }
 
-void swap(int &x1, int &x2)
-{
-	int b = x1;
-	x1 = x2;
-	x2 = b;
-}
-
 void bubble(int *mas, int length)
 {
 	for (int i = 0; i < length; ++i)
@@ -43,7 +36,9 @@ void bubble(int *mas, int length)
 		{
 			if (mas[j] < mas[j - 1])
 			{
-				swap(mas[j], mas[j - 1]);
+				int buffer = mas[j];
+				mas[j] = mas[j - 1];
+				mas[j - 1] = buffer;
 			}
 		}
 	}
@@ -51,44 +46,54 @@ void bubble(int *mas, int length)
 
 void sortingCounting(int *mas, int length)
 {
-	int max = 0, helpVariable = 0, min = 0;
+	int max = 0;
+	int min = 0;
+
 	for (int i = 0; i < length; ++i)
 	{
 		if (mas[i] > max)
 		{
 			max = mas[i];
 		}
+		if (mas[i] < min)
+		{
+			min = mas[i];
+		}
 	}
-	int *helpMasPos = new int[max + 1];
-	for (int i = 0; i <= max; ++i)
-	{
-		helpMasPos[i] = 0;
-	}
+
+	int *helpMasPos = new int[max + abs(min) + 1]{};
 
 	for (int i = 0; i < length; ++i)
 	{
-		++helpMasPos[mas[i]];
+		++helpMasPos[mas[i] + abs(min)];
 	}
 
-	for (int i = 0; i <= max; ++i)
+	int helpVariable = 0;
+
+	for (int i = 0; i <= max + abs(min); ++i)
 	{
 		for (int j = 0; j < helpMasPos[i]; ++j)
 		{
-			mas[helpVariable] = i;
+			mas[helpVariable] = i - abs(min);
 			++helpVariable;
 		}
 	}
+
 	delete[] helpMasPos;
 }
 
 bool test(void(*ptrFunction)(int*, int))
 {
-	int aray[9] = { 5,6,3,1,8,9,5,3,3 };
-	ptrFunction(aray, 9);
+	int array1[9] = { 5, 6, 3, 1, 8, 0, 5, 3, 3 };
+	int array2[9] = { 8, -3, 5, 0, -5, -1, -4, -3, 8 };
+	ptrFunction(array1, 9);
+	ptrFunction(array2, 9);
 	for (int i = 0; i < 8; ++i)
 	{
-		if (aray[i] > aray[i + 1])
+		if ((array1[i] > array1[i + 1]) || (array2[i] > array2[i + 1]))
+		{
 			return 0;
+		}
 	}
 	return 1;
 }
