@@ -25,6 +25,8 @@ int main()
 	{
 		printf("The test using sorting by counting was failed!\n\n");
 	}
+	int n;
+	scanf("%d", &n);
 	return 0;
 }
 
@@ -46,8 +48,8 @@ void bubble(int *mas, int length)
 
 void sortingCounting(int *mas, int length)
 {
-	int max = 0;
-	int min = 0;
+	int max = INT_MIN;
+	int min = INT_MAX;
 
 	for (int i = 0; i < length; ++i)
 	{
@@ -61,20 +63,20 @@ void sortingCounting(int *mas, int length)
 		}
 	}
 
-	int *helpMasPos = new int[max + abs(min) + 1]{};
+	int *helpMasPos = new int[max - min + 1]{};
 
 	for (int i = 0; i < length; ++i)
 	{
-		++helpMasPos[mas[i] + abs(min)];
+		++helpMasPos[mas[i] - min];
 	}
 
 	int indexInMainArrayToFill = 0;
 
-	for (int i = 0; i <= max + abs(min); ++i)
+	for (int i = 0; i <= max - min; ++i)
 	{
 		for (int j = 0; j < helpMasPos[i]; ++j)
 		{
-			mas[indexInMainArrayToFill] = i - abs(min);
+			mas[indexInMainArrayToFill] = i + min;
 			++indexInMainArrayToFill;
 		}
 	}
