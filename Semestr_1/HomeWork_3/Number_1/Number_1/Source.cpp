@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <cstdlib>
 
-void printmas(int* m, int length);
+bool test(void);
 void swap(int& a, int& b);
 void sorting(int* mas, int left, int right);
 void sortingInsert(int* mas, int left, int right);
@@ -9,16 +10,58 @@ void qusort(int* mas, int left, int right);
 int partition(int* mas, int left, int right);
 
 int main()
-{
-	const int n = 7;
-	int array[n]{ 3, 5, 4, 9, 7, 2, 1 };
-	sorting(array, 0, 6);
-	printmas(array, 7);
+{	
+	if (test())
+	{
+		printf("The test using sorting was successful!\n\n");
+	}
+	else
+	{
+		printf("The test using sorting was failed!\n\n");
+	}
 
-
-	int p;
-	scanf("%d", &p);
 	return 0;
+}
+
+bool test(void)
+{
+	int array1[7] = { 5, 1, 8, 0, 5, 3, 3 };
+	int array2[13] = { 8, -3, 5, 0, -5, -1, -4, -3, 8, 100, 43, -32, 5 };
+	int array3[30];
+
+	for (int i = 0; i < 30; ++i)
+	{
+		array3[i] = rand() % 500;
+	}
+
+	sorting(array1, 0, 6);
+	sorting(array2, 3, 12);
+	sorting(array3, 0, 29);
+
+	for (int i = 0; i < 6; ++i)
+	{
+		if (array1[i] > array1[i + 1])
+		{
+			return false;
+		}
+	}
+
+	for (int i = 3; i < 12; ++i)
+	{
+		if (array2[i] > array2[i + 1])
+		{
+			return false;
+		}
+	}
+
+	for (int i = 0; i < 29; ++i)
+	{
+		if (array3[i] > array3[i + 1])
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 void sorting(int* mas, int left, int right)
@@ -44,13 +87,6 @@ void sortingInsert(int* mas, int left, int right)
 	}
 }
 
-void printmas(int* m, int length)
-{
-	for (int i = 0; i < length; i++)
-		printf("%d ", m[i]);
-	printf("\n");
-}
-
 void swap(int& a, int& b)
 {
 	const int c = a;
@@ -62,6 +98,7 @@ int partition(int* mas, int left, int right)
 {
 	const int pivot = mas[right];
 	int i = left;
+
 	for (int j = left; j < right; j++)
 	{
 		if (mas[j] <= pivot)
@@ -71,7 +108,6 @@ int partition(int* mas, int left, int right)
 		}
 	}
 	swap(mas[i], mas[right]);
-	printmas(mas, 7);
 	return i;
 }
 
