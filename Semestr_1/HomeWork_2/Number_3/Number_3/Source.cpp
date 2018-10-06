@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <cmath>
+#include <climits>
 
 void bubble(int *mas, int length);
 void sortingCounting(int *mas, int length);
