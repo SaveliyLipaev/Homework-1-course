@@ -3,6 +3,7 @@
 
 void printmas(int* m, int length);
 void swap(int& a, int& b);
+void sorting(int* mas, int left, int right);
 void sortingInsert(int* mas, int left, int right);
 void qusort(int* mas, int left, int right);
 int partition(int* mas, int left, int right);
@@ -11,13 +12,25 @@ int main()
 {
 	const int n = 7;
 	int array[n]{ 3, 5, 4, 9, 7, 2, 1 };
-	sortingInsert(array, 0, 6);
+	sorting(array, 0, 6);
 	printmas(array, 7);
 
 
 	int p;
 	scanf("%d", &p);
 	return 0;
+}
+
+void sorting(int* mas, int left, int right)
+{
+	if (right - left <= 8)
+	{
+		sortingInsert(mas, left, right);
+	}
+	else
+	{
+		qusort(mas, left, right);
+	}
 }
 
 void sortingInsert(int* mas, int left, int right)
