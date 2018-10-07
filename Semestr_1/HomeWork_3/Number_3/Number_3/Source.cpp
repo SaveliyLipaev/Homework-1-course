@@ -4,13 +4,15 @@
 void swap(int &a, int &b);
 void siftingDown(int *mas, int root, const int border);
 void heapSort(int *mas, const int length);
+int mostCommonElementInSortArray(int *mas, const int length);
 int mostCommonElement(int *mas, const int length);
+
 
 int main()
 {
 	int mas[10] = { 1,1,2,3,3,3,8,8,8,8 };
 	
-	printf("%d\n",mostCommonElement(mas, 10));
+	
 
 
 	int n;
@@ -20,9 +22,16 @@ int main()
 
 int mostCommonElement(int *mas, const int length)
 {
+	heapSort(mas, length);
+	return mostCommonElementInSortArray(mas, length);
+}
+
+int mostCommonElementInSortArray(int *mas, const int length)
+{
 	int amount = 1;
 	int maxAmount = 0;
 	int element = mas[0];
+
 	for (int i = 0; i < length - 1; ++i)
 	{
 		if (mas[i] == mas[i + 1])
@@ -39,6 +48,13 @@ int mostCommonElement(int *mas, const int length)
 			amount = 1;
 		}
 	}
+
+	if (amount > maxAmount)
+	{
+		maxAmount = amount;
+		element = mas[length - 1];
+	}
+
 	return element;
 }
 
