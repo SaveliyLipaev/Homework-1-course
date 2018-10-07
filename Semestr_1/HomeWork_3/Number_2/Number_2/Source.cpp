@@ -3,12 +3,17 @@
 #include <ctime>
 #include <cstdlib>
 
+void swap(int& a, int& b);
+int partition(int* mas, int left, int right);
+void qusort(int* mas, int left, int right);
+bool binSearch(int* mas, int left, int right, int searchVeriable);
+
 int main()
 {
 	srand(time(0));
 	int n = 0;
 	int k = 0;
-	
+
 	printf("Enter n and k:");
 	scanf("%d%d", &n, &k);
 	int * mas = new int[n];
@@ -18,10 +23,42 @@ int main()
 		mas[i] = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
 	}
 
+	qusort(mas, 0, n - 1);
+
+
 
 	scanf("%d", &n);
 	delete[] mas;
 	return 0;
+}
+
+bool binSearch(int* mas, int left, int right, int searchVeriable)
+{
+	const int average = (right + left) / 2;
+
+	if (left == right)
+	{
+		if (mas[left] == searchVeriable)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	if (mas[average] == searchVeriable)
+	{
+		return true;
+	}
+
+	if (mas[average] > searchVeriable)
+	{
+		return binSearch(mas, left, average - 1, searchVeriable);
+	}
+
+	if (mas[average] < searchVeriable)
+	{
+		return binSearch(mas, average + 1, right, searchVeriable);
+	}
 }
 
 void swap(int& a, int& b)
