@@ -43,7 +43,7 @@ bool binSearch(int* mas, int left, int right, int searchVeriable)
 {
 	const int average = (right + left) / 2;
 
-	if (left == right)
+	if (left >= right)
 	{
 		if (mas[left] == searchVeriable)
 		{
