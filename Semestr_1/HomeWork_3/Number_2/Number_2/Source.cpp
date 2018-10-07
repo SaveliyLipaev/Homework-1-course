@@ -24,8 +24,15 @@ int main()
 	}
 
 	qusort(mas, 0, n - 1);
-
-
+	
+	for (int i = 0; i < k; ++i)
+	{
+		const unsigned int randomVeriable = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+		if (binSearch(mas, 0, n - 1, randomVeriable))
+		{
+			printf("%d\n", randomVeriable);
+		}
+	}
 
 	scanf("%d", &n);
 	delete[] mas;
@@ -52,12 +59,12 @@ bool binSearch(int* mas, int left, int right, int searchVeriable)
 
 	if (mas[average] > searchVeriable)
 	{
-		return binSearch(mas, left, average - 1, searchVeriable);
+		return binSearch(mas, left, average - 1 , searchVeriable);
 	}
 
 	if (mas[average] < searchVeriable)
 	{
-		return binSearch(mas, average + 1, right, searchVeriable);
+		return binSearch(mas, average + 1 , right, searchVeriable);
 	}
 }
 
