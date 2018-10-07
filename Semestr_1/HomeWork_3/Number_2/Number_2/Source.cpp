@@ -4,9 +4,9 @@
 #include <cstdlib>
 
 void swap(int& a, int& b);
-int partition(int* mas, int left, int right);
-void qusort(int* mas, int left, int right);
-bool binSearch(int* mas, int left, int right, int searchVeriable);
+int partition(int* mas, const int left, const int right);
+void qusort(int* mas, const int left, const int right);
+bool binSearch(int* mas, const int left, const int right, const int searchVeriable);
 
 int main()
 {
@@ -27,21 +27,21 @@ int main()
 	
 	for (int i = 0; i < k; ++i)
 	{
-		const unsigned int randomVeriable = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+		const int randomVeriable = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+
 		if (binSearch(mas, 0, n - 1, randomVeriable))
 		{
 			printf("%d\n", randomVeriable);
 		}
 	}
 
-	scanf("%d", &n);
 	delete[] mas;
 	return 0;
 }
 
-bool binSearch(int* mas, int left, int right, int searchVeriable)
+bool binSearch(int* mas, const int left, const int right, const int searchVeriable)
 {
-	const int average = (right + left) / 2;
+	const unsigned int average = (right + left) / 2;
 
 	if (left >= right)
 	{
@@ -68,14 +68,14 @@ bool binSearch(int* mas, int left, int right, int searchVeriable)
 	}
 }
 
-void swap(int& a, int& b)
+void swap(int &a, int &b)
 {
 	const int c = a;
 	a = b;
 	b = c;
 }
 
-int partition(int* mas, int left, int right)
+int partition(int* mas, const int left, const int right)
 {
 	const int pivot = mas[right];
 	int i = left;
@@ -92,13 +92,13 @@ int partition(int* mas, int left, int right)
 	return i;
 }
 
-void qusort(int* mas, int left, int right)
+void qusort(int* mas, const int left, const int right)
 {
 	if (right < left)
 	{
 		return;
 	}
-	const int p = partition(mas, left, right);
+	const unsigned int p = partition(mas, left, right);
 	qusort(mas, left, p - 1);
 	qusort(mas, p + 1, right);
 }
