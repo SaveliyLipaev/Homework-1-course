@@ -25,8 +25,6 @@ int main()
 	{
 		printf("The test using sorting by counting was failed!\n\n");
 	}
-	int n;
-	scanf("%d", &n);
 	return 0;
 }
 
