@@ -6,18 +6,29 @@ void siftingDown(int *mas, int root, const int border);
 void heapSort(int *mas, const int length);
 int mostCommonElementInSortArray(int *mas, const int length);
 int mostCommonElement(int *mas, const int length);
-
+bool test(void);
 
 int main()
 {
-	int mas[10] = { 1,1,2,3,3,3,8,8,8,8 };
-	
-	
+	if (test())
+	{
+		printf("Test completed\n");
+	}
+	else
+	{
+		printf("Test failed");
+	}
 
-
-	int n;
-	scanf("%d", &n);
 	return 0;
+}
+
+bool test(void)
+{
+	int array1[11]{ 0, 3, -2, 12, 43, 3, -3, -1, 43, -2, 3 };
+	int array2[11]{ -1, -1, -1, -1, -1, 3, -1, -1, 3, 3, 3 };
+	int array3[11]{ -11, -13, 0, -13, -1535, 344, 0, -321, 0, 312341, 342424 };
+
+	return mostCommonElement(array1, 11) == 3 && mostCommonElement(array2, 11) == -1 && mostCommonElement(array3, 11) == 0;
 }
 
 int mostCommonElement(int *mas, const int length)
@@ -36,7 +47,7 @@ int mostCommonElementInSortArray(int *mas, const int length)
 	{
 		if (mas[i] == mas[i + 1])
 		{
-			amount++;
+			++amount;
 		}
 		else
 		{
