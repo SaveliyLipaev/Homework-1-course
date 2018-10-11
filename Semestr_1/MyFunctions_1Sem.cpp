@@ -1,26 +1,26 @@
 //Описание файла:
 //
-//void bubble(int *mas, const int length); - сортировка пузырьком.
+//void bubble(int *mas, const int length); - bubble sort.
 //
-//void heapSort(int *mas, const int length); - сортировка кучей, использует функцию siftingGown.
+//void heapSort(int *mas, const int length); - heap sort, use function siftingGown.
 //
-//void sortingCounting(int *mas, const int length); - сортировка подсчетом.
+//void sortingCounting(int *mas, const int length); - couting sort.
 //
-//void sortingInsert(int* mas, int left, int right); - сортировка вставками.
+//void sortingInsert(int* mas, int left, int right); - insert sort.
 //
-//void siftingDown(int *mas, int root, const int border); - функция просеивающая большие элементы в бинарном дереве вверх.
+//void siftingDown(int *mas, int root, const int border); - function sifting large elements in a binary tree up.
 //
-//bool binSearch(int* mas, const int left, const int right, const int searchVeriable); - бинарный поиск.
+//bool binSearch(int* mas, const int left, const int right, const int searchVeriable); - binary search.
 //
-//int mostCommonElementInSortArray(int *mas, const int length); - находит наиболее часто встречающийся элемент
-//в отсартированном массиве.
+//int mostCommonElementInSortArray(int *mas, const int length); - finds the most common element
+//in the separated array.
 //
-//int mostCommonElement(int *mas, const int length); - функция находит наиболее часто встречающийся элемент в массиве
-//использует функцию heapSort и mostCommonElementInSortArray.
+//int mostCommonElement(int *mas, const int length); - the function finds the most common element in the array
+//uses the heapSort and mostCommonElementInSortArray functions.
 //
-//void printMas(int *mas, const int length); - печатает массив.
+//void printMas(int *mas, const int length); - prints an array.
 //
-//void swap(int& a, int& b); - свапает элементы.
+//void swap(int& a, int& b); - swap elements.
 
 void bubble(int *mas, const int length)
 {
