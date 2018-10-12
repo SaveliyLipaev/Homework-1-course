@@ -2,11 +2,11 @@
 #include <stdio.h>
 
 bool test_task_2(void);
-void sortingInsert(int* mas);
 void swap(int& a, int& b);
 bool test_task_1(void);
 int FuncFromFirstTask(bool *mas1, const int length1, bool *mas2, const int length2);
 int linearPow(const int a, const int n);
+void choicesSort(int* mas);
 
 int main()
 {
@@ -34,7 +34,7 @@ int main()
 	{
 		scanf("%d", &array[i]);
 	}
-	sortingInsert(array);
+	choicesSort(array);
 	printf("And that's what happened:\n");
 	for (int i = 0; i < 10; ++i)
 	{
@@ -60,8 +60,8 @@ bool test_task_2(void)
 	int array1[10] = { 5, 1, 8, 0, 5, 3, 3, 6, 7, 1 };
 	int array2[10] = { 8, -3, 5, 0, -5, -1, -4, -3, 8, 100 };
 
-	sortingInsert(array1);
-	sortingInsert(array2);
+	choicesSort(array1);
+	choicesSort(array2);
 
 	for (int i = 0; i < 9; ++i)
 	{
@@ -128,20 +128,23 @@ int FuncFromFirstTask(bool *mas1, const int length1, bool *mas2, const int lengt
 	}
 }
 
-void sortingInsert(int* mas)
-{
-	for (int i = 1; i < 10; ++i)
-	{
-		for (int j = i; j > 0 && mas[j] < mas[j - 1]; --j)
-		{
-			swap(mas[j], mas[j - 1]);
-		}
-	}
-}
-
 void swap(int& a, int& b)
 {
 	const int c = a;
 	a = b;
 	b = c;
+}
+
+void choicesSort(int* mas)
+{
+	for (int repeatCounter = 0; repeatCounter < 10; repeatCounter++)
+	{
+		for (int elementCounter = repeatCounter + 1; elementCounter < 10; elementCounter++)
+		{
+			if (mas[repeatCounter] > mas[elementCounter])
+			{
+				swap(mas[repeatCounter], mas[elementCounter]);
+			}
+		}
+	}
 }
