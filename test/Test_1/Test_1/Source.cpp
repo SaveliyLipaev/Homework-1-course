@@ -1,6 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <cmath>
 
 bool test_task_2(void);
 void sortingInsert(int* mas, int left, int right);
@@ -11,18 +10,18 @@ int linearPow(int a, int n);
 
 int main()
 {
-	if (test_task_2())
+	if (test_task_1())
 	{
-		printf("Succeful!!!Number 2!\n");
+		printf("Test 1 task passed successfully!!!\n");
 	}
 	else
 	{
 		printf("Failed!:((\n");
 	}
 
-	if (test_task_1())
+	if (test_task_2())
 	{
-		printf("Succeful!!!Number 1!\n");
+		printf("Test 2 task passed successfully!!!\n");
 	}
 	else
 	{
