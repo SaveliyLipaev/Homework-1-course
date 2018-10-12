@@ -1,9 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <cmath>
 
 bool test_task_2(void);
 void sortingInsert(int* mas, int left, int right);
 void swap(int& a, int& b);
+bool test_task_1(void);
+int FuncFromFirstTask(bool *mas1, int length1, bool *mas2, int length2);
+int linearPow(int a, int n);
 
 int main()
 {
@@ -16,17 +20,77 @@ int main()
 		printf("Failed!:((\n");
 	}
 
+	if (test_task_1())
+	{
+		printf("Succeful!!!Number 1!\n");
+	}
+	else
+	{
+		printf("Failed!:((\n");
+	}
 
-	//int n;
-	//scanf("%d", &n);
+
+	int n;
+	scanf("%d", &n);
 	return 0;
 }
 
-void FuncFromFirstTask(bool *mas1, int length1, bool *mas2, int length2)
+bool test_task_1(void)
 {
+	bool mas1[6]{ 1, 1, 0, 0, 1, 1 };
+	bool mas2[5]{ 0, 0, 0, 1, 0 };
+	bool mas3[6]{ 1, 1, 0, 1, 1, 1 };
+	bool mas4[3]{ 1, 1, 0};
+	bool mas5[4]{ 0, 1, 1, 0 };
 
+	return FuncFromFirstTask(mas1, 6, mas2, 5) == 1 && FuncFromFirstTask(mas4, 3, mas5, 4) == 0 && FuncFromFirstTask(mas1, 6, mas3, 6) == 2;
+}
 
+int linearPow(int a, int n)
+{
+	if (n == 0)
+	{
+		return 1;
+	}
 
+	int b = 1;
+	for (int i = 0; i < n; ++i)
+	{
+		b *= a;
+	}
+	return b;
+}
+
+int FuncFromFirstTask(bool *mas1, int length1, bool *mas2, int length2)
+{
+	int firstNumber = 0;
+	int secondNumber = 0;
+	for (int i = 0; i < length1; ++i)
+	{
+		if (mas1[i])
+		{
+			firstNumber += linearPow(2, i);
+		}
+	}
+	for (int i = 0; i < length2; ++i)
+	{
+		if (mas2[i])
+		{
+			secondNumber += linearPow(2, i);
+		}
+	}
+	if (firstNumber > secondNumber)
+	{
+		return 1;
+	}
+	else if (secondNumber > firstNumber)
+	{
+		return 2;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 bool test_task_2(void)
