@@ -2,11 +2,11 @@
 #include <stdio.h>
 
 bool test_task_2(void);
-void sortingInsert(int* mas, int left, int right);
+void sortingInsert(int* mas);
 void swap(int& a, int& b);
 bool test_task_1(void);
-int FuncFromFirstTask(bool *mas1, int length1, bool *mas2, int length2);
-int linearPow(int a, int n);
+int FuncFromFirstTask(bool *mas1, const int length1, bool *mas2, const int length2);
+int linearPow(const int a, const int n);
 
 int main()
 {
@@ -28,9 +28,19 @@ int main()
 		printf("Failed!:((\n");
 	}
 
-
-	int n;
-	scanf("%d", &n);
+	int array[10]{};
+	printf("Enter 10 elements into the array so that the program written by Savely sorts it: \n");
+	for (int i = 0; i < 10; ++i)
+	{
+		scanf("%d", &array[i]);
+	}
+	sortingInsert(array);
+	printf("And that's what happened:\n");
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", array[i]);
+	}
+	printf("\nGood luck to you :)\n");
 	return 0;
 }
 
@@ -45,7 +55,33 @@ bool test_task_1(void)
 	return FuncFromFirstTask(mas1, 6, mas2, 5) == 1 && FuncFromFirstTask(mas4, 3, mas5, 4) == 0 && FuncFromFirstTask(mas1, 6, mas3, 6) == 2;
 }
 
-int linearPow(int a, int n)
+bool test_task_2(void)
+{
+	int array1[10] = { 5, 1, 8, 0, 5, 3, 3, 6, 7, 1 };
+	int array2[10] = { 8, -3, 5, 0, -5, -1, -4, -3, 8, 100 };
+
+	sortingInsert(array1);
+	sortingInsert(array2);
+
+	for (int i = 0; i < 9; ++i)
+	{
+		if (array1[i] > array1[i + 1])
+		{
+			return false;
+		}
+	}
+
+	for (int i = 0; i < 9; ++i)
+	{
+		if (array2[i] > array2[i + 1])
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+int linearPow(const int a, const int n)
 {
 	if (n == 0)
 	{
@@ -60,7 +96,7 @@ int linearPow(int a, int n)
 	return b;
 }
 
-int FuncFromFirstTask(bool *mas1, int length1, bool *mas2, int length2)
+int FuncFromFirstTask(bool *mas1, const int length1, bool *mas2, const int length2)
 {
 	int firstNumber = 0;
 	int secondNumber = 0;
@@ -92,35 +128,9 @@ int FuncFromFirstTask(bool *mas1, int length1, bool *mas2, int length2)
 	}
 }
 
-bool test_task_2(void)
+void sortingInsert(int* mas)
 {
-	int array1[10] = { 5, 1, 8, 0, 5, 3, 3, 6, 7, 1 };
-	int array2[10] = { 8, -3, 5, 0, -5, -1, -4, -3, 8, 100 };
-
-	sortingInsert(array1, 0, 9);
-	sortingInsert(array2, 0, 9);
-
-	for (int i = 0; i < 9; ++i)
-	{
-		if (array1[i] > array1[i + 1])
-		{
-			return false;
-		}
-	}
-
-	for (int i = 0; i < 9; ++i)
-	{
-		if (array2[i] > array2[i + 1])
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
-void sortingInsert(int* mas, int left, int right)
-{
-	for (int i = left + 1; i <= right; ++i)
+	for (int i = 1; i < 10; ++i)
 	{
 		for (int j = i; j > 0 && mas[j] < mas[j - 1]; --j)
 		{
