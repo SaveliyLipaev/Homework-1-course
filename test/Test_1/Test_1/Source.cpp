@@ -69,14 +69,14 @@ int FuncFromFirstTask(bool *mas1, int length1, bool *mas2, int length2)
 	{
 		if (mas1[i])
 		{
-			firstNumber += linearPow(2, i);
+			firstNumber += linearPow(2, length1 - i);
 		}
 	}
 	for (int i = 0; i < length2; ++i)
 	{
 		if (mas2[i])
 		{
-			secondNumber += linearPow(2, i);
+			secondNumber += linearPow(2, length2 - i);
 		}
 	}
 	if (firstNumber > secondNumber)
