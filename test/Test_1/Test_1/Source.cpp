@@ -137,9 +137,9 @@ void swap(int& a, int& b)
 
 void choicesSort(int* mas)
 {
-	for (int repeatCounter = 0; repeatCounter < 10; repeatCounter++)
+	for (int repeatCounter = 0; repeatCounter < 10; ++repeatCounter)
 	{
-		for (int elementCounter = repeatCounter + 1; elementCounter < 10; elementCounter++)
+		for (int elementCounter = repeatCounter + 1; elementCounter < 10; ++elementCounter)
 		{
 			if (mas[repeatCounter] > mas[elementCounter])
 			{
