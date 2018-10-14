@@ -19,3 +19,7 @@ int mostCommonElement(int *mas, const int length); // - the function finds the m
 void printMas(int *mas, const int length); // - prints an array.
 
 void swap(int& a, int& b); // - swap elements.
+
+int amountSeriesOfCharacters(FILE *file); // - returns the number of series of characters.
+
+int maxLengthSeriesOfCharacter(FILE *file); // - returns the length of the maximum character series.
