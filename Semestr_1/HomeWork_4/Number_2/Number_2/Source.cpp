@@ -18,10 +18,10 @@ int main()
 	int amount = amountSeriesOfCharacters(file);
 	int length = maxLengthSeriesOfCharacter(file);
 
-	char** buffer = new char*[amount];
-	for (int i = 0; i < amount; ++i)
+	char** buffer = new char*[amount+1];
+	for (int i = 0; i < amount+1; ++i)
 	{
-		buffer[i] = new char[length]{};
+		buffer[i] = new char[length+1]{};
 	}
 
 	rewind(file);
