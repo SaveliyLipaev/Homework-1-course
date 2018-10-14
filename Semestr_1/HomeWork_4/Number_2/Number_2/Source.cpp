@@ -3,8 +3,8 @@
 #include <fstream>
 #include "Head_MyFuncSem_1.h"
 
-int amountSeriesOfCharacters(FILE *file);
-int maxLengthSeriesOfCharacter(FILE *file);
+int amountSeriesOfCharacters(FILE *file);   //функция которая подсчитывает количество слов или чисел в файле
+int maxLengthSeriesOfCharacter(FILE *file); //функция возвращающая длину самого длинного слова или серии символов
 
 int main()
 {
@@ -15,17 +15,44 @@ int main()
 		return 1;
 	}
 
-	//int amount = amountSeriesOfCharacters(file);
-	//char** buffer = new char*[amount];
-	//for(int i=0;i<)
+	int amount = amountSeriesOfCharacters(file);
+	int length = maxLengthSeriesOfCharacter(file);
+
+	char** buffer = new char*[amount + 2];
+	for (int i = 0; i < amount; ++i)
+	{
+		buffer[i] = new char[length + 2]{};
+	}
+
+	rewind(file);
+	
+	for (int i = 0, j = 0; fscanf(file, "%c", &buffer[i][j]) != EOF;)
+	{
+		if (buffer[i][j] == ' ' || buffer[i][j] == '\n')
+		{
+			if (j >= 1 && buffer[i][j - 1] != ' ' && buffer[i][j - 1] != '\n')
+			{
+				++i;
+				j = 0;
+			}
+			continue;
+		}
+		++j;
+	}
+
+	for (int i = 0; i < amount; ++i)
+	{
+		for (int j = 0; j < length; ++j)
+			printf("%c ", buffer[i][j]);
+		printf("\n");
+	}
 
 
-
-	printf("%d\n", maxLengthSeriesOfCharacter(file));
-	printf("%d", amountSeriesOfCharacters(file));
+	for (int i = 0; i < amount; ++i)
+	{
+		delete[] buffer[i];
+	}
 	fclose(file);
-	int n = 0;
-	scanf("%d", &n);
 	return 0;
 }
 
