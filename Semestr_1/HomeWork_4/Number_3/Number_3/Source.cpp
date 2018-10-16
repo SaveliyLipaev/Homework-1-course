@@ -12,9 +12,11 @@ struct contact
 };
 
 void addNote(contact *mas, const int numberOldNote, int &numberNewNote);
-void interactiveWindow();
+void interactiveWindow(void);
 void printNote(contact *mas, const int numberOldNote, const int numberNewNote);
-void saveNewNote(contact *mas, int numberOldNote, int numberNewNote);
+void saveNewNote(contact *mas, int &numberOldNote, int &numberNewNote);
+void searchName(contact *mas, const int numberOldNote);
+void backButton(void);
 
 int main()
 {
@@ -72,6 +74,7 @@ void interactiveWindow()
 			}
 			case 4:
 			{
+				searchName(buffer, numberOldNote);
 				break;
 			}
 			case 5:
@@ -85,6 +88,7 @@ void interactiveWindow()
 
 void printNote(contact *mas,const int numberOldNote, const int numberNewNote)
 {
+	system("cls");
 	for (int i = 0; i < numberOldNote + numberNewNote; ++i)
 	{
 		printf("%s  -  %d\n", mas[i].name, mas[i].number);
@@ -98,7 +102,7 @@ void printNote(contact *mas,const int numberOldNote, const int numberNewNote)
 	}
 }
 
-void saveNewNote(contact *mas, int numberOldNote, int numberNewNote)
+void saveNewNote(contact *mas, int &numberOldNote, int &numberNewNote)
 {
 	FILE *file = fopen("phonebook.txt", "a");
 	for (int i = numberOldNote; i < numberOldNote + numberNewNote; ++i)
@@ -106,4 +110,36 @@ void saveNewNote(contact *mas, int numberOldNote, int numberNewNote)
 		fprintf(file, "%s  -  %d\n", mas[i].name, mas[i].number);
 	}
 	fclose(file);
+	numberOldNote += numberNewNote;
+	numberNewNote = 0;
+}
+
+void searchName(contact *mas, const int numberOldNote)
+{
+	system("cls");
+	printf("Поиск имени по телефону \nВведите номер телефона\n");
+	int number = 0;
+	scanf("%d", &number);
+	for (int i = 0; i < numberOldNote; ++i)
+	{
+		if (mas[i].number == number)
+		{
+			printf("Хозяин этого телефона: %s\n", mas[i].name);
+			backButton();
+			return;
+		}
+	}
+	printf("Человека с таким номером не найдено!\n");
+	backButton();
+}
+
+void backButton(void)
+{
+	printf("0 - Назад\n");
+	int temp = 0;
+	scanf("%d", &temp);
+	while (temp != 0)
+	{
+		scanf("%d", &temp);
+	}
 }
