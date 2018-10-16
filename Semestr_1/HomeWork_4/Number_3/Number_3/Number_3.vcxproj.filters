@@ -18,12 +18,12 @@
     <ClCompile Include="Source.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\MyFunctions_1Sem.cpp">
+    <ClCompile Include="FuncFor4.3.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Head_MyFuncSem_1.h">
+    <ClInclude Include="FuncFor4.3.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
