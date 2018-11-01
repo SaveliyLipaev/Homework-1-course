@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <cstdlib>
 
-bool test(void);
+bool test();
+bool checkArray(int *mas, const int length);
 void swap(int& a, int& b);
-void sorting(int* mas, int left, int right);
 void sortingInsert(int* mas, int left, int right);
-void qusort(int* mas, int left, int right);
+void qsort(int* mas, int left, int right);
 int partition(int* mas, int left, int right);
 
 int main()
@@ -19,61 +19,28 @@ int main()
 	{
 		printf("The test using sorting was failed!\n\n");
 	}
-
 	return 0;
 }
 
-bool test(void)
+bool test()
 {
 	int array1[7] = { 5, 1, 8, 0, 5, 3, 3 };
 	int array2[13] = { 8, -3, 5, 0, -5, -1, -4, -3, 8, 100, 43, -32, 5 };
-	int array3[30];
 
-	for (int i = 0; i < 30; ++i)
+	return checkArray(array1, 7) && checkArray(array2, 13);
+}
+
+bool checkArray(int *mas, const int length)
+{
+	qsort(mas, 0, length - 1);
+	for (int i = 0; i < length - 1; ++i)
 	{
-		array3[i] = rand() % 500;
-	}
-
-	sorting(array1, 0, 6);
-	sorting(array2, 3, 12);
-	sorting(array3, 0, 29);
-
-	for (int i = 0; i < 6; ++i)
-	{
-		if (array1[i] > array1[i + 1])
-		{
-			return false;
-		}
-	}
-
-	for (int i = 3; i < 12; ++i)
-	{
-		if (array2[i] > array2[i + 1])
-		{
-			return false;
-		}
-	}
-
-	for (int i = 0; i < 29; ++i)
-	{
-		if (array3[i] > array3[i + 1])
+		if (mas[i] > mas[i + 1])
 		{
 			return false;
 		}
 	}
 	return true;
-}
-
-void sorting(int* mas, int left, int right)
-{
-	if (right - left <= 8)
-	{
-		sortingInsert(mas, left, right);
-	}
-	else
-	{
-		qusort(mas, left, right);
-	}
 }
 
 void sortingInsert(int* mas, int left, int right)
@@ -111,13 +78,17 @@ int partition(int* mas, int left, int right)
 	return i;
 }
 
-void qusort(int* mas, int left, int right)
+void qsort(int* mas, int left, int right)
 {
+	if (right - left < 10)
+	{
+		sortingInsert(mas, left, right);
+	}
 	if (right < left)
 	{
 		return;
 	}
 	const int p = partition(mas, left, right);
-	qusort(mas, left, p - 1);
-	qusort(mas, p + 1, right);
+	qsort(mas, left, p - 1);
+	qsort(mas, p + 1, right);
 }
