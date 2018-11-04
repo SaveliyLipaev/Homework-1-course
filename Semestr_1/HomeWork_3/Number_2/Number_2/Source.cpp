@@ -7,10 +7,20 @@ void swap(int& a, int& b);
 int partition(int* mas, const int left, const int right);
 void qusort(int* mas, const int left, const int right);
 bool binSearch(int* mas, const int left, const int right, const int searchVeriable);
+bool test();
 
 int main()
 {
-	srand(time(0));
+	if (test)
+	{
+		printf("The test was successful\n");
+	}
+	else
+	{
+		printf("The test was failed\n");
+	}
+
+	srand(time(nullptr));
 	int n = 0;
 	int k = 0;
 
@@ -18,25 +28,40 @@ int main()
 	scanf("%d%d", &n, &k);
 	int * mas = new int[n];
 
+	printf("Source array: \n");
 	for (int i = 0; i < n; ++i)
 	{
 		mas[i] = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+		printf("%d\n", mas[i]);
 	}
 
 	qusort(mas, 0, n - 1);
 	
 	for (int i = 0; i < k; ++i)
 	{
-		const int randomVeriable = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
-
-		if (binSearch(mas, 0, n - 1, randomVeriable))
+		const int randomVariable = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+		printf("Number %d", randomVariable);
+		if (binSearch(mas, 0, n - 1, randomVariable))
 		{
-			printf("%d\n", randomVeriable);
+			printf(" is present\n");
+		}
+		else
+		{
+			printf(" not present\n");
 		}
 	}
-
 	delete[] mas;
 	return 0;
+}
+
+bool test() 
+{
+	int array1[10]{ 23, 14, 53, 9, 53, 1, 90, 5, 53, 1 };
+	int array2[10]{ -43, -33, 0, 12, 45, -5, 111, -555, 0, -33 };
+	qusort(array1, 0, 9);
+	qusort(array2, 0, 9);
+
+	return binSearch(array1, 0, 9, 33) == false && binSearch(array1, 0, 9, 90) == true && binSearch(array2, 0, 9, 3) == false && binSearch(array2, 0, 9, -33) == true;
 }
 
 bool binSearch(int* mas, const int left, const int right, const int searchVeriable)
@@ -45,11 +70,7 @@ bool binSearch(int* mas, const int left, const int right, const int searchVeriab
 
 	if (left >= right)
 	{
-		if (mas[left] == searchVeriable)
-		{
-			return true;
-		}
-		return false;
+		return mas[left] == searchVeriable;
 	}
 
 	if (mas[average] == searchVeriable)
