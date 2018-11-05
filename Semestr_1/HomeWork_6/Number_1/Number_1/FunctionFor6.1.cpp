@@ -63,3 +63,11 @@ int expressionResult(const string &str)
 	deleteStack(stack);
 	return result;
 }
+
+bool test()
+{
+	string str1 = "12+3*3-";
+	string str2 = "44/43+*";
+	string str3 = "777+*777+-+";
+	return expressionResult(str1) == 6 && expressionResult(str2) == 7 && expressionResult(str3) == 91;
+}

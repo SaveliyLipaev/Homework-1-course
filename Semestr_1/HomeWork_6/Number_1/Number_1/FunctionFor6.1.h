@@ -16,3 +16,6 @@ int operation(const char &symbol, const int &operandOne, const int &operandTwo);
 
 //the function returns the value calculated by the arithmetic expression in the postfix form
 int expressionResult(const string &str);
+
+//the function returns true if the test passed
+bool test();
