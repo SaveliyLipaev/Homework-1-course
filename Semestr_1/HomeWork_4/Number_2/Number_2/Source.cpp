@@ -28,7 +28,7 @@ int main()
 		fscanf(file, "%d", &mas[i]);
 	}
 
-	printf("The most common element in the file: %d\n",mostCommonElement(mas, counter));
+	printf("The most common element in the file: %d\n", mostCommonElement(mas, counter));
 
 	fclose(file);
 	delete[] mas;
