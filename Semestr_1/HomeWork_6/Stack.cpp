@@ -2,7 +2,7 @@
 
 struct Stack
 {
-	nodeStack *head;
+	nodeStack *head = nullptr;
 };
 
 struct nodeStack
@@ -26,7 +26,7 @@ int pop(Stack *stack)
 {
 	auto temp = stack->head;
 	const int value = temp->data;
-	stack->head = stack->head->next;
+	stack->head = temp->next;
 	delete temp;
 	return value;
 }
@@ -41,7 +41,7 @@ void deleteStack(Stack *stack)
 	while (stack->head != nullptr)
 	{
 		auto temp = stack->head;
-		stack->head = stack->head->next;
+		stack->head = temp->next;
 		delete temp;
 	}
 	delete stack;
