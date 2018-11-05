@@ -102,11 +102,10 @@ void interactiveWindow()
 	Contact buffer[100]{};
 	int numberOldNote = 0;
 	int numberNewNote = 0;
-	FILE *file;
-	if ((file = fopen("phonebook.txt", "r")) == NULL) 
+	FILE *file = fopen("phonebook.txt", "r");
+	if (file == nullptr)
 	{
-		printf("Файл не открылся!\n");
-		return;
+		printf("Новая база!\n");
 	}
 
 	while (fscanf(file, "%s%d", &buffer[numberOldNote].name, &buffer[numberOldNote].number) != EOF)
