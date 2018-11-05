@@ -1,17 +1,17 @@
 #pragma once
 
-struct contact;
+struct Contact;
 
-void addNote(contact *mas, const int numberOldNote, int &numberNewNote);
+void addNote(Contact *mas, const int numberOldNote, int &numberNewNote);
 
 void interactiveWindow(void);
 
-void printNote(contact *mas, const int numberOldNote, const int numberNewNote);
+void printNote(Contact *mas, const int numberOldNote, const int numberNewNote);
 
-void saveNewNote(contact *mas, int &numberOldNote, int &numberNewNote);
+void saveNewNote(Contact *mas, int &numberOldNote, int &numberNewNote);
 
-void searchName(contact *mas, const int numberOldNote);
+void searchName(Contact *mas, const int numberOldNote);
 
-void searchNumber(contact *mas, const int numberOldNote);
+void searchNumber(Contact *mas, const int numberOldNote);
 
 void backButton(void);

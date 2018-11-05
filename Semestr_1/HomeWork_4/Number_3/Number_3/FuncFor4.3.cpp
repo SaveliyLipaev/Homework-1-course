@@ -4,7 +4,7 @@
 #include <fstream>
 #include <cstring>
 
-struct contact
+struct Contact
 {
 	char name[30]{};
 	int number;
@@ -21,7 +21,7 @@ void backButton(void)
 	}
 }
 
-void printNote(contact *mas, const int numberOldNote, const int numberNewNote)
+void printNote(Contact *mas, const int numberOldNote, const int numberNewNote)
 {
 	system("cls");
 	for (int i = 0; i < numberOldNote + numberNewNote; ++i)
@@ -37,7 +37,7 @@ void printNote(contact *mas, const int numberOldNote, const int numberNewNote)
 	}
 }
 
-void saveNewNote(contact *mas, int &numberOldNote, int &numberNewNote)
+void saveNewNote(Contact *mas, int &numberOldNote, int &numberNewNote)
 {
 	FILE *file = fopen("phonebook.txt", "a");
 	for (int i = numberOldNote; i < numberOldNote + numberNewNote; ++i)
@@ -49,7 +49,7 @@ void saveNewNote(contact *mas, int &numberOldNote, int &numberNewNote)
 	numberNewNote = 0;
 }
 
-void searchName(contact *mas, const int numberOldNote)
+void searchName(Contact *mas, const int numberOldNote)
 {
 	system("cls");
 	printf("Поиск имени по телефону \nВведите номер телефона\n");
@@ -68,7 +68,7 @@ void searchName(contact *mas, const int numberOldNote)
 	backButton();
 }
 
-void searchNumber(contact *mas, const int numberOldNote)
+void searchNumber(Contact *mas, const int numberOldNote)
 {
 	system("cls");
 	printf("Поиск телефона по имени \nВведите имя\n");
@@ -87,7 +87,7 @@ void searchNumber(contact *mas, const int numberOldNote)
 	backButton();
 }
 
-void addNote(contact *mas, const int numberOldNote, int &numberNewNote)
+void addNote(Contact *mas, const int numberOldNote, int &numberNewNote)
 {
 	system("cls");
 	printf("Введите имя\n");
@@ -99,10 +99,16 @@ void addNote(contact *mas, const int numberOldNote, int &numberNewNote)
 
 void interactiveWindow()
 {
-	contact buffer[100]{};
+	Contact buffer[100]{};
 	int numberOldNote = 0;
 	int numberNewNote = 0;
-	FILE *file = fopen("phonebook.txt", "r");
+	FILE *file;
+	if ((file = fopen("phonebook.txt", "r")) == NULL) 
+	{
+		printf("Файл не открылся!\n");
+		return;
+	}
+
 	while (fscanf(file, "%s%d", &buffer[numberOldNote].name, &buffer[numberOldNote].number) != EOF)
 	{
 		++numberOldNote;
