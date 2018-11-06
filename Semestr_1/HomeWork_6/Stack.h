@@ -19,3 +19,6 @@ bool isEmpty(Stack *stack);
 
 //The function that clears the memory that occupied the stack
 void deleteStack(Stack *stack);
+
+//a function that returns the data of the element that the head points to
+int lastValue(Stack *stack);

@@ -46,3 +46,8 @@ void deleteStack(Stack *stack)
 	}
 	delete stack;
 }
+
+int lastValue(Stack *stack)
+{
+	return stack->head->data;
+}
