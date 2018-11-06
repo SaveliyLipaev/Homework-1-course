@@ -106,6 +106,9 @@ void interactiveWindow()
 	if (file == nullptr)
 	{
 		printf("Новая база!\n");
+		file = fopen("phonebook.txt", "w");
+		fclose(file);
+		file = fopen("phonebook.txt", "r");
 	}
 
 	while (fscanf(file, "%s%d", &buffer[numberOldNote].name, &buffer[numberOldNote].number) != EOF)
