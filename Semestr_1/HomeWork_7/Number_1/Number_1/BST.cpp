@@ -36,18 +36,24 @@ void addNodeBST(BST *tree, int data)
 	}
 }
 
-void addNode(NodeBST *node, int data)
+void addNode(NodeBST * node, int data)
 {
-	if (node == nullptr)
+	if (data > node->data)
 	{
-		node = new NodeBST{ data };
-	}
-	else if (data > node->data)
-	{
+		if (node->rightChild == nullptr)
+		{
+			node->rightChild = new NodeBST{ data };
+			return;
+		}
 		addNode(node->rightChild, data);
 	}
 	else
 	{
+		if (node->leftChild == nullptr)
+		{
+			node->leftChild = new NodeBST{ data };
+			return;
+		}
 		addNode(node->leftChild, data);
 	}
 }
