@@ -14,9 +14,11 @@ void interactiveWindows(SortedList *list)
 			 << "3 - распечатать список" << endl;
 
 		int temp = 0;
-		while (!(cin >> temp) && temp < 0 && temp > 3)
+		cin >> temp;
+		while (temp < 0 && temp > 3)
 		{
 			cout << "Ошибка ввода, повторите попытку:" << endl;
+			cin >> temp;
 		}
 
 		switch (temp)

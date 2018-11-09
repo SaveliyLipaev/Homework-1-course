@@ -2,7 +2,7 @@
 
 
 struct SortedList;
-struct listElement;
+struct ListElement;
 SortedList * createdSortedList();
 bool isEmpty(SortedList *list);
 void pushList(SortedList *list, const int data);

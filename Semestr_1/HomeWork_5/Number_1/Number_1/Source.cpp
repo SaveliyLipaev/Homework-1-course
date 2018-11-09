@@ -6,11 +6,19 @@ using namespace std;
 
 int main()
 {
-	SortedList* list = createdSortedList();
 	setlocale(LC_ALL, "Russian");
+	if (test())
+	{
+		SortedList* list = createdSortedList();
 
-	interactiveWindows(list);
-	
-	deleteList(list);
+		interactiveWindows(list);
+
+		deleteList(list);
+		delete list;
+	}
+	else
+	{
+		cout << "Тест не пройден!!\n";
+	}
 	return 0;
 }

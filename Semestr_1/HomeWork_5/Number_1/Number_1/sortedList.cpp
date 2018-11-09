@@ -3,15 +3,15 @@
 
 using namespace std;
 
-struct listElement
+struct ListElement
 {
 	int data;
-	listElement* next = nullptr;
+	ListElement* next = nullptr;
 };
 
 struct SortedList
 {
-	listElement *head = nullptr;
+	ListElement *head = nullptr;
 };
 
 SortedList * createdSortedList()
@@ -26,37 +26,35 @@ bool isEmpty(SortedList *list)
 
 void pushList(SortedList *list, const int data)
 {
-	auto newElement = new listElement{ data, list->head };
+	auto newElement = new ListElement{ data, list->head };
 
 	if (isEmpty(list))
 	{
 		list->head = newElement;
+		return;
+	}
+
+	if (data <= list->head->data)
+	{
+		newElement->next = list->head;
+		list->head = newElement;
 	}
 	else
 	{
-		if (data <= list->head->data)
+		while (newElement->next->next != nullptr && newElement->data > newElement->next->next->data)
 		{
-			newElement->next = list->head;
-			list->head = newElement;
+			newElement->next = newElement->next->next;
+		}
+		if (newElement->next->next == nullptr)
+		{
+			newElement->next->next = newElement;
+			newElement->next = nullptr;
 		}
 		else
 		{
-			while (newElement->next->next != nullptr && newElement->data > newElement->next->next->data)
-			{
-				newElement->next = newElement->next->next;
-			}
-
-			if (newElement->next->next == nullptr)
-			{
-				newElement->next->next = newElement;
-				newElement->next = nullptr;
-			}
-			else
-			{
-				auto temp = newElement->next->next;
-				newElement->next->next = newElement;
-				newElement->next = temp;
-			}
+			auto temp = newElement->next->next;
+			newElement->next->next = newElement;
+			newElement->next = temp;
 		}
 	}
 }
@@ -110,5 +108,5 @@ void deleteList(SortedList *list)
 		list->head = list->head->next;
 		delete temp;
 	}
-	delete list;
 }
+
