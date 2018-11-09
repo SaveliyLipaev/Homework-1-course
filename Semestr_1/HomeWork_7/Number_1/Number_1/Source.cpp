@@ -3,18 +3,19 @@
 
 using namespace std;
 
+
 int main()
 {
 	auto tree = createBST();
-	addNodeBST(tree, 22);
-	addNodeBST(tree, 25);
-	addNodeBST(tree, 20);
+	add(tree, 22);
+	add(tree, 25);
+	deleteNode(tree, 25);
+	add(tree, 20);
 
-	printDecreasingBST(tree);
+	printDecreasing(tree);
 	cout << endl;
-	printIncreasingBST(tree);
-
-
+	printIncreasing(tree);
+	
 
 	return 0;
 }

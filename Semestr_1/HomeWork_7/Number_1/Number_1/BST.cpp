@@ -24,7 +24,7 @@ bool isEmpty(BST *tree)
 	return tree->head == nullptr;
 }
 
-void addNodeBST(BST *tree, int data)
+void add(BST *tree, int data)
 {
 	if (isEmpty(tree))
 	{
@@ -36,7 +36,7 @@ void addNodeBST(BST *tree, int data)
 	}
 }
 
-void addNode(NodeBST * node, int data)
+void addNode(NodeBST *node, int data)
 {
 	if (data > node->data)
 	{
@@ -58,7 +58,57 @@ void addNode(NodeBST * node, int data)
 	}
 }
 
-void printDecreasingBST(BST *tree)
+NodeBST* find(BST *tree, int data)
+{
+	if (isEmpty(tree))
+	{
+		return nullptr;
+	}
+	return doFind(tree->head, data);
+}
+
+NodeBST* doFind(NodeBST *node, int data)
+{
+	if (node == nullptr)
+	{
+		return nullptr;
+	}
+	else if (node->data == data)
+	{
+		return node;
+	}
+	else if (node->data > data)
+	{
+		return doFind(node->leftChild, data);
+	}
+	else
+	{
+		return doFind(node->rightChild, data);
+	}
+}
+
+NodeBST* findMin(BST *tree)
+{
+	if (isEmpty(tree))
+	{
+		return nullptr;
+	}
+	else
+	{
+		return doFindMin(tree->head);
+	}
+}
+
+NodeBST* doFindMin(NodeBST *node)
+{
+	if (node->leftChild != nullptr)
+	{
+		return doFindMin(node->leftChild);
+	}
+	return node;
+}
+
+void printDecreasing(BST *tree)
 {
 	if (isEmpty(tree))
 	{
@@ -66,24 +116,24 @@ void printDecreasingBST(BST *tree)
 	}
 	else
 	{
-		printDecreasingTree(tree->head);
+		doPrintDecreasing(tree->head);
 	}
 }
 
-void printDecreasingTree(NodeBST *node)
+void doPrintDecreasing(NodeBST *node)
 {
 	if (node->rightChild != nullptr)
 	{
-		printDecreasingTree(node->rightChild);
+		doPrintDecreasing(node->rightChild);
 	}
 	cout << node->data << endl;
 	if (node->leftChild != nullptr)
 	{
-		printDecreasingTree(node->leftChild);
+		doPrintDecreasing(node->leftChild);
 	}
 }
 
-void printIncreasingBST(BST *tree)
+void printIncreasing(BST *tree)
 {
 	if (isEmpty(tree))
 	{
@@ -91,26 +141,61 @@ void printIncreasingBST(BST *tree)
 	}
 	else
 	{
-		printIncreasingTree(tree->head);
+		doPrintIncreasing(tree->head);
 	}
 }
 
-void printIncreasingTree(NodeBST *tree)
+void doPrintIncreasing(NodeBST *tree)
 {
 	if (tree->leftChild != nullptr)
 	{
-		printDecreasingTree(tree->leftChild);
+		doPrintIncreasing(tree->leftChild);
 	}
 	cout << tree->data << endl;
 	if (tree->rightChild != nullptr)
 	{
-		printDecreasingTree(tree->rightChild);
+		doPrintIncreasing(tree->rightChild);
 	}
 }
 
+void deleteNode(BST *tree, int data)
+{
+	auto deleteThis = find(tree, data);
+	if (deleteThis == nullptr)
+	{
+		return;
+	}
+	doDeleteNode(deleteThis);
+}
 
-
-
+void doDeleteNode(NodeBST *node)
+{
+	if (node->leftChild == nullptr)
+	{
+		auto temp = node->rightChild;
+		delete node;
+		node = temp;
+	}
+	else if (node->rightChild == nullptr)
+	{
+		auto temp = node->leftChild;
+		delete node;
+		node = temp;
+	}
+	else
+	{
+		auto min = node->rightChild;
+		auto parentMin = node;
+		while (min->leftChild != nullptr)
+		{
+			parentMin = min;
+			min = min->leftChild;
+		}
+		(parentMin->leftChild == min ? parentMin->leftChild : parentMin->rightChild) = min->rightChild;
+		node->data = min->data;
+		delete min;
+	}
+}
 
 
 
