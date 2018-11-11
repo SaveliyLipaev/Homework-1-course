@@ -1,6 +1,6 @@
-#include <iostream>
+#include "InteractiveWindow.h"
 #include "BST.h"
-using namespace std;
+
 
 struct BST
 {
@@ -58,24 +58,24 @@ void addNode(NodeBST *node, int data)
 	}
 }
 
-NodeBST* find(BST *tree, int data)
+bool find(BST *tree, int data)
 {
 	if (isEmpty(tree))
 	{
-		return nullptr;
+		return false;
 	}
 	return doFind(tree->head, data);
 }
 
-NodeBST* doFind(NodeBST *node, int data)
+bool doFind(NodeBST *node, int data)
 {
 	if (node == nullptr)
 	{
-		return nullptr;
+		return false;
 	}
 	else if (node->data == data)
 	{
-		return node;
+		return true;
 	}
 	else if (node->data > data)
 	{
@@ -85,27 +85,6 @@ NodeBST* doFind(NodeBST *node, int data)
 	{
 		return doFind(node->rightChild, data);
 	}
-}
-
-NodeBST* findMin(BST *tree)
-{
-	if (isEmpty(tree))
-	{
-		return nullptr;
-	}
-	else
-	{
-		return doFindMin(tree->head);
-	}
-}
-
-NodeBST* doFindMin(NodeBST *node)
-{
-	if (node->leftChild != nullptr)
-	{
-		return doFindMin(node->leftChild);
-	}
-	return node;
 }
 
 void printDecreasing(BST *tree)
@@ -158,57 +137,103 @@ void doPrintIncreasing(NodeBST *tree)
 	}
 }
 
-void deleteNode(BST *tree, int data)
+void terriblyUglyDeleteNode(BST *tree, int data)
 {
-	auto parentNode = tree->head;
-	auto node = tree->head;
-	while (true)
+	if (tree->head->data == data)
 	{
-		if (node == nullptr)
+		deleteFirstElement(tree);
+	}
+	else
+	{
+		auto parentNode = tree->head;
+		auto node = tree->head;
+
+		while (true)
 		{
-			return;
+			if (node == nullptr)
+			{
+				return;
+			}
+			else if (node->data == data)
+			{
+				break;
+			}
+			else if (node->data > data)
+			{
+				parentNode = node;
+				node = node->leftChild;
+			}
+			else
+			{
+				parentNode = node;
+				node = node->rightChild;
+			}
 		}
-		else if (node->data == data)
+		if (node->leftChild == nullptr)
 		{
-			break;
+			if (parentNode->rightChild == node)
+			{
+				parentNode->rightChild = node->rightChild;
+				delete node;
+			}
+			else
+			{
+				parentNode->leftChild = node->rightChild;
+				delete node;
+			}
 		}
-		else if (node->data > data)
+		else if (node->rightChild == nullptr)
 		{
-			parentNode = node;
-			node = node->leftChild;
+			if (parentNode->rightChild == node)
+			{
+				parentNode->rightChild = node->leftChild;
+				delete node;
+			}
+			else
+			{
+				parentNode->leftChild = node->leftChild;
+				delete node;
+			}
 		}
 		else
 		{
-			parentNode = node;
-			node = node->rightChild;
+			auto min = node->rightChild;
+			auto parentMin = node;
+			while (min->leftChild != nullptr)
+			{
+				parentMin = min;
+				min = min->leftChild;
+			}
+			(parentMin->leftChild == min ? parentMin->leftChild : parentMin->rightChild) = min->rightChild;
+			node->data = min->data;
+			delete min;
 		}
 	}
+}
 
+void deleteBST(BST *tree)
+{
+	while (tree->head != nullptr)
+	{
+		deleteFirstElement(tree);
+	}
+	delete tree;
+}
+
+void deleteFirstElement(BST *tree)
+{
+	auto node = tree->head;
 	if (node->leftChild == nullptr)
 	{
-		if (parentNode->rightChild == node)
-		{
-			parentNode->rightChild = node->rightChild;
-			delete node;
-		}
-		else
-		{
-			parentNode->leftChild = node->rightChild;
-			delete node;
-		}
+		auto temp = node;
+		tree->head = node->rightChild;
+		delete temp;
 	}
 	else if (node->rightChild == nullptr)
 	{
-		if (parentNode->rightChild == node)
-		{
-			parentNode->rightChild = node->leftChild;
-			delete node;
-		}
-		else
-		{
-			parentNode->leftChild = node->leftChild;
-			delete node;
-		}
+		auto temp = node;
+		tree->head = node->leftChild;
+		delete temp;
 	}
 	else
 	{
@@ -224,5 +249,3 @@ void deleteNode(BST *tree, int data)
 		delete min;
 	}
 }
-
-

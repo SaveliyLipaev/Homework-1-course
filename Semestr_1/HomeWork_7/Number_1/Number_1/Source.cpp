@@ -1,21 +1,12 @@
-#include "BST.h"
-#include <iostream>
-
-using namespace std;
-
+#include "InteractiveWindow.h"
 
 int main()
 {
+	setlocale(LC_ALL, "Russian");
+
 	auto tree = createBST();
-	add(tree, 22);
-	add(tree, 25);
-	deleteNode(tree, 25);
-	add(tree, 20);
+	interactiveWindows(tree);
 
-	printDecreasing(tree);
-	cout << endl;
-	printIncreasing(tree);
-	
-
+	deleteBST(tree);
 	return 0;
 }
