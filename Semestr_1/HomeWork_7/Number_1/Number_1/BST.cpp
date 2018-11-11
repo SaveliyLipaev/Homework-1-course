@@ -160,27 +160,55 @@ void doPrintIncreasing(NodeBST *tree)
 
 void deleteNode(BST *tree, int data)
 {
-	auto deleteThis = find(tree, data);
-	if (deleteThis == nullptr)
+	auto parentNode = tree->head;
+	auto node = tree->head;
+	while (true)
 	{
-		return;
+		if (node == nullptr)
+		{
+			return;
+		}
+		else if (node->data == data)
+		{
+			break;
+		}
+		else if (node->data > data)
+		{
+			parentNode = node;
+			node = node->leftChild;
+		}
+		else
+		{
+			parentNode = node;
+			node = node->rightChild;
+		}
 	}
-	doDeleteNode(deleteThis);
-}
 
-void doDeleteNode(NodeBST *node)
-{
 	if (node->leftChild == nullptr)
 	{
-		auto temp = node->rightChild;
-		delete node;
-		node = temp;
+		if (parentNode->rightChild == node)
+		{
+			parentNode->rightChild = node->rightChild;
+			delete node;
+		}
+		else
+		{
+			parentNode->leftChild = node->rightChild;
+			delete node;
+		}
 	}
 	else if (node->rightChild == nullptr)
 	{
-		auto temp = node->leftChild;
-		delete node;
-		node = temp;
+		if (parentNode->rightChild == node)
+		{
+			parentNode->rightChild = node->leftChild;
+			delete node;
+		}
+		else
+		{
+			parentNode->leftChild = node->leftChild;
+			delete node;
+		}
 	}
 	else
 	{
@@ -196,15 +224,5 @@ void doDeleteNode(NodeBST *node)
 		delete min;
 	}
 }
-
-
-
-
-
-
-
-
-
-
 
 
