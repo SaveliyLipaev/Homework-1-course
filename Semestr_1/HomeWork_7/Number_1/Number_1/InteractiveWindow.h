@@ -15,3 +15,6 @@ void deleteElement(BST *tree);
 
 //the function asks for which element to check for membership and returns true if this element belongs to the set
 void affiliationElement(BST *tree);
+
+//The function returns true if the test passed
+bool test();
