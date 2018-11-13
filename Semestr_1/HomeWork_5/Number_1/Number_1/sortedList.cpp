@@ -38,24 +38,23 @@ void pushList(SortedList *list, const int data)
 	{
 		newElement->next = list->head;
 		list->head = newElement;
+		return;
+	}
+
+	while (newElement->next->next != nullptr && newElement->data > newElement->next->next->data)
+	{
+		newElement->next = newElement->next->next;
+	}
+	if (newElement->next->next == nullptr)
+	{
+		newElement->next->next = newElement;
+		newElement->next = nullptr;
 	}
 	else
 	{
-		while (newElement->next->next != nullptr && newElement->data > newElement->next->next->data)
-		{
-			newElement->next = newElement->next->next;
-		}
-		if (newElement->next->next == nullptr)
-		{
-			newElement->next->next = newElement;
-			newElement->next = nullptr;
-		}
-		else
-		{
-			auto temp = newElement->next->next;
-			newElement->next->next = newElement;
-			newElement->next = temp;
-		}
+		auto temp = newElement->next->next;
+		newElement->next->next = newElement;
+		newElement->next = temp;
 	}
 }
 
@@ -110,3 +109,22 @@ void deleteList(SortedList *list)
 	}
 }
 
+bool checkSortingList(SortedList *list)
+{
+	auto temp = list->head;
+
+	if (temp == nullptr)
+	{
+		return true;
+	}
+
+	while (temp->next != nullptr)
+	{
+		if (temp->data > temp->next->data)
+		{
+			return false;
+		}
+		temp = temp->next;
+	}
+	return true;
+}

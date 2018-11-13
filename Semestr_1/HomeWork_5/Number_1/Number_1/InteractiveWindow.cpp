@@ -74,5 +74,7 @@ void printNodes(SortedList *list)
 {
 	system("cls");
 	printList(list);
-	system("pause");
+	int temp = 0;
+	cout << "¬ведите любое число дл€ продолжени€\n";
+	cin >> temp;
 }

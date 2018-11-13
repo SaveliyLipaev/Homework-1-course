@@ -9,3 +9,4 @@ void pushList(SortedList *list, const int data);
 void printList(SortedList *list);
 void deleteElement(SortedList *list, int data);
 void deleteList(SortedList *list);
+bool checkSortingList(SortedList *list);

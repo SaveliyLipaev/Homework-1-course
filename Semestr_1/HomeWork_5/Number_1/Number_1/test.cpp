@@ -1,44 +1,38 @@
 #include "sortedList.h"
 
-struct ListElement
-{
-	int data;
-	ListElement* next = nullptr;
-};
-
-struct SortedList
-{
-	ListElement *head = nullptr;
-};
 
 bool test()
 {
-	auto list = createdSortedList();
+	SortedList *list = createdSortedList();
 
-	pushList(list, 10);
-	if (list->head->data != 10)
+	for (int i = 50; i >= 0; --i)
 	{
-		return false;
+		pushList(list, i);
+		pushList(list, i - 25);
+		if (!checkSortingList(list))
+		{
+			deleteList(list);
+			return false;
+		}
 	}
 
-	pushList(list, 20);
-	if (list->head->data != 10)
+	for (int i = 0; i <= 50; ++i)
 	{
-		return false;
+		deleteElement(list, i);
+		deleteElement(list, i - 25);
+		if (!checkSortingList(list))
+		{
+			deleteList(list);
+			return false;
+		}
 	}
 
-	deleteElement(list, 10);
-	if (list->head->data != 20)
+	if (!isEmpty(list))
 	{
+		deleteList(list);
 		return false;
 	}
 
 	deleteList(list);
-	if (isEmpty(list))
-	{
-		delete list;
-		return true;
-	}
-	delete list;
-	return false;
+	return true;
 }
