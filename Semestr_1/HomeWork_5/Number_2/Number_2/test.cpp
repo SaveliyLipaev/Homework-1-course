@@ -2,12 +2,12 @@
 
 int forTesting(const int warriors, const int step)
 {
-	auto list = createdCyclicList();
+	auto list = createCyclicList();
 	for (int i = warriors; i >= 1; --i)
 	{
 		push(list, i);
 	}
-	int temp = killsWarriors(list, step);
+	int temp = deleteWithStep(list, step);
 	deleteList(list);
 	return temp;
 }

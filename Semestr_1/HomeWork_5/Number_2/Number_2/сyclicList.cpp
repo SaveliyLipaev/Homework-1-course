@@ -2,14 +2,14 @@
 
 struct CyclicList
 {
-	node *first = nullptr;
-	node *head = nullptr;
+	Node *first = nullptr;
+	Node *head = nullptr;
 };
 
-struct node
+struct Node
 {
 	int data;
-	node *next;
+	Node *next;
 };
 
 bool isEmpty(CyclicList *list)
@@ -19,7 +19,7 @@ bool isEmpty(CyclicList *list)
 
 void push(CyclicList *list, const int data)
 {
-	auto newNode = new node{ data, list->head };
+	auto newNode = new Node{ data, list->head };
 	if (isEmpty(list))
 	{
 		list->first = newNode;
@@ -28,12 +28,12 @@ void push(CyclicList *list, const int data)
 	list->first->next = newNode;
 }
 
-CyclicList *createdCyclicList()
+CyclicList *createCyclicList()
 {
 	return new CyclicList;
 }
 
-int killsWarriors(CyclicList *list, const int step)
+int deleteWithStep(CyclicList *list, const int step)
 {
 	auto temp = list->head;
 

@@ -17,13 +17,13 @@ int main()
 		cout << "Тест не пройден!\n\n";
 	}
 
-	auto list = createdCyclicList();
+	auto list = createCyclicList();
 	int warriors = 0;
 	int step = 0;
 
-	cout << "Введите количество войнов\n";
+	cout << "Введите количество воинов\n";
 	cin >> warriors;
-	cout << "Введите каждого какого война убивают\n";
+	cout << "Введите каждого какого воина убивают\n";
 	cin >> step;
 	
 	for (int i = warriors; i >= 1; --i)
@@ -31,9 +31,8 @@ int main()
 		push(list, i);
 	}
 
-	cout << "Останется воин, который стоял на " << killsWarriors(list, step) << "-ой позиции" << endl;
+	cout << "Останется воин, который стоял на " << deleteWithStep(list, step) << "-ой позиции" << endl;
 
 	deleteList(list);
-	system("pause");
 	return 0;
 }
