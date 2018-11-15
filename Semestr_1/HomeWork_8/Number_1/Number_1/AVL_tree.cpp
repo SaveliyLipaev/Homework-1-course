@@ -21,7 +21,11 @@ AvlTree* createAvlTree()
 
 int height(TreeNode *node)
 {
-	return node ? node->height : 0;
+	if (node == nullptr)
+	{
+		return 0;
+	}
+	return node->height;
 }
 
 int heightDifference(TreeNode *node)
@@ -129,9 +133,64 @@ void deleteNode(AvlTree *tree, int key)
 	doDeleteNode(tree->head, key);
 }
 
-void doDeleteNode(TreeNode *node, int key)
+TreeNode* doDeleteNode(TreeNode *node, int key)
 {
+	if (node == nullptr)
+	{
+		return 0;
+	}
+	else if (key > node->key)
+	{
+		node->rightchild = doDeleteNode(node->rightchild, key);
+	}
+	else if (key < node->key)
+	{
+		node->leftchild = doDeleteNode(node->leftchild, key);
+	}
+	else
+	{
+		auto right = node->rightchild;
+		auto left = node->leftchild;
+		delete node;
+		if (right == nullptr)
+		{
+			return left;
+		}
+		auto min = right;
+		while (min->leftchild != nullptr)
+		{
+			min = min->leftchild;
+		}
+		min->leftchild = left;
+		min->rightchild = right;
 
 
+	}
+	return balance(node);
+}
 
+TreeNode* deleteMin(AvlTree *tree)
+{
+	if (isEmpty)
+	{
+		return 0;
+	}
+	else
+	{
+		auto min = tree->head;
+		auto parentMin = tree->head;
+		while (min->leftchild != nullptr)
+		{
+			parentMin = min;
+			min = min->leftchild;
+		}
+		if (min->rightchild == nullptr)
+		{
+			delete min;
+		}
+		else
+		{
+
+		}
+	}
 }
