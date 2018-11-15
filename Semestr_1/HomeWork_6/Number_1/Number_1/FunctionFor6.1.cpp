@@ -1,6 +1,7 @@
 #include "FunctionFor6.1.h"
 #include "HomeWork_6/Stack.h"
 
+using namespace std;
 
 int operation(const char &symbol, const int &operandOne, const int &operandTwo)
 {
@@ -27,6 +28,13 @@ int operation(const char &symbol, const int &operandOne, const int &operandTwo)
 		result = operandOne / operandTwo;
 		break;
 	}
+	default:
+	{
+		cout << "!!!!ÎØÈÁÊÀ!!!!ÂÅÐÍÅÒÑß -1, ÈÁÎ ÍÅ ÓÌÅÞ ÀÂÀÐÈÉÍÎ ÎÑÒÎÍÀÂËÈÂÀÒÜ ÏÐÎÃÐÀÌÌÓ\n";
+		int temp = 0;
+		cin >> temp;
+		return -1;
+	}
 	}
 	return result;
 }
@@ -50,7 +58,7 @@ int expressionResult(const string &str)
 	{
 		if (isNumber(str[i]))
 		{
-			push(stack, (int)(str[i] - 48));
+			push(stack, (int)(str[i] - '0'));
 		}
 		else if (isOperator(str[i]))
 		{

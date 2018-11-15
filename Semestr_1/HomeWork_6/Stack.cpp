@@ -1,14 +1,14 @@
 #include "Stack.h"
 
-struct Stack
-{
-	nodeStack *head = nullptr;
-};
-
-struct nodeStack
+struct NodeStack
 {
 	int data;
-	nodeStack *next;
+	NodeStack *next;
+};
+
+struct Stack
+{
+	NodeStack *head = nullptr;
 };
 
 Stack *createStack()
@@ -18,7 +18,7 @@ Stack *createStack()
 
 void push(Stack *stack, int data)
 {
-	auto newNode = new nodeStack{ data, stack->head };
+	auto newNode = new NodeStack{ data, stack->head };
 	stack->head = newNode;
 }
 

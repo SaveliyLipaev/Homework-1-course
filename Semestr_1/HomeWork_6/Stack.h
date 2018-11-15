@@ -2,8 +2,6 @@
 
 struct Stack;
 
-struct nodeStack;
-
 //A function that returns a pointer to the allocated memory for the Stack type
 Stack *createStack();
 

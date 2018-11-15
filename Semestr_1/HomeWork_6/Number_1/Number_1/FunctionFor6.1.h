@@ -3,8 +3,6 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 //The function returns true if the char is a character from 0..9
 bool isNumber(const char &symbol);
 
@@ -15,7 +13,7 @@ bool isOperator(const char &symbol);
 int operation(const char &symbol, const int &operandOne, const int &operandTwo);
 
 //the function returns the value calculated by the arithmetic expression in the postfix form
-int expressionResult(const string &str);
+int expressionResult(const std::string &str);
 
 //the function returns true if the test passed
 bool test();
