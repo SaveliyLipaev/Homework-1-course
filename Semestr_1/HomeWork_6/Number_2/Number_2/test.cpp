@@ -2,8 +2,8 @@
 
 bool test()
 {
-	string str1 = "{{()[]}}";
-	string str2 = "(({})(";
-	string str3 = "){}[]";
+	std::string str1 = "{{()[]}}";
+	std::string str2 = "(({})(";
+	std::string str3 = "){}[]";
 	return balanceCheck(str1) && !balanceCheck(str2) && !balanceCheck(str3);
 }

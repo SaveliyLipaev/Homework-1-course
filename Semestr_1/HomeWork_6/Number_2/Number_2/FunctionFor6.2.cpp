@@ -1,6 +1,7 @@
 #include "FunctionFor6.2.h"
 #include "HomeWork_6/Stack.h"
 
+using namespace std;
 
 bool isClosingBracket(const char &symbol)
 {
@@ -17,7 +18,7 @@ bool isFamilyBracket(const char &symbol1, const char &symbol2)
 	return symbol1 == '(' && symbol2 == ')' || symbol1 == '[' && symbol2 == ']' || symbol1 == '{' && symbol2 == '}';
 }
 
-bool balanceCheck(string &str)
+bool balanceCheck(const string &str)
 {
 	auto stack = createStack();
 	const int length = (int)str.size();
@@ -36,7 +37,7 @@ bool balanceCheck(string &str)
 		}
 		else
 		{
-			if (isFamilyBracket(lastValue(stack),str[i]))
+			if (isFamilyBracket(lastValue(stack), str[i]))
 			{
 				pop(stack);
 			}

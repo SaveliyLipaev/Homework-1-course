@@ -1,9 +1,7 @@
 #pragma once
 
 #include <string>
-#include <iostream>
 
-using namespace std;
 
 //returns true if opening bracket
 bool isOpeningBracket(const char &symbol);
@@ -15,7 +13,7 @@ bool isClosingBracket(const char &symbol);
 bool isFamilyBracket(const char &symbol1, const char &symbol2);
 
 //the function returns true if the balance of brackets is met
-bool balanceCheck(string &str);
+bool balanceCheck(const std::string &str);
 
 //the function returns true if the program has passed testing
 bool test();
