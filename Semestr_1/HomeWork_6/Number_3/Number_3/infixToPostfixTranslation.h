@@ -1,10 +1,7 @@
 #pragma once
 
 #include <string>
-#include <iostream>
-#include "HomeWork_6/Stack.h"
 
-using namespace std;
 
 //function returns true if the character was an operator
 bool isOperator(const char &symbol);
@@ -16,7 +13,7 @@ bool isNumber(const char &symbol);
 int operandPriority(const char &operand);
 
 //function rewriting infix in postfix
-void infixToPostfix(const string &infix, string &postfix);
+std::string infixToPostfix(const std::string &infix);
 
 //a function that returns true if the function passed the test
 bool test();

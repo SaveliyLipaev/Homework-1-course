@@ -1,4 +1,8 @@
 #include "infixToPostfixTranslation.h"
+#include "HomeWork_6/Stack.h"
+#include <string>
+
+using namespace std;
 
 bool isOperator(const char &symbol)
 {
@@ -10,8 +14,9 @@ bool isNumber(const char &symbol)
 	return symbol >= '0' && symbol <= '9';
 }
 
-void infixToPostfix(const string &infix, string &postfix)
+string infixToPostfix(const string &infix)
 {
+	string postfix{};
 	auto stack = createStack();
 	const int length = (int)infix.size();
 
@@ -47,6 +52,7 @@ void infixToPostfix(const string &infix, string &postfix)
 		postfix += pop(stack);
 	}
 	deleteStack(stack);
+	return postfix;
 }
 
 int operandPriority(const char &operand)
@@ -54,21 +60,12 @@ int operandPriority(const char &operand)
 	switch (operand)
 	{
 	case '+':
-	{
-		return 1;
-	}
 	case '-':
-	{
 		return 1;
-	}
 	case '*':
-	{
-		return 2;
-	}
 	case '/':
-	{
 		return 2;
+	default: 
+		return 0;
 	}
-	}
-	return 0;
 }
