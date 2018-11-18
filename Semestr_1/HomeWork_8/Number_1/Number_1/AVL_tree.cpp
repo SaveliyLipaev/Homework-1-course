@@ -1,9 +1,11 @@
 #include "AVL_tree.h"
 
+using namespace std;
+
 struct TreeNode
 {
 	int key = 0;
-	string str = "\0";
+	string str{};
 	int height = 0;
 	TreeNode *leftchild = nullptr;
 	TreeNode *rightchild = nullptr;
@@ -45,8 +47,12 @@ void newHeight(TreeNode *node)
 	node->height = (heightLeft > heightRight ? heightLeft : heightRight) + 1;
 }
 
-TreeNode* rightTurn(TreeNode *node)
+TreeNode* rightTurn(TreeNode *node, AvlTree *tree)
 {
+	if (node == tree->head)
+	{
+		tree->head = node->leftchild;
+	}
 	auto temp = node->leftchild;
 	node->leftchild = temp->rightchild;
 	temp->rightchild = node;
@@ -55,8 +61,12 @@ TreeNode* rightTurn(TreeNode *node)
 	return temp;
 }
 
-TreeNode* leftTurn(TreeNode *node)
+TreeNode* leftTurn(TreeNode *node, AvlTree *tree)
 {
+	if (node == tree->head)
+	{
+		tree->head = node->rightchild;
+	}
 	auto temp = node->rightchild;
 	node->rightchild = temp->leftchild;
 	temp->leftchild = node;
@@ -65,7 +75,7 @@ TreeNode* leftTurn(TreeNode *node)
 	return temp;
 }
 
-TreeNode* balance(TreeNode *node)
+TreeNode* balance(TreeNode *node, AvlTree *tree)
 {
 	newHeight(node);
 
@@ -73,18 +83,18 @@ TreeNode* balance(TreeNode *node)
 	{
 		if (heightDifference(node->rightchild) < 0)
 		{
-			node->rightchild = rightTurn(node->rightchild);
+			node->rightchild = rightTurn(node->rightchild, tree);
 		}
-		return leftTurn(node);
+		return leftTurn(node, tree);
 	}
 
 	if (heightDifference(node) == -2)
 	{
 		if (heightDifference(node->leftchild) > 0)
 		{
-			node->leftchild = leftTurn(node->leftchild);
+			node->leftchild = leftTurn(node->leftchild, tree);
 		}
-		return rightTurn(node);
+		return rightTurn(node, tree);
 	}
 
 	return node;
@@ -98,30 +108,30 @@ void push(AvlTree *tree, int key, string str)
 	}
 	else
 	{
-		doPush(tree->head, key, str);
+		doPush(tree->head, tree, key, str);
 	}
 }
 
-TreeNode* doPush(TreeNode *node, int key, string str)
+TreeNode* doPush(TreeNode *node, AvlTree *tree, int key, string str)
 {
-	if (node->key == key)
+	if (node == nullptr)
+	{
+		return node = new TreeNode{ key,str };
+	}
+	else if (node->key == key)
 	{
 		node->str = str;
 		return node;
 	}
-	else if (node == nullptr)
-	{
-		return node = new TreeNode{ key,str };
-	}
 	else if (key > node->key)
 	{
-		node->rightchild = doPush(node->rightchild, key, str);
+		node->rightchild = doPush(node->rightchild, tree, key, str);
 	}
 	else
 	{
-		node->leftchild = doPush(node->leftchild, key, str);
+		node->leftchild = doPush(node->leftchild, tree, key, str);
 	}
-	return balance(node);
+	return balance(node, tree);
 }
 
 void deleteNode(AvlTree *tree, int key)
@@ -130,10 +140,10 @@ void deleteNode(AvlTree *tree, int key)
 	{
 		return;
 	}
-	doDeleteNode(tree->head, key);
+	tree->head=doDeleteNode(tree->head, tree, key);
 }
 
-TreeNode* doDeleteNode(TreeNode *node, int key)
+TreeNode* doDeleteNode(TreeNode *node, AvlTree *tree, int key)
 {
 	if (node == nullptr)
 	{
@@ -141,56 +151,121 @@ TreeNode* doDeleteNode(TreeNode *node, int key)
 	}
 	else if (key > node->key)
 	{
-		node->rightchild = doDeleteNode(node->rightchild, key);
+		node->rightchild = doDeleteNode(node->rightchild, tree, key);
 	}
 	else if (key < node->key)
 	{
-		node->leftchild = doDeleteNode(node->leftchild, key);
+		node->leftchild = doDeleteNode(node->leftchild, tree, key);
 	}
 	else
 	{
-		auto right = node->rightchild;
-		auto left = node->leftchild;
-		delete node;
-		if (right == nullptr)
+		if (node->rightchild == nullptr)  //≈сли у узла нет правого ребенка, тогда возвращаем левого и удал€ем узел
 		{
-			return left;
+			auto temp = node->leftchild;
+			delete node;
+			return temp;
 		}
-		auto min = right;
-		while (min->leftchild != nullptr)
+		else  //≈сли есть правый ребенок 
 		{
-			min = min->leftchild;
+			auto right = node->rightchild;
+			auto left = node->leftchild;
+			auto min = node->rightchild;
+			auto parentMin = node;
+			while (min->leftchild != nullptr)
+			{
+				parentMin = min;
+				min = min->leftchild;
+			}
+			if (node->rightchild == min) //если минимальный элемент это и есть правый ребенок узла который надо удалить
+			{
+				min->leftchild = left;
+				delete node;
+				return balance(min, tree);
+			}
+			else // если минимальный элемент это какой либо другой элемент
+			{
+				parentMin->leftchild = min->rightchild;
+				min->leftchild = left;
+				min->rightchild = right;
+				delete node;
+				return balance(min, tree);
+			}
 		}
-		min->leftchild = left;
-		min->rightchild = right;
-
-
 	}
-	return balance(node);
+	return balance(node, tree);
 }
 
-TreeNode* deleteMin(AvlTree *tree)
+string takingString(AvlTree *tree, int key)
 {
-	if (isEmpty)
+	return doTakingString(tree->head, key);
+}
+
+string doTakingString(TreeNode *node, int key)
+{
+
+	if (node == nullptr)
 	{
-		return 0;
+		return "";
+	}
+	else if (node->key == key)
+	{
+		return node->str;
+	}
+	else if (key > node->key)
+	{
+		return doTakingString(node->rightchild, key);
 	}
 	else
 	{
-		auto min = tree->head;
-		auto parentMin = tree->head;
-		while (min->leftchild != nullptr)
-		{
-			parentMin = min;
-			min = min->leftchild;
-		}
-		if (min->rightchild == nullptr)
-		{
-			delete min;
-		}
-		else
-		{
-
-		}
+		return doTakingString(node->leftchild, key);
 	}
+}
+
+bool elementIsPresent(AvlTree *tree, int key)
+{
+	return doElementIsPresent(tree->head, key);
+}
+
+bool doElementIsPresent(TreeNode *node, int key)
+{
+	if (node == nullptr)
+	{
+		return false;
+	}
+	else if (node->key == key)
+	{
+		return true;
+	}
+	else if (key > node->key)
+	{
+		return doElementIsPresent(node->rightchild, key);
+	}
+	else
+	{
+		return doElementIsPresent(node->leftchild, key);
+	}
+}
+
+void deleteTree(AvlTree *tree)
+{
+	if (tree->head != nullptr)
+	{
+		deleteSubtree(tree->head);
+	}
+	delete tree;
+}
+
+void deleteSubtree(TreeNode *node)
+{
+	if (node->rightchild != nullptr)
+	{
+		deleteSubtree(node->rightchild);
+	}
+
+	if (node->leftchild != nullptr)
+	{
+		deleteSubtree(node->leftchild);
+	}
+
+	delete node;
 }
