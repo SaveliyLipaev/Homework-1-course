@@ -21,7 +21,7 @@ AvlTree* createAvlTree()
 	return new AvlTree;
 }
 
-int height(TreeNode *node)
+int height(const TreeNode *node)
 {
 	if (node == nullptr)
 	{
@@ -30,12 +30,12 @@ int height(TreeNode *node)
 	return node->height;
 }
 
-int heightDifference(TreeNode *node)
+int heightDifference(const TreeNode *node)
 {
 	return height(node->rightchild) - height(node->leftchild);
 }
 
-bool isEmpty(AvlTree *tree)
+bool isEmpty(const AvlTree *tree)
 {
 	return tree->head == nullptr;
 }
@@ -100,7 +100,7 @@ TreeNode* balance(TreeNode *node, AvlTree *tree)
 	return node;
 }
 
-void push(AvlTree *tree, int key, string str)
+void push(AvlTree *tree, const int key, const string str)
 {
 	if (isEmpty(tree))
 	{
@@ -112,7 +112,7 @@ void push(AvlTree *tree, int key, string str)
 	}
 }
 
-TreeNode* doPush(TreeNode *node, AvlTree *tree, int key, string str)
+TreeNode* doPush(TreeNode *node, AvlTree *tree, const int key, const string str)
 {
 	if (node == nullptr)
 	{
@@ -134,7 +134,7 @@ TreeNode* doPush(TreeNode *node, AvlTree *tree, int key, string str)
 	return balance(node, tree);
 }
 
-void deleteNode(AvlTree *tree, int key)
+void deleteNode(AvlTree *tree, const int key)
 {
 	if (isEmpty(tree))
 	{
@@ -143,7 +143,7 @@ void deleteNode(AvlTree *tree, int key)
 	tree->head=doDeleteNode(tree->head, tree, key);
 }
 
-TreeNode* doDeleteNode(TreeNode *node, AvlTree *tree, int key)
+TreeNode* doDeleteNode(TreeNode *node, AvlTree *tree, const int key)
 {
 	if (node == nullptr)
 	{
@@ -195,12 +195,12 @@ TreeNode* doDeleteNode(TreeNode *node, AvlTree *tree, int key)
 	return balance(node, tree);
 }
 
-string takingString(AvlTree *tree, int key)
+string takingString(const AvlTree *tree, const int key)
 {
 	return doTakingString(tree->head, key);
 }
 
-string doTakingString(TreeNode *node, int key)
+string doTakingString(const TreeNode *node, const int key)
 {
 
 	if (node == nullptr)
@@ -221,12 +221,12 @@ string doTakingString(TreeNode *node, int key)
 	}
 }
 
-bool elementIsPresent(AvlTree *tree, int key)
+bool elementIsPresent(const AvlTree *tree, const int key)
 {
 	return doElementIsPresent(tree->head, key);
 }
 
-bool doElementIsPresent(TreeNode *node, int key)
+bool doElementIsPresent(const TreeNode *node, const int key)
 {
 	if (node == nullptr)
 	{

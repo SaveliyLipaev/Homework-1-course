@@ -8,9 +8,12 @@ int main()
 {
 	if (test())
 	{
-		cout << "VCEEE OK\n";
+		cout << "Test passed!!!\n";
 	}
-	
+	else
+	{
+		cout << "Test failed!!!\n";
+	}
 
 	return 0;
 }
