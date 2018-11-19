@@ -1,12 +1,16 @@
 #pragma once
 #include <string>
 
-struct Stack;
 struct NodeStack
 {
 	std::string str;
 	int quantity = 0;
 	NodeStack *next;
+};
+
+struct Stack
+{
+	NodeStack *head = nullptr;
 };
 
 //A function that returns a pointer to the allocated memory for the Stack type

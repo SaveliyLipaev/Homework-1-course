@@ -3,10 +3,6 @@
 
 using namespace std;
 
-struct Stack
-{
-	NodeStack *head = nullptr;
-};
 
 Stack *createStack()
 {
