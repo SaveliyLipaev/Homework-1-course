@@ -1,21 +1,20 @@
 #include <vector>
-#include "stackFor9.1.h"
-#include "HashTable.h"
+#include "ListFor9.1.h"
 
-using namespace std;
-
-struct Set
+struct HashTable
 {
-	vector<Stack> buckets;
+	int maxLengthList = 0;
+	int amountOfElements = 0;
+	std::vector<List*> buckets;
 };
 
-void constructor(Set &set)
+void constructor(HashTable &table)
 {
-	int size = 1000;
-	set.buckets.resize(size);
+	int size = 900;
+	table.buckets.resize(size);
 }
 
-unsigned long long hashFunction(const string &str)
+unsigned long long hashFunction(const std::string &str)
 {
 	unsigned int prime = 31;
 	unsigned long long sum = 0;
@@ -27,36 +26,67 @@ unsigned long long hashFunction(const string &str)
 	return sum;
 }
 
-void add(Set &set, const string str)
+void add(HashTable &table, const std::string str)
 {
-	const int hash = hashFunction(str) % set.buckets.size();
-	NodeStack *node = findNode(&set.buckets[hash], str);
+	++table.amountOfElements;
+
+	const int hash = hashFunction(str) % table.buckets.size();
+
+	NodeList *node = findNode(table.buckets[hash], str);
+
 	if (node == nullptr)
 	{
-		push(&set.buckets[hash], str);
+		push(table.buckets[hash], str);
 	}
 	else
 	{
-		++node->quantity;
+		increaseQuantity(node);
 	}
-}
 
-void printTable(Set &set)
-{
-	for (int i = 0; i < set.buckets.size(); ++i)
+	if (lengthList(table.buckets[hash]) > table.maxLengthList)
 	{
-		printStack(&set.buckets[i]);
+		table.maxLengthList = lengthList(table.buckets[hash]);
 	}
 }
 
-Set* createSet()
+void printTable(HashTable &table)
 {
-	return new Set;
+	for (int i = 0; i < (int)table.buckets.size(); ++i)
+	{
+		printlist(table.buckets[i]);
+	}
 }
 
-float loadFactor(Set &set, int amountOfElements)
+HashTable* createHashTable()
 {
-	float temp1 = set.buckets.size();
-	float temp2 = amountOfElements;
-	return temp2 / temp1;
+	return new HashTable;
+}
+
+float loadFactor(HashTable &table)
+{
+	return (float)table.amountOfElements / (float)table.buckets.size();
+}
+
+void deleteHashTable(HashTable &table)
+{
+	for (int i = 0; i < (int)table.buckets.size(); ++i)
+	{
+		deleteList(table.buckets[i]);
+	}
+	delete &table;
+}
+
+int maxLength(HashTable &table)
+{
+	return table.maxLengthList;
+}
+
+float averageLength(HashTable &table)
+{
+	int sum = 0;
+	for (int i = 0; i < (int)table.buckets.size(); ++i)
+	{
+		sum += lengthList(table.buckets[i]);
+	}
+	return (float)sum / (float)table.buckets.size();
 }

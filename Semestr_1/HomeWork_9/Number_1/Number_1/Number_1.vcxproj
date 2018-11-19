@@ -119,12 +119,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HashTable.cpp" />
+    <ClCompile Include="ListFor9.1.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="stackFor9.1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashTable.h" />
-    <ClInclude Include="stackFor9.1.h" />
+    <ClInclude Include="ListFor9.1.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="TextFor9.1.txt" />

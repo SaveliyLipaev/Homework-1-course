@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
 #include "HashTable.h"
 
 using namespace std;
@@ -9,11 +8,13 @@ using namespace std;
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	auto table = createSet();
+
+	auto table = createHashTable();
 	constructor(*table);
-	int amountOfElements = 0;
+
 	ifstream file("TextFor9.1.txt");
 	string buffer;
+
 	if (!file.is_open())
 	{
 		cout << "Текст не открылся!!!\n";
@@ -21,14 +22,15 @@ int main()
 	}
 	while (!file.eof())
 	{
-		++amountOfElements;
 		file >> buffer;
 		add(*table, buffer);
 	}
+
 	printTable(*table);
-	cout << "Коэффициент заполнения хэш-таблицы: " << loadFactor(*table, amountOfElements) << endl;
+	cout << "Коэффициент заполнения хэш-таблицы: " << loadFactor(*table) << endl;
+	cout << "Максимальная длина списка в сегменте таблицы: " << maxLength(*table) << endl;
+	cout << "Средняя длина списка в сегменте таблицы: " << averageLength(*table) << endl;
 
-
-
+	deleteHashTable(*table);
 	return 0;
 }

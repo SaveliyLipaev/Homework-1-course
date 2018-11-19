@@ -1,34 +1,33 @@
 #pragma once
 #include <string>
 
-struct NodeStack
-{
-	std::string str;
-	int quantity = 1;
-	NodeStack *next;
-};
+struct NodeList;
+struct List;
 
-struct Stack
-{
-	NodeStack *head = nullptr;
-};
+//A function that returns a pointer to the allocated memory for the List type
+List *createList();
 
-//A function that returns a pointer to the allocated memory for the Stack type
-Stack *createStack();
+//returns the address of the found node if not found returns nullptr
+NodeList* findNode(List *&list, const std::string str);
 
-//Function that adds an item to the stack
-void push(Stack *stack, std::string str);
+//The function returns true if the list is empty
+bool isEmpty(List *list);
 
-//The function that removes an item in the stack that the head points to.
+//Function that adds an item to the list
+void push(List *list, const std::string str);
+
+//The function that removes an item in the list that the head points to.
 //and returns the data of this item.
-void pop(Stack *stack);
+void pop(List *list);
 
-//The function returns true if the stack is empty
-bool isEmpty(Stack *stack);
+//The function that clears the memory that occupied the list
+void deleteList(List *list);
 
-//The function that clears the memory that occupied the stack
-void deleteStack(Stack *stack);
+//prints List values
+void printlist(List *list);
 
-NodeStack* findNode(Stack *stack, std::string str);
+//increases parameter quantity by one
+void increaseQuantity(NodeList *list);
 
-void printStack(Stack* stack);
+//returns list length
+int lengthList(List *list);
