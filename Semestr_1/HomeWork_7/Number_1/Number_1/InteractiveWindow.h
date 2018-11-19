@@ -1,8 +1,6 @@
 #pragma once
 
-#include <iostream>
 #include "BST.h"
-using namespace std;
 
 //the function calls the interactive window and works with it, calling the necessary functions
 void interactiveWindows(BST *tree);

@@ -1,6 +1,5 @@
 #include "InteractiveWindow.h"
 
-
 bool test()
 {
 	auto tree = createBST();

@@ -1,6 +1,8 @@
-
+#include <iostream>
 #include "BST.h"
 #include "InteractiveWindow.h"
+
+using namespace std;
 
 void interactiveWindows(BST *tree)
 {

@@ -1,17 +1,18 @@
 #include "InteractiveWindow.h"
 #include "BST.h"
+#include <iostream>
 
-
-struct BST
-{
-	NodeBST *head = nullptr;
-};
 
 struct NodeBST
 {
 	int data;
 	NodeBST *leftChild = nullptr;
 	NodeBST *rightChild = nullptr;
+};
+
+struct BST
+{
+	NodeBST *head = nullptr;
 };
 
 BST *createBST()
@@ -24,20 +25,12 @@ bool isEmpty(BST *tree)
 	return tree->head == nullptr;
 }
 
-void add(BST *tree, int data)
-{
-	if (isEmpty(tree))
-	{
-		tree->head = new NodeBST{ data };
-	}
-	else
-	{
-		addNode(tree->head, data);
-	}
-}
-
 void addNode(NodeBST *node, int data)
 {
+	if (node->data == data)
+	{
+		return;
+	}
 	if (data > node->data)
 	{
 		if (node->rightChild == nullptr)
@@ -58,13 +51,16 @@ void addNode(NodeBST *node, int data)
 	}
 }
 
-bool find(BST *tree, int data)
+void add(BST *tree, int data)
 {
 	if (isEmpty(tree))
 	{
-		return false;
+		tree->head = new NodeBST{ data };
 	}
-	return doFind(tree->head, data);
+	else
+	{
+		addNode(tree->head, data);
+	}
 }
 
 bool doFind(NodeBST *node, int data)
@@ -87,6 +83,28 @@ bool doFind(NodeBST *node, int data)
 	}
 }
 
+bool find(BST *tree, int data)
+{
+	if (isEmpty(tree))
+	{
+		return false;
+	}
+	return doFind(tree->head, data);
+}
+
+void doPrintDecreasing(NodeBST *node)
+{
+	if (node->rightChild != nullptr)
+	{
+		doPrintDecreasing(node->rightChild);
+	}
+	std::cout << node->data << std::endl;
+	if (node->leftChild != nullptr)
+	{
+		doPrintDecreasing(node->leftChild);
+	}
+}
+
 void printDecreasing(BST *tree)
 {
 	if (isEmpty(tree))
@@ -99,16 +117,16 @@ void printDecreasing(BST *tree)
 	}
 }
 
-void doPrintDecreasing(NodeBST *node)
+void doPrintIncreasing(NodeBST *tree)
 {
-	if (node->rightChild != nullptr)
+	if (tree->leftChild != nullptr)
 	{
-		doPrintDecreasing(node->rightChild);
+		doPrintIncreasing(tree->leftChild);
 	}
-	cout << node->data << endl;
-	if (node->leftChild != nullptr)
+	std::cout << tree->data << std::endl;
+	if (tree->rightChild != nullptr)
 	{
-		doPrintDecreasing(node->leftChild);
+		doPrintIncreasing(tree->rightChild);
 	}
 }
 
@@ -121,19 +139,6 @@ void printIncreasing(BST *tree)
 	else
 	{
 		doPrintIncreasing(tree->head);
-	}
-}
-
-void doPrintIncreasing(NodeBST *tree)
-{
-	if (tree->leftChild != nullptr)
-	{
-		doPrintIncreasing(tree->leftChild);
-	}
-	cout << tree->data << endl;
-	if (tree->rightChild != nullptr)
-	{
-		doPrintIncreasing(tree->rightChild);
 	}
 }
 
@@ -174,26 +179,24 @@ void terriblyUglyDeleteNode(BST *tree, int data)
 			if (parentNode->rightChild == node)
 			{
 				parentNode->rightChild = node->rightChild;
-				delete node;
 			}
 			else
 			{
 				parentNode->leftChild = node->rightChild;
-				delete node;
 			}
+			delete node;
 		}
 		else if (node->rightChild == nullptr)
 		{
 			if (parentNode->rightChild == node)
 			{
 				parentNode->rightChild = node->leftChild;
-				delete node;
 			}
 			else
 			{
 				parentNode->leftChild = node->leftChild;
-				delete node;
 			}
+			delete node;
 		}
 		else
 		{
@@ -211,11 +214,26 @@ void terriblyUglyDeleteNode(BST *tree, int data)
 	}
 }
 
+void doDeleteBST(NodeBST *node)
+{
+	if (node->leftChild != nullptr)
+	{
+		doDeleteBST(node->leftChild);
+	}
+
+	if (node->rightChild != nullptr)
+	{
+		doDeleteBST(node->rightChild);
+	}
+
+	delete node;
+}
+
 void deleteBST(BST *tree)
 {
-	while (tree->head != nullptr)
+	if (tree->head != nullptr)
 	{
-		deleteFirstElement(tree);
+		doDeleteBST(tree->head);
 	}
 	delete tree;
 }
@@ -249,3 +267,4 @@ void deleteFirstElement(BST *tree)
 		delete min;
 	}
 }
+
