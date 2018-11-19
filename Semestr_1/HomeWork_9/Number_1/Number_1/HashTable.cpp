@@ -15,11 +15,11 @@ void constructor(Set &set)
 	set.buckets.resize(size);
 }
 
-long long hashFunction(const string &str)
+unsigned long long hashFunction(const string &str)
 {
-	int prime = 53;
-	long long sum = 0;
-	for (int i = 0; i < str.length(); i++)
+	unsigned int prime = 31;
+	unsigned long long sum = 0;
+	for (int i = 0; i < (int)str.length(); ++i)
 	{
 		sum += prime * str[i];
 		prime *= prime;
@@ -39,4 +39,24 @@ void add(Set &set, const string str)
 	{
 		++node->quantity;
 	}
+}
+
+void printTable(Set &set)
+{
+	for (int i = 0; i < set.buckets.size(); ++i)
+	{
+		printStack(&set.buckets[i]);
+	}
+}
+
+Set* createSet()
+{
+	return new Set;
+}
+
+float loadFactor(Set &set, int amountOfElements)
+{
+	float temp1 = set.buckets.size();
+	float temp2 = amountOfElements;
+	return temp2 / temp1;
 }

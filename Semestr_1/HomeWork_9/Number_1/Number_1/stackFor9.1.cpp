@@ -1,5 +1,6 @@
 #include "stackFor9.1.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -11,7 +12,7 @@ Stack *createStack()
 
 void push(Stack *stack, string str)
 {
-	auto newNode = new NodeStack{ str, 0, stack->head };
+	auto newNode = new NodeStack{ str, 1, stack->head };
 	stack->head = newNode;
 }
 
@@ -50,4 +51,15 @@ NodeStack* findNode(Stack *stack, string str)
 		temp = temp->next;
 	}
 	return temp;
+
+}
+
+void printStack(Stack* stack)
+{
+	auto temp = stack->head;
+	while (temp != nullptr)
+	{
+		cout << temp->str << " - " << temp->quantity << endl;
+		temp = temp->next;
+	}
 }

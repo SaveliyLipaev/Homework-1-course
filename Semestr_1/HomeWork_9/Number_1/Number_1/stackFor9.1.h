@@ -4,7 +4,7 @@
 struct NodeStack
 {
 	std::string str;
-	int quantity = 0;
+	int quantity = 1;
 	NodeStack *next;
 };
 
@@ -30,3 +30,5 @@ bool isEmpty(Stack *stack);
 void deleteStack(Stack *stack);
 
 NodeStack* findNode(Stack *stack, std::string str);
+
+void printStack(Stack* stack);
