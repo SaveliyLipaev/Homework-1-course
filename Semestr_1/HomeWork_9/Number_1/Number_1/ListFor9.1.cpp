@@ -105,3 +105,8 @@ int lengthList(List *list)
 	}
 	return length;
 }
+
+int returnQuantity(NodeList *node)
+{
+	return node->quantity;
+}

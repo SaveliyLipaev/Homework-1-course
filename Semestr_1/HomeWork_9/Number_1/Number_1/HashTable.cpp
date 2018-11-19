@@ -90,3 +90,14 @@ float averageLength(HashTable &table)
 	}
 	return (float)sum / (float)table.buckets.size();
 }
+
+int findStr(HashTable &table, std::string str)
+{
+	int hash = hashFunction(str) % table.buckets.size();
+	auto node = findNode(table.buckets[hash], str);
+	if (node == nullptr)
+	{
+		return 0;
+	}
+	return returnQuantity(node);
+}

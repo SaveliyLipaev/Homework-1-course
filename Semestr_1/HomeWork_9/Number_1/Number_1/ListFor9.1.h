@@ -31,3 +31,6 @@ void increaseQuantity(NodeList *list);
 
 //returns list length
 int lengthList(List *list);
+
+//returns parameter quantity for node
+int returnQuantity(NodeList *node);

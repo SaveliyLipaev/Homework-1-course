@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="ListFor9.1.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="TextFor9.1.txt" />

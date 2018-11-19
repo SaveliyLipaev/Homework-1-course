@@ -29,3 +29,6 @@ int maxLength(HashTable &table);
 
 //returns average list length
 float averageLength(HashTable &table);
+
+//returns how many times this character set entered the table
+int findStr(HashTable &table, std::string str);
