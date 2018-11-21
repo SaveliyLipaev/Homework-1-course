@@ -21,6 +21,11 @@ List* createList()
 	return new List;
 }
 
+bool isEmpty(List *list)
+{
+	return list->head == nullptr;
+}
+
 void push(List *list, const std::string name, const std::string number)
 {
 	list->head = new ListNode{ name, number, nullptr, list->head };
@@ -80,7 +85,7 @@ void sortByNumber(List *list, List *left, List *right)
 
 	while (tempRight != nullptr || tempLeft != nullptr)
 	{
-		if (tempLeft == nullptr || tempLeft->name.compare(tempRight->number) > 0)
+		if (tempLeft == nullptr || (tempRight != nullptr && tempLeft->number.compare(tempRight->number) > 0))
 		{
 			tempList->name = tempRight->name;
 			tempList->number = tempRight->number;
@@ -146,4 +151,40 @@ void printList(List *list)
 		std::cout << temp->name << std::endl << temp->number << std::endl << std::endl;
 		temp = temp->next;
 	}
+}
+
+bool checkSortByName(List *list)
+{
+	if (isEmpty(list))
+	{
+		return true;
+	}
+	auto temp = list->head->next;
+	while (temp != nullptr)
+	{
+		if (temp->name.compare(temp->previous->name) < 0)
+		{
+			return false;
+		}
+		temp = temp->next;
+	}
+	return true;
+}
+
+bool checkSortByNumber(List *list)
+{
+	if (isEmpty(list))
+	{
+		return true;
+	}
+	auto temp = list->head->next;
+	while (temp != nullptr)
+	{
+		if (temp->number.compare(temp->previous->number) < 0)
+		{
+			return false;
+		}
+		temp = temp->next;
+	}
+	return true;
 }

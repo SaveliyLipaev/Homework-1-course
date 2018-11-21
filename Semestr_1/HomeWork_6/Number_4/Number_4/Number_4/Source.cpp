@@ -1,12 +1,22 @@
 #include <iostream>
 #include <fstream>
 #include "ListFor6.4.h"
+#include "test.h"
 
 int main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	auto list = createList();
+	if (test())
+	{
+		std::cout << "“ест пройден, все ок!!!\n\n";
+	}
+	else
+	{
+		std::cout << "“ест провален!!!\n\n";
+		return 1;
+	}
+
 	std::ifstream file("Phonebook.txt");
 	if (!file.is_open())
 	{
@@ -14,8 +24,7 @@ int main()
 		return 1;
 	}
 
-	std::string nameBuffer;
-	std::string numberBuffer;
+	auto list = createList();
 
 	while (!file.eof())
 	{
@@ -27,6 +36,8 @@ int main()
 
 		push(list, nameBuffer, numberBuffer);
 	}
+
+	file.close();
 
 	std::cout << "0 - отсортировать по номеру\n";
 	std::cout << "1 - отсортировать по имени\n";
