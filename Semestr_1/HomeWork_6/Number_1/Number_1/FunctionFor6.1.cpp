@@ -1,3 +1,4 @@
+#include <iostream>
 #include "FunctionFor6.1.h"
 #include "HomeWork_6/Stack.h"
 
