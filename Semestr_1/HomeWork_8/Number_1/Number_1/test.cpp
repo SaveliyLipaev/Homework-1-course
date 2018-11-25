@@ -1,5 +1,6 @@
 #include "AVL_tree.h"
 
+
 bool test()
 {
 	auto tree = createAvlTree();
@@ -20,7 +21,7 @@ bool test()
 			return false;
 		}
 	}
-	if (!elementIsPresent(tree, 125) || !elementIsPresent(tree, 100) || !elementIsPresent(tree, 150) || elementIsPresent(tree,53))
+	if (!elementIsPresent(tree, 125) || !elementIsPresent(tree, 100) || !elementIsPresent(tree, 150) || elementIsPresent(tree, 53))
 	{
 		deleteTree(tree);
 		return false;
