@@ -25,7 +25,7 @@ bool test()
 
 	mergeSort(list, true);
 
-	if (!checkSortByName(list))
+	if (!checkSort(list, true))
 	{
 		deleteList(list);
 		return false;
@@ -33,7 +33,7 @@ bool test()
 
 	mergeSort(list, false);
 
-	if (!checkSortByNumber(list))
+	if (!checkSort(list, false))
 	{
 		deleteList(list);
 		return false;

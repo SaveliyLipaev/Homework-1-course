@@ -53,7 +53,7 @@ void deleteList(List *list)
 	delete list;
 }
 
-void sortByName(List *list, List *left, List *right)
+void merge(List *list, List *left, List *right, const bool byName)
 {
 	auto tempList = list->head;
 	auto tempLeft = left->head;
@@ -61,31 +61,7 @@ void sortByName(List *list, List *left, List *right)
 
 	while (tempRight != nullptr || tempLeft != nullptr)
 	{
-		if (tempLeft == nullptr || (tempRight != nullptr && tempLeft->name.compare(tempRight->name) > 0))
-		{
-			tempList->name = tempRight->name;
-			tempList->number = tempRight->number;
-			tempRight = tempRight->next;
-		}
-		else
-		{
-			tempList->name = tempLeft->name;
-			tempList->number = tempLeft->number;
-			tempLeft = tempLeft->next;
-		}
-		tempList = tempList->next;
-	}
-}
-
-void sortByNumber(List *list, List *left, List *right)
-{
-	auto tempList = list->head;
-	auto tempLeft = left->head;
-	auto tempRight = right->head;
-
-	while (tempRight != nullptr || tempLeft != nullptr)
-	{
-		if (tempLeft == nullptr || (tempRight != nullptr && tempLeft->number.compare(tempRight->number) > 0))
+		if (tempLeft == nullptr || (tempRight != nullptr && (byName ? tempLeft->name.compare(tempRight->name) : tempLeft->number.compare(tempRight->number)) > 0))
 		{
 			tempList->name = tempRight->name;
 			tempList->number = tempRight->number;
@@ -125,22 +101,18 @@ void mergeSort(List *list, const bool byName)
 		return;
 	}
 
-	List left;
-	List right;
+	auto left = createList();
+	auto right = createList();
 
-	split(list, &left, &right);
+	split(list, left, right);
 
-	mergeSort(&left, byName);
-	mergeSort(&right, byName);
+	mergeSort(left, byName);
+	mergeSort(right, byName);
 
-	if (byName)
-	{
-		sortByName(list, &left, &right);
-	}
-	else
-	{
-		sortByNumber(list, &left, &right);
-	}
+	merge(list, left, right, byName);
+
+	deleteList(left);
+	deleteList(right);
 }
 
 void printList(List *list)
@@ -153,7 +125,7 @@ void printList(List *list)
 	}
 }
 
-bool checkSortByName(List *list)
+bool checkSort(List *list, const bool byName)
 {
 	if (isEmpty(list))
 	{
@@ -162,25 +134,7 @@ bool checkSortByName(List *list)
 	auto temp = list->head->next;
 	while (temp != nullptr)
 	{
-		if (temp->name.compare(temp->previous->name) < 0)
-		{
-			return false;
-		}
-		temp = temp->next;
-	}
-	return true;
-}
-
-bool checkSortByNumber(List *list)
-{
-	if (isEmpty(list))
-	{
-		return true;
-	}
-	auto temp = list->head->next;
-	while (temp != nullptr)
-	{
-		if (temp->number.compare(temp->previous->number) < 0)
+		if ((byName ? temp->name.compare(temp->previous->name) : temp->number.compare(temp->previous->number)) < 0)
 		{
 			return false;
 		}

@@ -23,7 +23,4 @@ void mergeSort(List *list, const bool byName);
 void printList(List *list);
 
 //return true if list sorting by name
-bool checkSortByName(List *list);
-
-//return true if list sorting by number
-bool checkSortByNumber(List *list);
+bool checkSort(List *list, const bool byName);
