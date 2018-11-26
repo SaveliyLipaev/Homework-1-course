@@ -3,32 +3,26 @@
 
 struct HashTable;
 
-//determines the size of the hash table
-void constructor(HashTable &set);
-
-//hash function
-unsigned long long hashFunction(const std::string &str);
-
 //function to add a value to a hash table
-void add(HashTable &set, const std::string str);
+void add(HashTable *table, const std::string &str);
 
 //returns the address of the selected memory cell of the HashTable structure
 HashTable* createHashTable();
 
 //Prints a hash table
-void printTable(HashTable &set);
+void printTable(HashTable *table);
 
 //returns the fill factor of the hash table
-float loadFactor(HashTable &set);
+float loadFactor(HashTable *table);
 
 //deletes the hash table
-void deleteHashTable(HashTable &table);
+void deleteHashTable(HashTable *table);
 
 //returns maximum list length
-int maxLength(HashTable &table);
+int maxLength(HashTable *table);
 
 //returns average list length
-float averageLength(HashTable &table);
+float averageLength(HashTable *table);
 
 //returns how many times this character set entered the table
-int findStr(HashTable &table, std::string str);
+int findStr(HashTable *table, std::string &str);

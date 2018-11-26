@@ -13,7 +13,6 @@ int main()
 	if (test())
 	{
 		auto table = createHashTable();
-		constructor(*table);
 
 		ifstream file("TextFor9.1.txt");
 		string buffer;
@@ -26,15 +25,16 @@ int main()
 		while (!file.eof())
 		{
 			file >> buffer;
-			add(*table, buffer);
+			add(table, buffer);
 		}
+		file.close();
 
-		printTable(*table);
-		cout << "Коэффициент заполнения хэш-таблицы: " << loadFactor(*table) << endl;
-		cout << "Максимальная длина списка в сегменте таблицы: " << maxLength(*table) << endl;
-		cout << "Средняя длина списка в сегменте таблицы: " << averageLength(*table) << endl;
+		printTable(table);
+		cout << "Коэффициент заполнения хэш-таблицы: " << loadFactor(table) << endl;
+		cout << "Максимальная длина списка в сегменте таблицы: " << maxLength(table) << endl;
+		cout << "Средняя длина списка в сегменте таблицы: " << averageLength(table) << endl;
 
-		deleteHashTable(*table);
+		deleteHashTable(table);
 	}
 	else
 	{

@@ -25,7 +25,7 @@ List* createList()
 	return new List;
 }
 
-NodeList* findNode(List *&list, const string str)
+NodeList* findNode(List *&list, const string &str)
 {
 	if (list == nullptr)
 	{
@@ -43,7 +43,7 @@ NodeList* findNode(List *&list, const string str)
 	return temp;
 }
 
-void push(List *list, const string str)
+void push(List *list, const string &str)
 {
 	auto newNode = new NodeList{ str, 1, list->head };
 	list->head = newNode;
@@ -71,7 +71,7 @@ void deleteList(List *list)
 	delete list;
 }
 
-void printlist(List *list)
+void printList(List *list)
 {
 	if (list == nullptr)
 	{

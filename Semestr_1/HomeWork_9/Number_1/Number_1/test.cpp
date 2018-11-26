@@ -8,7 +8,6 @@ using namespace std;
 bool test()
 {
 	auto table = createHashTable();
-	constructor(*table);
 	ifstream file("TextFor9.1.txt");
 	string buffer;
 
@@ -20,14 +19,18 @@ bool test()
 	while (!file.eof())
 	{
 		file >> buffer;
-		add(*table, buffer);
+		add(table, buffer);
 	}
-
-	if (findStr(*table, "cover") == 1 && findStr(*table, "this") == 8 && findStr(*table, "ldldldl") == 0 && findStr(*table, "room") == 2)
+	file.close();
+	std::string testStr1 = "cover";
+	std::string testStr2 = "this";
+	std::string testStr3 = "ldldldl";
+	std::string testStr4 = "room";
+	if (findStr(table, testStr1) == 1 && findStr(table, testStr2) == 8 && findStr(table, testStr3) == 0 && findStr(table, testStr4) == 2)
 	{
-		deleteHashTable(*table);
+		deleteHashTable(table);
 		return true;
 	}
-	deleteHashTable(*table);
+	deleteHashTable(table);
 	return false;
 }
