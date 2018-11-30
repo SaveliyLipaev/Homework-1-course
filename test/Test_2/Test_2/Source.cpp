@@ -82,6 +82,7 @@ int main()
 		cout << "Список не симметричный!!!\n";
 	}
 
+	file.close();
 	deleteList(list);
 	return 0;
 }
