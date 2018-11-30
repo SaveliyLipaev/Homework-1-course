@@ -63,7 +63,7 @@ int main()
 	file.open("FileForTask_2.txt");
 	if (!file.is_open())
 	{
-		cout << "File dont open!!!\n";
+		cout << "Файл не открылся!!!\n";
 		return -1;
 	}
 	auto list = createList();
@@ -75,11 +75,11 @@ int main()
 	}
 	if (thisListSymmetry(list))
 	{
-		cout << "LIST symmetry!!!\n";
+		cout << "Список симметричный!!!\n";
 	}
 	else
 	{
-		cout << "LIST DONT symmetry!!!\n";
+		cout << "Список не симметричный!!!\n";
 	}
 
 	deleteList(list);
