@@ -1,4 +1,5 @@
 #include "graphForTasks10.1.h"
+#include "Test.h"
 #include <vector>
 #include <iostream>
 #include <list>
@@ -6,6 +7,17 @@
 
 int main()
 {
+	if (test())
+	{
+		std::cout << "Test passed!!!\n\n";
+	}
+	else
+	{
+		std::cout << "Test failed!!!\n\n";
+		return -1;
+	}
+
+
 	std::ifstream file("inputFile.txt");
 	if (!file.is_open())
 	{

@@ -121,12 +121,15 @@
     <ClCompile Include="graphForTasks10.1.cpp" />
     <ClCompile Include="ListForGraph.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphForTasks10.1.h" />
     <ClInclude Include="ListForGraph.h" />
+    <ClInclude Include="Test.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="FileForTest.txt" />
     <Text Include="inputFile.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
