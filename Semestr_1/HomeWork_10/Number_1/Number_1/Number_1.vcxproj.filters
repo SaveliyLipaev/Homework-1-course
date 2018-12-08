@@ -24,6 +24,9 @@
     <ClCompile Include="graphForTasks10.1.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Test.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListForGraph.h">
@@ -32,9 +35,15 @@
     <ClInclude Include="graphForTasks10.1.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="inputFile.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="FileForTest.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>
