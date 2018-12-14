@@ -5,7 +5,7 @@
 struct Node
 {
 	int state = 0;
-	List* list;
+	List* adjacentList;
 };
 
 struct Graph
@@ -19,22 +19,22 @@ Graph* createGraph(const int &numberNode)
 	graph->nodes.resize(numberNode);
 	for (auto &temp : graph->nodes)
 	{
-		temp.list = createList();
+		temp.adjacentList = createList();
 	}
 	return graph;
 }
 
 void addArc(Graph *graph, const int &nodeOne, const int &nodeTwo, const int &length)
 {
-	push(graph->nodes[nodeOne - 1].list, nodeTwo, length);
-	push(graph->nodes[nodeTwo - 1].list, nodeOne, length);
+	push(graph->nodes[nodeOne - 1].adjacentList, nodeTwo, length);
+	push(graph->nodes[nodeTwo - 1].adjacentList, nodeOne, length);
 }
 
 void deleteGraph(Graph *graph)
 {
 	for (auto &temp : graph->nodes)
 	{
-		deleteList(temp.list);
+		deleteList(temp.adjacentList);
 	}
 	graph->nodes.clear();
 	delete graph;
@@ -65,16 +65,16 @@ bool captureCity(Graph *graph, const int capital)
 		queue.pop();
 		helpMas[targetNode] = true;
 
-		for (int i = 0; i < lengthList(graph->nodes[targetNode].list); ++i)
+		for (int i = 0; i < lengthList(graph->nodes[targetNode].adjacentList); ++i)
 		{   
-			if (graph->nodes[targetNode].state == 0 && returnState(graph, returnNode(graph->nodes[targetNode].list,i)) == capital && returnLengthArc(graph->nodes[targetNode].list, i) <= minLength)
+			if (graph->nodes[targetNode].state == 0 && returnState(graph, returnNode(graph->nodes[targetNode].adjacentList, i)) == capital && returnLengthArc(graph->nodes[targetNode].adjacentList, i) <= minLength)
 			{
-				minLength = returnLengthArc(graph->nodes[targetNode].list, i);
+				minLength = returnLengthArc(graph->nodes[targetNode].adjacentList, i);
 				minNode = targetNode;
 			}
-			else if (graph->nodes[targetNode].state == capital && !helpMas[returnNode(graph->nodes[targetNode].list, i) - 1])
+			else if (graph->nodes[targetNode].state == capital && !helpMas[returnNode(graph->nodes[targetNode].adjacentList, i) - 1])
 			{
-				queue.push(returnNode(graph->nodes[targetNode].list, i));
+				queue.push(returnNode(graph->nodes[targetNode].adjacentList, i));
 			}
 		}
 	}

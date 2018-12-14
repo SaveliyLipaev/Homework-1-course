@@ -1,3 +1,4 @@
+#include "ListForGraph.h"
 
 struct NodeList
 {
