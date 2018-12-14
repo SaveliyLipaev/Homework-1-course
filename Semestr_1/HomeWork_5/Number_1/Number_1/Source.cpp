@@ -1,4 +1,5 @@
 #include <iostream>
+#include <clocale>
 #include "sortedList.h"
 #include "InteractiveWindow.h"
 
