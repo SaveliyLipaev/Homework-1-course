@@ -70,7 +70,8 @@ void printList(List *list)
 	auto temp = list->head;
 	while (temp->next != nullptr)
 	{
-		std::cout << temp->data << std::endl;
+		std::cout << temp->data << ' ';
 		temp = temp->next;
 	}
+	std::cout << temp->data << std::endl;
 }

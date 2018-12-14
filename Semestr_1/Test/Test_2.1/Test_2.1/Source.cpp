@@ -19,7 +19,10 @@ int main()
 		file >> buffer;
 		push(list, buffer);
 	}
+	std::cout << "Before turning:\n";
+	printList(list);
 	list = coupList(list);
+	std::cout << "After turning\n";
 	printList(list);
 	file.close();
 	deleteList(list);
