@@ -33,14 +33,19 @@ int minInColumns(std::vector<std::vector<int>> &matrix, const int line, const in
 
 void findSaddlePoints(std::vector<std::vector<int>> &matrix, const int line, const int columns)
 {
+	bool flagFind = false;
 	for (int i = 0; i < line; ++i)
 	{
 		int max = maxInLine(matrix, columns, i);
 		int min = minInColumns(matrix, line, max);
 		if (min == i)
 		{
-			std::cout << min + 1 << "  -  " << max + 1;
+			flagFind = true;
+			std::cout << min + 1 << "  -  " << max + 1 << std::endl;
 		}
 	}
-
+	if (!flagFind)
+	{
+		std::cout << "no saddle points found\n";
+	}
 }
