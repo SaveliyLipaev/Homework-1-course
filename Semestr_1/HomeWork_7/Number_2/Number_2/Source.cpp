@@ -5,28 +5,26 @@
 
 int main()
 {
-	setlocale(LC_ALL, "Russian");
-
 	if (test())
 	{
-		std::cout << "Тест пройден, все ок!\n";
+		std::cout << "Test passed!\n";
 	}
 	else
 	{
-		std::cout << "Тест провален!\n";
+		std::cout << "Test failed!\n";
 		return -1;
 	}
 
 	std::ifstream file("ArithmeticExpression.txt");
 	if (!file.is_open())
 	{
-		std::cout << "Файл не открылся!(\n";
+		std::cout << "The file did not open!(\n";
 		return -1;
 	}
 
 	std::string str;
 	getline(file, str);
-	std::cout << "Результат арифмитического выражения: " << resultArithmyExpression(str) << std::endl;
+	std::cout << "Arithmitic expression result: " << resultArithmyExpression(str) << std::endl;
 
 	file.close();
 	return 0;
