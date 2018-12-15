@@ -1,8 +1,6 @@
 #include <iostream>
 #include "sortedList.h"
 
-using namespace std;
-
 struct ListElement
 {
 	int data;
@@ -62,13 +60,13 @@ void printList(SortedList *list)
 {
 	if (isEmpty(list))
 	{
-		cout << "Список пуст" << endl;
+		std::cout << "The list is empty" << std::endl;
 		return;
 	}
 	auto temp = list->head;
 	while (temp != nullptr)
 	{
-		cout << temp->data << endl;
+		std::cout << temp->data << std::endl;
 		temp = temp->next;
 	}
 }
