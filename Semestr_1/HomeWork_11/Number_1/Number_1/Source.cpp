@@ -16,7 +16,7 @@ int main()
 	std::cout << "Enter the string you want to find in the file\n";
 	getline(std::cin, findString);
 
-	int venue = KnutMorrisPrattForFile(file, findString);
+	int venue = find(file, findString);
 
 	if (venue == -1)
 	{

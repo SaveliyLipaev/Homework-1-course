@@ -24,7 +24,7 @@ void prefixFunc(int *prefixMas, const std::string &prototype)
 	}
 }
 
-int KnutMorrisPrattForFile(std::ifstream &file, const std::string &prototype)
+int find(std::ifstream &file, const std::string &prototype)
 {
 	int *prefixMas = new int[prototype.length()];
 	prefixFunc(prefixMas, prototype);

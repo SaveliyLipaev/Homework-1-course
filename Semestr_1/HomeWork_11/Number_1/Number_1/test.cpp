@@ -5,7 +5,7 @@ using namespace std;
 int readAndTest(string str)
 {
 	ifstream file("Text.txt");
-	int temp = KnutMorrisPrattForFile(file, str);
+	int temp = find(file, str);
 	file.close();
 	return temp;
 }

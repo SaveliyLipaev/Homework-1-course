@@ -4,4 +4,4 @@
 
 //takes a pointer to the file and the substring to be found,
 //returns the place in the file where the given string is first encountered
-int KnutMorrisPrattForFile(std::ifstream &file, const std::string &prototype);
+int find(std::ifstream &file, const std::string &prototype);
