@@ -11,7 +11,6 @@ int main()
 		interactiveWindows(list);
 
 		deleteList(list);
-		delete list;
 	}
 	else
 	{

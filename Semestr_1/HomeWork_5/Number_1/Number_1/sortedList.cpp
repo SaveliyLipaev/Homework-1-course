@@ -105,6 +105,7 @@ void deleteList(SortedList *list)
 		list->head = list->head->next;
 		delete temp;
 	}
+	delete list;
 }
 
 bool checkSortingList(SortedList *list)
