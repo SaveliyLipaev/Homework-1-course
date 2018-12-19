@@ -120,12 +120,14 @@
   <ItemGroup>
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="priorityQueueForGraph.cpp" />
+    <ClCompile Include="set.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h" />
     <ClInclude Include="priorityQueueForGraph.h" />
+    <ClInclude Include="set.h" />
     <ClInclude Include="Test.h" />
   </ItemGroup>
   <ItemGroup>

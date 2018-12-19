@@ -2,6 +2,7 @@
 #include <iostream>
 #include "priorityQueueForGraph.h"
 #include "Graph.h"
+#include "set.h"
 
 struct Arc
 {
@@ -34,8 +35,10 @@ void addArc(Graph *graph, const int firstVertex, const int secondVertex, const i
 void highlightOstovTree(Graph *graph, const bool print)
 {
 	auto queueArc = createQueue();
+	auto sets = createSets(graph->nodes.size());
 	for (size_t i = 0; i < graph->nodes.size(); ++i)
 	{
+		makeSet(sets, i + 1);
 		for (size_t j = i + 1; j < graph->nodes.size(); ++j)
 		{
 			if (graph->nodes[i][j].length != 0)
@@ -44,13 +47,12 @@ void highlightOstovTree(Graph *graph, const bool print)
 			}
 		}
 	}
-	bool *affiliationOstov = new bool[graph->nodes.size()]{};
 	while (!isEmpty(queueArc))
 	{
 		int firstVetrex = returnFirstVertex(queueArc);
 		int secondVertex = returnSecondVertex(queueArc);
 		pop(queueArc);
-		if (affiliationOstov[firstVetrex] && affiliationOstov[secondVertex])
+		if (find(sets, firstVetrex) == find(sets, secondVertex))
 		{
 			continue;
 		}
@@ -60,11 +62,9 @@ void highlightOstovTree(Graph *graph, const bool print)
 		}
 		graph->nodes[firstVetrex][secondVertex].partOstov = true;
 		graph->nodes[secondVertex][firstVetrex].partOstov = true;
-		affiliationOstov[firstVetrex] = true;
-		affiliationOstov[secondVertex] = true;
+		unionSet(sets, firstVetrex, secondVertex);
 	}
 
-	delete[] affiliationOstov;
 	deleteQueue(queueArc);
 }
 
