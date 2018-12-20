@@ -50,3 +50,10 @@ void unionSet(Sets *set, const int firstNumber, const int secondNumber)
 		}
 	}
 }
+
+void deleteSets(Sets *set)
+{
+	set->parent.clear();
+	set->rank.clear();
+	delete set;
+}

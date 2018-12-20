@@ -64,7 +64,7 @@ void highlightOstovTree(Graph *graph, const bool print)
 		graph->nodes[secondVertex][firstVetrex].partOstov = true;
 		unionSet(sets, firstVetrex, secondVertex);
 	}
-
+	deleteSets(sets);
 	deleteQueue(queueArc);
 }
 
