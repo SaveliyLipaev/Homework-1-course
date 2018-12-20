@@ -5,8 +5,6 @@
 
 int main()
 {
-	setlocale(LC_ALL, "Russian");
-
 	if (test())
 	{
 		std::cout << "Тест пройден, все ок!!!\n\n";
