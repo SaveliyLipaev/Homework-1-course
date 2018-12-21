@@ -26,7 +26,7 @@ bool isEmpty(List *list)
 	return list->head == nullptr;
 }
 
-void push(List *list, const std::string name)
+void push(List *list, const std::string &name)
 {
 	list->head = new ListNode{ name, nullptr, list->head };
 

@@ -12,7 +12,7 @@ List* createList();
 bool isEmpty(List *list);
 
 //Adds an item to the top of the list
-void push(List *list, const std::string str);
+void push(List *list, const std::string &str);
 
 //Removes the entire list
 void deleteList(List *list);
