@@ -9,12 +9,8 @@ int main()
 
 	int quantityVertex = 0;
 	file >> quantityVertex;
-
 	int quantityArcs = 0;
 	file >> quantityArcs;
-
-	bool *vertex = new bool[quantityVertex];
-
 	int **graph = new int *[quantityVertex];
 
 	for (int i = 0; i < quantityVertex; i++)
@@ -28,14 +24,12 @@ int main()
 
 	file.close();
 
-	find(graph, vertex, quantityVertex, quantityArcs);
+	find(graph, quantityVertex, quantityArcs);
 
 	for (int i = 0; i < quantityVertex; i++)
 	{
 		delete[] graph[i];
 	}
-
 	delete[] graph;
-	delete[] vertex;
 	return 0;
 }

@@ -1,24 +1,22 @@
 #include <iostream>
-#include <fstream>
 
-int findAnotherCity(int **graph, int n, int index)
+int findVertex(int **graph, int quantityVertex, int index)
 {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < quantityVertex; i++)
 	{
-		if (graph[i][index] == 1)
+		if (graph[i][index] == true)
 		{
 			return i;
 		}
 	}
-
 	return 0;
 }
 
-bool isRightNode(bool *vertex, int quantityVertex)
+bool isGoodVertex(bool *visitedVertex, int quantityVertex)
 {
 	for (int i = 0; i < quantityVertex; i++)
 	{
-		if (!vertex[i])
+		if (!visitedVertex[i])
 		{
 			return false;
 		}
@@ -26,44 +24,36 @@ bool isRightNode(bool *vertex, int quantityVertex)
 	return true;
 }
 
-void printNode(bool *vertex, int quantinyVertex)
+void bypass(int **graph, bool *visitedVertex, int index, int quantityArcs, int quantityVertex, int currentVertex)
 {
-	for (int i = 0; i < quantinyVertex; i++)
-	{
-		std::cout << vertex[i] << ' ';
-	}
-}
-
-void bypass(int **graph, bool *vertex, int index, int m, int n, int currentCity)
-{
-	for (int i = 0; i < m; i++)
+	for (int i = 0; i < quantityArcs; i++)
 	{
 		if (graph[index][i] == -1)
 		{
-			int numberOfCity = findAnotherCity(graph, n, i);
-			if (!vertex[numberOfCity])
+			int numberVertex = findVertex(graph, quantityVertex, i);
+			if (!visitedVertex[numberVertex])
 			{
-				vertex[numberOfCity] = true;
-				bypass(graph, vertex, numberOfCity, m, n, currentCity);
+				visitedVertex[numberVertex] = true;
+				bypass(graph, visitedVertex, numberVertex, quantityArcs, quantityVertex, currentVertex);
 			}
 		}
 	}
 }
 
-void find(int **graph, bool *vertex, int quantityVertex, int quantityArc)
+void find(int **graph, int quantityVertex, int quantityArc)
 {
 	for (int i = 0; i < quantityVertex; i++)
 	{
-		for (int i = 0; i < quantityVertex; i++)
-		{
-			vertex[i] = false;
-		}
+		bool *visitedVertex = new bool[quantityVertex] {};
 
-		bypass(graph, vertex, i, quantityArc, quantityVertex, i);
-		vertex[i] = true;
-		if (isRightNode(vertex, quantityVertex))
+		bypass(graph, visitedVertex, i, quantityArc, quantityVertex, i);
+
+		visitedVertex[i] = true;
+
+		if (isGoodVertex(visitedVertex, quantityVertex))
 		{
 			std::cout << i + 1 << std::endl;
 		}
+		delete[] visitedVertex;
 	}
 }
