@@ -3,17 +3,14 @@
 #include <string>
 #include "ListForSort.h"
 
-
-using namespace std;
-
 int main()
 {
-	ifstream readFile("Text.txt");
+	std::ifstream readFile("Text.txt");
 	auto list = createList();
 
 	while (!readFile.eof())
 	{
-		string buffer;
+		std::string buffer;
 		getline(readFile, buffer);
 		auto node = findNode(list, buffer);
 		if (node == nullptr)
@@ -22,9 +19,13 @@ int main()
 		}
 	}
 	readFile.close();
-	ofstream newFile("result.txt");
+
+	std::ofstream newFile("result.txt");
+
 	mergeSort(list);
+
 	printListInFile(list, newFile);
+
 	newFile.close();
 	deleteList(list);
 	return 0;
