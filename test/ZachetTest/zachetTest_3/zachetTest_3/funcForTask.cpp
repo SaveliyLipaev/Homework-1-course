@@ -4,7 +4,7 @@ int findVertex(int **graph, int quantityVertex, int index)
 {
 	for (int i = 0; i < quantityVertex; i++)
 	{
-		if (graph[i][index] == true)
+		if (graph[i][index] == 1)
 		{
 			return i;
 		}
