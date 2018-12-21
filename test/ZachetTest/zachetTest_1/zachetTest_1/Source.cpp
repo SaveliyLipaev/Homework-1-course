@@ -15,18 +15,10 @@ int main()
 	{
 		string buffer;
 		getline(readFile, buffer);
-		for (int i = 0; i < buffer.length(); ++i)
+		auto node = findNode(list, buffer);
+		if (node == nullptr)
 		{
-			string secondBuffer;
-			for (int j = i; j < buffer.length(); ++j)
-			{
-				secondBuffer += buffer[j];
-				auto node = findNode(list, secondBuffer);
-				if (node == nullptr)
-				{
-					push(list, secondBuffer);
-				}
-			}
+			push(list, buffer);
 		}
 	}
 	readFile.close();
