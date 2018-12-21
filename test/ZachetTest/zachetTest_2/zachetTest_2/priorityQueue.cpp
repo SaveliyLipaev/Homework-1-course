@@ -26,13 +26,13 @@ void enqueue(PriorityQueue *queue, const int key, const int data)
 {
 	auto newElement = new Node{ key, data, queue->head, nullptr };
 
-	while (newElement->next && newElement->next->key >= key)
+	while (newElement->next != nullptr && newElement->next->key >= key)
 	{
 		newElement->previous = newElement->next;
 		newElement->next = newElement->next->next;
 	}
 
-	if (newElement->previous)
+	if (newElement->previous != nullptr)
 	{
 		newElement->previous->next = newElement;
 	}
@@ -41,7 +41,7 @@ void enqueue(PriorityQueue *queue, const int key, const int data)
 		queue->head = newElement;
 	}
 
-	if (newElement->next)
+	if (newElement->next != nullptr)
 	{
 		newElement->next->previous = newElement;
 	}
