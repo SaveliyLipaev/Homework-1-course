@@ -45,11 +45,8 @@ void findGoodVertex(int **graph, int quantityVertex, int quantityArc)
 	for (int i = 0; i < quantityVertex; i++)
 	{
 		bool *visitedVertex = new bool[quantityVertex] {};
-
-		bypass(graph, visitedVertex, i, quantityArc, quantityVertex, i);
-
 		visitedVertex[i] = true;
-
+		bypass(graph, visitedVertex, i, quantityArc, quantityVertex, i);
 		if (isGoodVertex(visitedVertex, quantityVertex))
 		{
 			std::cout << i + 1 << std::endl;
