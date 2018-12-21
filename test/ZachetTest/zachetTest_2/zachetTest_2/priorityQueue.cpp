@@ -22,7 +22,7 @@ bool isEmpty(PriorityQueue *queue)
 
 void enqueue(PriorityQueue *queue, const int key, const int data)
 {
-	Node * newNode = new Node{ key, data, nullptr };
+	auto newNode = new Node{ key, data, nullptr };
 
 	if (isEmpty(queue) || key < queue->head->key)
 	{
@@ -30,11 +30,14 @@ void enqueue(PriorityQueue *queue, const int key, const int data)
 		queue->head = newNode;
 		return;
 	}
-	Node *temp = queue->head;
+
+	auto temp = queue->head;
+
 	while (temp->next != nullptr && temp->next->key < key)
 	{
 		temp = temp->next;
 	}
+
 	newNode->next = temp->next;
 	temp->next = newNode;
 }

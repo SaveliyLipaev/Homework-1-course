@@ -13,8 +13,10 @@ int main()
 
 	int temp = dequeue(queue);
 	int temp2 = dequeue(queue);
+	int temp3 = dequeue(queue);
+	int temp4 = dequeue(queue);
 
-	cout << temp << endl << temp2;
+	cout << temp << endl << temp2 << endl << temp3 << endl << temp4;
 
 	deletePriorityQueue(queue);
 	return 0;
