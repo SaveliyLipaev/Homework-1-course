@@ -1,4 +1,5 @@
 #include <iostream>
+#include "funcForTask.h"
 
 int findVertex(int **graph, int quantityVertex, int index)
 {
