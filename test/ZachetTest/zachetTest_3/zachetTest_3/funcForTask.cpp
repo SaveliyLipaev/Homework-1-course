@@ -49,7 +49,7 @@ void findGoodVertex(int **graph, int quantityVertex, int quantityArc)
 		bypass(graph, visitedVertex, i, quantityArc, quantityVertex, i);
 		if (isGoodVertex(visitedVertex, quantityVertex))
 		{
-			std::cout << i + 1 << std::endl;
+			std::cout << i << std::endl;
 		}
 		delete[] visitedVertex;
 	}
