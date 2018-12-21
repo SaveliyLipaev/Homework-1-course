@@ -3,11 +3,13 @@ struct Node
 	int key = 0;
 	int data = 0;
 	Node *next = nullptr;
+	Node *previous = nullptr;
 };
 
 struct PriorityQueue
 {
 	Node *head = nullptr;
+	Node *tail = nullptr;
 };
 
 PriorityQueue *createPriorityQueue()
@@ -22,24 +24,31 @@ bool isEmpty(PriorityQueue *queue)
 
 void enqueue(PriorityQueue *queue, const int key, const int data)
 {
-	auto newNode = new Node{ key, data, nullptr };
+	auto newElement = new Node{ key, data, queue->head, nullptr };
 
-	if (isEmpty(queue) || key < queue->head->key)
+	while (newElement->next && newElement->next->key >= key)
 	{
-		newNode->next = queue->head;
-		queue->head = newNode;
-		return;
+		newElement->previous = newElement->next;
+		newElement->next = newElement->next->next;
 	}
 
-	auto temp = queue->head;
-
-	while (temp->next != nullptr && temp->next->key < key)
+	if (newElement->previous)
 	{
-		temp = temp->next;
+		newElement->previous->next = newElement;
+	}
+	else 
+	{
+		queue->head = newElement;
 	}
 
-	newNode->next = temp->next;
-	temp->next = newNode;
+	if (newElement->next)
+	{
+		newElement->next->previous = newElement;
+	}
+	else 
+	{
+		queue->tail = newElement;
+	}
 }
 
 void deletePriorityQueue(PriorityQueue *&queue)

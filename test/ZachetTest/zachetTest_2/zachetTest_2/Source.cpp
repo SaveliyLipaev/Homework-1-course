@@ -1,8 +1,6 @@
 #include <iostream>
 #include "priorityQueue.h"
 
-using namespace std;
-
 int main()
 {
 	auto queue = createPriorityQueue();
@@ -14,9 +12,9 @@ int main()
 	int temp = dequeue(queue);
 	int temp2 = dequeue(queue);
 	int temp3 = dequeue(queue);
-	int temp4 = dequeue(queue);
 
-	cout << temp << endl << temp2 << endl << temp3 << endl << temp4;
+
+	std::cout << temp << std::endl << temp2 << std::endl << temp3 << std::endl;
 
 	deletePriorityQueue(queue);
 	return 0;
