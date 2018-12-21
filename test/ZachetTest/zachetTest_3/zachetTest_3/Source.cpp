@@ -24,7 +24,7 @@ int main()
 
 	file.close();
 
-	find(graph, quantityVertex, quantityArcs);
+	findGoodVertex(graph, quantityVertex, quantityArcs);
 
 	for (int i = 0; i < quantityVertex; i++)
 	{

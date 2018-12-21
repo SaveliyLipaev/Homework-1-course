@@ -40,7 +40,7 @@ void bypass(int **graph, bool *visitedVertex, int index, int quantityArcs, int q
 	}
 }
 
-void find(int **graph, int quantityVertex, int quantityArc)
+void findGoodVertex(int **graph, int quantityVertex, int quantityArc)
 {
 	for (int i = 0; i < quantityVertex; i++)
 	{
