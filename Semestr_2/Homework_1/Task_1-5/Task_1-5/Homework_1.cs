@@ -24,7 +24,7 @@ namespace Task_1_5
             return value;
         }
 
-        public static int Fibonachi(int number)
+        public static int Fibonacсhi(int number)
         {
             if (number <= 0)
             {
@@ -112,18 +112,18 @@ namespace Task_1_5
         }
 
         public static void SortColumns(int[,] matrix)
+        {
+            for (var i = 1; i < matrix.GetLength(1); ++i)
             {
-                for (var i = 1; i < matrix.GetLength(1); ++i)
+                for (var j = matrix.GetLength(1) - 1; j >= i; --j)
                 {
-                    for (var j = matrix.GetLength(1) - 1; j >= i; --j)
+                    if (matrix[0, j] < matrix[0, j - 1])
                     {
-                        if (matrix[0, j] < matrix[0, j - 1]) 
-                        {
-                            SwapColumns(matrix , j, j - 1);
-                        }
+                        SwapColumns(matrix, j, j - 1);
                     }
                 }
             }
+        }
 
         public static void printMatrix(int[,] matrix)
         {

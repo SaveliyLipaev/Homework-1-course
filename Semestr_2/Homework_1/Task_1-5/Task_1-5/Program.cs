@@ -10,7 +10,7 @@ namespace Task_1_5
 
             Console.WriteLine($"Задание №1\nФакториал числа 6 = {Homework_1.Factorial(6)}\n");
 
-            Console.WriteLine($"Задание №2\nДесятое число Фибоначчи = {Homework_1.Fibonachi(10)}\n");
+            Console.WriteLine($"Задание №2\nДесятое число Фибоначчи = {Homework_1.Fibonacсhi(10)}\n");
 
             Console.WriteLine("Данный массив:");
 
