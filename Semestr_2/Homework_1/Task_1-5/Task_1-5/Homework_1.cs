@@ -103,51 +103,37 @@ namespace Task_1_5
             Console.WriteLine();
         }
 
-        public class Matrix
+        private static void SwapColumns(int[,] matrix, int firstIndex, int secondIndex)
         {
-            private int[,] matrix;
-            private int lines;
-            private int columns;
-
-            public Matrix(int[,] _matrix)
+            for (var i = 0; i < matrix.GetLength(0); ++i)
             {
-                matrix = _matrix;
-                lines = matrix.GetUpperBound(0) + 1;
-                columns = matrix.Length / lines;
+                Swap(ref matrix[i, firstIndex], ref matrix[i, secondIndex]);
             }
+        }
 
-            private void SwapColumns(int firstIndex, int secondIndex)
+        public static void SortColumns(int[,] matrix)
             {
-                for (var i = 0; i < lines; ++i)
+                for (var i = 1; i < matrix.GetLength(1); ++i)
                 {
-                    Swap(ref matrix[i, firstIndex], ref matrix[i, secondIndex]);
-                }
-            }
-
-            public void SortColumns()
-            {
-                for (var i = 1; i < columns; ++i)
-                {
-                    for (var j = columns - 1; j >= i; --j)
+                    for (var j = matrix.GetLength(1) - 1; j >= i; --j)
                     {
                         if (matrix[0, j] < matrix[0, j - 1]) 
                         {
-                            SwapColumns(j, j - 1);
+                            SwapColumns(matrix , j, j - 1);
                         }
                     }
                 }
             }
 
-            public void printMatrix()
+        public static void printMatrix(int[,] matrix)
+        {
+            for (var i = 0; i < matrix.GetLength(0); ++i)
             {
-                for (var i = 0; i < lines; ++i)
+                for (var j = 0; j < matrix.GetLength(1); ++j)
                 {
-                    for (var j = 0; j < columns; ++j)
-                    {
-                        Console.Write($"{matrix[i, j]}  ");
-                    }
-                    Console.WriteLine();
+                    Console.Write($"{matrix[i, j]}  ");
                 }
+                Console.WriteLine();
             }
         }
     }

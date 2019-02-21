@@ -15,15 +15,14 @@ namespace Task_1_5
             Console.WriteLine("Данный массив:");
 
             int[,] mas = { { 3, 2, 5, 3, 1 }, { 2, 5, 7, 4, 7 }, { 1, 3, 4, 6, 8 }, { 1, 6, 7, 7, 5 }, { 1, 9, 8, 0, 8 } };
-            var matrix = new Homework_1.Matrix(mas);
-            matrix.printMatrix();
+            Homework_1.printMatrix(mas);
 
             Console.WriteLine("\nЗадание №4(проход по спирали)");
             Homework_1.SpiralWalk(mas);
 
             Console.WriteLine("\nЗадание №5(сортировка по первому элементу столбцов)");
-            matrix.SortColumns();
-            matrix.printMatrix();
+            Homework_1.SortColumns(mas);
+            Homework_1.printMatrix(mas);
 
             Console.ReadKey();
         }
