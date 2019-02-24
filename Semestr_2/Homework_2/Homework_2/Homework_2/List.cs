@@ -18,10 +18,7 @@ namespace Homework_2
         private int size;
         private Node head;
 
-        private bool GoodPosition(int position)
-        {
-            return position > 0 && position <= size;
-        }
+        private bool GoodPosition(int position) => position > 0 && position <= size;
 
         public bool AddPosition(int position, int data)
         {
@@ -60,7 +57,7 @@ namespace Homework_2
 
         public int Pop()
         {
-            if(this.IsEmpty())
+            if (this.IsEmpty()) 
             {
                 Console.WriteLine("Ошибка, список пуст!!!");
                 return -1;
@@ -98,15 +95,9 @@ namespace Homework_2
             return value;
         }
 
-        public bool IsEmpty()
-        {
-            return size == 0;
-        }
+        public bool IsEmpty() => size == 0;
 
-        public int Size()
-        {
-            return size;
-        }
+        public int Size() => size;
 
         public bool ChangeValue(int position, int value)
         {
@@ -144,6 +135,5 @@ namespace Homework_2
 
             return buffer.data;
         }
-
     }
 }
