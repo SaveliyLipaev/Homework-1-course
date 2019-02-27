@@ -12,6 +12,7 @@ namespace Homework_2
             list.Add(2);
             list.Add(1);
             list.AddPosition(3, 10);
+            list.RemovePosition(3);
             //list.ChangeValue(3, 99);
 
             Console.WriteLine(list.GetValue(3));

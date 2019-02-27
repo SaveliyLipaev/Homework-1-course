@@ -75,16 +75,12 @@ namespace Homework_2
                 return this.Remove();
             }
 
-            var buffer = head;
-
-            for (var i = 0; i < position - 2; ++i)
-            {
-                buffer = buffer.next;
-            }
+            var buffer = FindNode(position - 1);
 
             var value = buffer.next.data;
             buffer.next = buffer.next.next;
             --size;
+
             return value;
         }
 
@@ -100,14 +96,7 @@ namespace Homework_2
                 return false;
             }
 
-            var buffer = head;
-
-            for (var i = 0; i < position - 1; ++i) 
-            {
-                buffer = buffer.next;
-            }
-
-            buffer.data = value;
+            FindNode(position).data = value;
             return true;
         }
 
@@ -118,15 +107,8 @@ namespace Homework_2
                 Console.WriteLine("Ошибка!!!");
                 return -1;
             }
-
-            var buffer = head;
-   
-            for (var i = 0; i < position - 1; ++i)
-            {
-                buffer = buffer.next;
-            }
-
-            return buffer.data;
+ 
+            return FindNode(position).data;
         }
 
         private Node FindNode(int position)
