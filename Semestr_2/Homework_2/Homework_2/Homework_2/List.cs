@@ -8,6 +8,7 @@ namespace Homework_2
         {
             public int data;
             public Node next;
+
             public Node(int data, Node next)
             {
                 this.data = data;
@@ -33,29 +34,21 @@ namespace Homework_2
                 return true;
             }
 
-            var newNode = new Node(data, head);
+            var buffer = FindNode(position - 1);
+            buffer.next = new Node(data, buffer.next.next);
+
             ++size;
-
-            for (var i = 0; i < position - 2; ++i)
-            {
-                newNode.next = newNode.next.next;
-            }
-
-            var buffer = newNode.next.next;
-            newNode.next.next = newNode;
-            newNode.next = buffer;
 
             return true;
         }
 
         public void Add(int data)
         {
-            var newNode = new Node(data, head);
-            head = newNode;
+            head = new Node(data, head);
             ++size;
         }
 
-        public int Pop()
+        public int Remove()
         {
             if (this.IsEmpty()) 
             {
@@ -69,7 +62,7 @@ namespace Homework_2
             return value;
         }
 
-        public int PopPosition(int position)
+        public int RemovePosition(int position)
         {
             if (!GoodPosition(position))
             {
@@ -79,7 +72,7 @@ namespace Homework_2
 
             if (position == 1)
             {
-                return this.Pop();
+                return this.Remove();
             }
 
             var buffer = head;
@@ -134,6 +127,16 @@ namespace Homework_2
             }
 
             return buffer.data;
+        }
+
+        private Node FindNode(int position)
+        {
+            var buffer = head;
+            for (var i = 0; i < position - 1; ++i)
+            {
+                buffer = buffer.next;
+            }
+            return buffer;
         }
     }
 }
