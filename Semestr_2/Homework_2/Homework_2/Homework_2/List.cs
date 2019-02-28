@@ -6,10 +6,10 @@ namespace Homework_2
     {
         private class Node
         {
-            public int data;
+            public string data;
             public Node next;
 
-            public Node(int data, Node next)
+            public Node(string data, Node next)
             {
                 this.data = data;
                 this.next = next;
@@ -21,7 +21,7 @@ namespace Homework_2
 
         private bool GoodPosition(int position) => position > 0 && position <= size;
 
-        public bool AddPosition(int position, int data)
+        public bool AddPosition(int position, string data)
         {
             if (!GoodPosition(position))
             {
@@ -42,18 +42,18 @@ namespace Homework_2
             return true;
         }
 
-        public void Add(int data)
+        public void Add(string data)
         {
             head = new Node(data, head);
             ++size;
         }
 
-        public int Remove()
+        public string Remove()
         {
             if (this.IsEmpty()) 
             {
                 Console.WriteLine("Ошибка, список пуст!!!");
-                return -1;
+                return null;
             }
 
             var value = head.data;
@@ -62,12 +62,12 @@ namespace Homework_2
             return value;
         }
 
-        public int RemovePosition(int position)
+        public string RemovePosition(int position)
         {
             if (!GoodPosition(position))
             {
                 Console.WriteLine("Ошибка!!!!!");
-                return -1;
+                return null;
             }
 
             if (position == 1)
@@ -88,7 +88,7 @@ namespace Homework_2
 
         public int Size() => size;
 
-        public bool ChangeValue(int position, int value)
+        public bool ChangeValue(int position, string value)
         {
             if (!GoodPosition(position))
             {
@@ -100,12 +100,12 @@ namespace Homework_2
             return true;
         }
 
-        public int GetValue(int position)
+        public string GetValue(int position)
         {
             if (!GoodPosition(position)) 
             {
                 Console.WriteLine("Ошибка!!!");
-                return -1;
+                return null;
             }
  
             return FindNode(position).data;
@@ -119,6 +119,33 @@ namespace Homework_2
                 buffer = buffer.next;
             }
             return buffer;
+        }
+
+        public int FindPosition(string str)
+        {
+            var buffer = head;
+
+            for (var i = 1; i <= this.size; ++i)
+            {
+                if (buffer.data == str) 
+                {
+                    return i;
+                }
+
+                buffer = buffer.next;
+            }
+
+            return -1;
+        }
+        
+        public void PrintList()
+        {
+            var buffer = head;
+            while (buffer != null)
+            {
+                Console.WriteLine(buffer.data);
+                buffer = buffer.next;
+            }
         }
     }
 }
