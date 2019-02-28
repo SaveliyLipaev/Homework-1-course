@@ -6,16 +6,18 @@ namespace Homework_2
     {
         static void Main(string[] args)
         {
-            var list = new List();
-            list.Add(4);
-            list.Add(3);
-            list.Add(2);
-            list.Add(1);
-            list.AddPosition(3, 10);
-            list.RemovePosition(3);
-            //list.ChangeValue(3, 99);
+            var hash = new HashTable();
 
-            Console.WriteLine(list.GetValue(3));
+            hash.Add("123");
+            hash.Add("1234");
+            hash.Add("9876");
+
+            if (hash.Affiliation("123"))
+            {
+                hash.Remove("1234");
+            }
+
+            hash.PrintHashTable();
             Console.ReadKey();
         }
     }
