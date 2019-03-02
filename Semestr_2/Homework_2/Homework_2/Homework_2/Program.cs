@@ -12,13 +12,12 @@ namespace Homework_2
             hash.Add("1234");
             hash.Add("9876");
 
-            if (hash.Affiliation("123"))
+            if (hash.IsBelongs("123"))
             {
                 hash.Remove("1234");
             }
 
             hash.PrintHashTable();
-            Console.ReadKey();
         }
     }
 }

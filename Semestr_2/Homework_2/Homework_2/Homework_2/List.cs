@@ -6,13 +6,13 @@ namespace Homework_2
     {
         private class Node
         {
-            public string data;
-            public Node next;
+            public string Data { get; set; }
+            public Node Next { get; set; }
 
             public Node(string data, Node next)
             {
-                this.data = data;
-                this.next = next;
+                Data = data;
+                Next = next;
             }
         }
 
@@ -35,7 +35,7 @@ namespace Homework_2
             }
 
             var buffer = FindNode(position - 1);
-            buffer.next = new Node(data, buffer.next.next);
+            buffer.Next = new Node(data, buffer.Next.Next);
 
             ++size;
 
@@ -56,8 +56,8 @@ namespace Homework_2
                 return null;
             }
 
-            var value = head.data;
-            head = head.next;
+            var value = head.Data;
+            head = head.Next;
             --size;
             return value;
         }
@@ -77,8 +77,8 @@ namespace Homework_2
 
             var buffer = FindNode(position - 1);
 
-            var value = buffer.next.data;
-            buffer.next = buffer.next.next;
+            var value = buffer.Next.Data;
+            buffer.Next = buffer.Next.Next;
             --size;
 
             return value;
@@ -96,7 +96,7 @@ namespace Homework_2
                 return false;
             }
 
-            FindNode(position).data = value;
+            FindNode(position).Data = value;
             return true;
         }
 
@@ -108,7 +108,7 @@ namespace Homework_2
                 return null;
             }
  
-            return FindNode(position).data;
+            return FindNode(position).Data;
         }
 
         private Node FindNode(int position)
@@ -116,7 +116,7 @@ namespace Homework_2
             var buffer = head;
             for (var i = 0; i < position - 1; ++i)
             {
-                buffer = buffer.next;
+                buffer = buffer.Next;
             }
             return buffer;
         }
@@ -127,12 +127,12 @@ namespace Homework_2
 
             for (var i = 1; i <= this.size; ++i)
             {
-                if (buffer.data == str) 
+                if (buffer.Data == str) 
                 {
                     return i;
                 }
 
-                buffer = buffer.next;
+                buffer = buffer.Next;
             }
 
             return -1;
@@ -143,8 +143,8 @@ namespace Homework_2
             var buffer = head;
             while (buffer != null)
             {
-                Console.WriteLine(buffer.data);
-                buffer = buffer.next;
+                Console.WriteLine(buffer.Data);
+                buffer = buffer.Next;
             }
         }
     }

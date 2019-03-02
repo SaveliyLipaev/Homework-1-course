@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Homework_2
 {
     class HashTable
     {
-        private List<List> Buckets;
-        private long amountElements = 0;
+        private List[] buckets;
+        private long amountElements;
 
         public HashTable(int initialSize)
         {
-            Buckets = new List<List>();
+            buckets = new List[initialSize];
 
             for (var i = 0; i < initialSize; ++i)
             {
-                Buckets.Add(new List());
+                buckets[i] = new List();
             }
         }
 
@@ -32,34 +31,29 @@ namespace Homework_2
                 prime *= prime;
             }
 
-            if (sum < 0)
-            {
-                return -sum;
-            }
-
-            return sum;
+            return sum < 0 ? -sum : sum;
         }
 
-        private double LoadFactor() => (double)amountElements / Buckets.Count;
+        private double LoadFactor() => (double)amountElements / buckets.Length;
 
         private void Extension()
         {
-            var NewBuckets = new List<List>();
+            List[] newBuckets = new List[2 * buckets.Length + 1] ;
 
-            for (var i = 0; i < 2 * Buckets.Count + 1; ++i)
+            for (var i = 0; i < newBuckets.Length; ++i)
             {
-                NewBuckets.Add(new List());
+                newBuckets[i] = new List();
             }
 
-            foreach (var oldList in Buckets)
+            foreach (var oldList in buckets)
             {
                 for (var i = 0; i < oldList.Size(); ++i)
                 {
                     var str = oldList.Remove();
-                    NewBuckets[HashFunction(str) % NewBuckets.Count].Add(str);
+                    newBuckets[HashFunction(str) % newBuckets.Length].Add(str);
                 }
             }
-            Buckets = NewBuckets;
+            buckets = newBuckets;
         }
 
         private void CheckDimension()
@@ -72,28 +66,28 @@ namespace Homework_2
 
         public void Add(string str)
         {
-            Buckets[HashFunction(str) % Buckets.Count].Add(str);
+            buckets[HashFunction(str) % buckets.Length].Add(str);
             ++amountElements;
             CheckDimension();
         }
 
         public void Remove(string str)
         {
-            var hash = HashFunction(str) % Buckets.Count;
-            var position = Buckets[hash].FindPosition(str);
+            var hash = HashFunction(str) % buckets.Length;
+            var position = buckets[hash].FindPosition(str);
 
             if (position != -1)
             {
-                Buckets[hash].RemovePosition(position);
+                buckets[hash].RemovePosition(position);
                 --amountElements;
             }
         }
 
-        public bool Affiliation(string str) => Buckets[HashFunction(str) % Buckets.Count].FindPosition(str) != -1;
+        public bool IsBelongs(string str) => buckets[HashFunction(str) % buckets.Length].FindPosition(str) != -1;
 
         public void PrintHashTable()
         {
-            foreach(var list in Buckets)
+            foreach(var list in buckets)
             {
                 list.PrintList();
             }
