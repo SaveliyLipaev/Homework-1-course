@@ -20,7 +20,7 @@ namespace Homework_2
         public HashTable() : this(20)
         { }
 
-        private int HashFunction(string str)
+        private static int HashFunction(string str)
         {
             int prime = 31;
             int sum = 0;
