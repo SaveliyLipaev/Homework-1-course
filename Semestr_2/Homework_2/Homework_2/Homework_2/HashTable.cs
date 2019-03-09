@@ -4,16 +4,16 @@ namespace Homework_2
 {
     class HashTable
     {
-        private List[] buckets;
+        private ListString[] buckets;
         private long amountElements;
 
         public HashTable(int initialSize)
         {
-            buckets = new List[initialSize];
+            buckets = new ListString[initialSize];
 
             for (var i = 0; i < initialSize; ++i)
             {
-                buckets[i] = new List();
+                buckets[i] = new ListString();
             }
         }
 
@@ -38,11 +38,11 @@ namespace Homework_2
 
         private void Extension()
         {
-            List[] newBuckets = new List[2 * buckets.Length + 1] ;
+            ListString[] newBuckets = new ListString[2 * buckets.Length + 1] ;
 
             for (var i = 0; i < newBuckets.Length; ++i)
             {
-                newBuckets[i] = new List();
+                newBuckets[i] = new ListString();
             }
 
             foreach (var oldList in buckets)

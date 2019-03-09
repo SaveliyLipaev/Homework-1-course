@@ -6,18 +6,10 @@ namespace Homework_2
     {
         static void Main(string[] args)
         {
-            var hash = new HashTable();
+            var calc = new StackCalculator(new ListStackInt());
 
-            hash.Add("123");
-            hash.Add("1234");
-            hash.Add("9876");
-
-            if (hash.IsBelongs("123"))
-            {
-                hash.Remove("1234");
-            }
-
-            hash.PrintHashTable();
+            Console.WriteLine(calc.DoCalculation("4 43 + 5 6 * -"));
+            
         }
     }
 }

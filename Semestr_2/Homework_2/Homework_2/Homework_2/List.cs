@@ -2,7 +2,7 @@
 
 namespace Homework_2
 {
-    class List
+    class ListString
     {
         private class Node
         {
