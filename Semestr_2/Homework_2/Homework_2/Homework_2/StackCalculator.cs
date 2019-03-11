@@ -14,28 +14,26 @@ namespace Homework_2
 
         private static bool IsOperator(string str) => str == "+" || str == "-" || str == "*" || str == "/";
 
-        private static int DoOperation(int firstNumber, int secondNimber, string operation)
+        private static int DoOperation(int firstNumber, int secondNumber, string operation)
         {
             switch(operation)
             {
                 case "+":
-                    return firstNumber + secondNimber;
+                    return firstNumber + secondNumber;
                 case "-":
-                    return firstNumber - secondNimber;
+                    return firstNumber - secondNumber;
                 case "*":
-                    return firstNumber * secondNimber;
+                    return firstNumber * secondNumber;
                 case "/":
-                    return firstNumber / secondNimber;
+                    return firstNumber / secondNumber;
             }
-            //кинуть исключение
-            return -1;
+            return 0;
         }
 
         public int DoCalculation(string expression)
         {
             string[] literals = expression.Split(' ');
-            try
-            {
+
                 foreach (var literal in literals)
                 {
                     if (int.TryParse(literal, out int result))
@@ -46,30 +44,25 @@ namespace Homework_2
                     {
                         int secondNumber = stack.Remove();
                         int firstNumber = stack.Remove();
+                        if(secondNumber == 0 && literal == "/")
+                        {
+                            return -1;
+                        }
                         stack.Add(DoOperation(firstNumber, secondNumber, literal));
                     }
                     else
                     {
-                        throw new ArgumentOutOfRangeException("Встреча непредвиденных символов");
+                        return -1;
                     }
                 }
 
                 var buffer = stack.Remove();
                 if (!stack.IsEmpty())
                 {
-                    throw new Exception("Некорректный ввод");
+                    return -1;
                 }
 
                 return buffer;
-            }
-            catch(ArgumentOutOfRangeException exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
-            catch(Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
         }
     }
 }

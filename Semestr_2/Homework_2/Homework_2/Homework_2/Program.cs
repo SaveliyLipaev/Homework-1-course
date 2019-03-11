@@ -8,7 +8,7 @@ namespace Homework_2
         {
             var calc = new StackCalculator(new ListStackInt());
 
-            Console.WriteLine(calc.DoCalculation("4 а3 + 5 6 * -"));
+            Console.WriteLine(calc.DoCalculation("4 0 /"));
             
         }
     }
