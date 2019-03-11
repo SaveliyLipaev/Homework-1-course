@@ -3,7 +3,7 @@
 
 namespace Homework_2
 {
-    class StackCalculator
+    public class StackCalculator : IStackCalculator
     {
         private IStack stack;
 
@@ -34,23 +34,42 @@ namespace Homework_2
         public int DoCalculation(string expression)
         {
             string[] literals = expression.Split(' ');
-
-            foreach(var literal in literals)
+            try
             {
-                if (int.TryParse(literal, out int result))
+                foreach (var literal in literals)
                 {
-                    stack.Add(result);
+                    if (int.TryParse(literal, out int result))
+                    {
+                        stack.Add(result);
+                    }
+                    else if (IsOperator(literal))
+                    {
+                        int secondNumber = stack.Remove();
+                        int firstNumber = stack.Remove();
+                        stack.Add(DoOperation(firstNumber, secondNumber, literal));
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException("Встреча непредвиденных символов");
+                    }
                 }
-                else if (IsOperator(literal))
-                {
-                    int secondNumber = stack.Remove();
-                    int firstNumber = stack.Remove();
-                    stack.Add(DoOperation(firstNumber, secondNumber, literal));
-                }
-                //кинуть еще исключение
-            }
 
-            return stack.Remove();
+                var buffer = stack.Remove();
+                if (!stack.IsEmpty())
+                {
+                    throw new Exception("Некорректный ввод");
+                }
+
+                return buffer;
+            }
+            catch(ArgumentOutOfRangeException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
     }
 }
