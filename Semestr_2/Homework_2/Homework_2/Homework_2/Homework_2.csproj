@@ -47,6 +47,7 @@
     <Compile Include="ArrayStack.cs" />
     <Compile Include="HashTable.cs" />
     <Compile Include="IStack.cs" />
+    <Compile Include="IStackCalculator.cs" />
     <Compile Include="List.cs" />
     <Compile Include="ListStackInt.cs" />
     <Compile Include="Program.cs" />

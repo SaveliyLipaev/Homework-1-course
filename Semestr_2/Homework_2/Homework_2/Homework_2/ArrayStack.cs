@@ -2,7 +2,7 @@
 
 namespace Homework_2
 {
-    class ArrayStack : IStack
+    public class ArrayStack : IStack
     {
         private int[] nodes;
         private int size;
@@ -40,8 +40,6 @@ namespace Homework_2
             }
             nodes = newNodes;
         }
-
-        public int GetValue(int position) => nodes[position - 1];
 
         public bool IsEmpty() => size == 0;
 

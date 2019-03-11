@@ -2,7 +2,7 @@
 
 namespace Homework_2
 {
-    class ListStackInt : IStack
+    public class ListStackInt : IStack
     {
         private class Node
         {
@@ -44,26 +44,5 @@ namespace Homework_2
         public bool IsEmpty() => size == 0;
 
         public int Size() => size;
-
-        public int GetValue(int position)
-        {
-            if (!GoodPosition(position))
-            {
-                Console.WriteLine("Ошибка!!!");
-                return -1;
-            }
-
-            return FindNode(position).Data;
-        }
-
-        private Node FindNode(int position)
-        {
-            var buffer = head;
-            for (var i = 0; i < position - 1; ++i)
-            {
-                buffer = buffer.Next;
-            }
-            return buffer;
-        }
     }
 }

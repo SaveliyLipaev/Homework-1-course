@@ -2,7 +2,7 @@
 
 namespace Homework_2
 {
-    interface IStack
+    public interface IStack
     {
         /// <summary>
         /// Этот метод добавляет значение в начало списка
@@ -27,12 +27,5 @@ namespace Homework_2
         /// </summary>
         /// <returns>Возвращает колличесвто элементов в списке</returns>
         int Size();
-
-        /// <summary>
-        /// Получает значение по позции
-        /// </summary>
-        /// <param name="position">Позиция, на которой стоит элемент, значение которого нужно получить</param>
-        /// <returns>Возвращает значение на нужной нам позции</returns>
-        int GetValue(int position);
     }
 }
