@@ -50,12 +50,17 @@ namespace Homework_2
 
         public string Remove()
         {
-            if (this.IsEmpty()) 
+            try
             {
-                Console.WriteLine("Ошибка, список пуст!!!");
-                return null;
+                if (this.IsEmpty())
+                {
+                    throw new NullReferenceException("Стек пуст");
+                }
             }
-
+            catch
+            {
+                throw;
+            }
             var value = head.Data;
             head = head.Next;
             --size;
@@ -64,10 +69,16 @@ namespace Homework_2
 
         public string RemovePosition(int position)
         {
-            if (!GoodPosition(position))
+            try
             {
-                Console.WriteLine("Ошибка!!!!!");
-                return null;
+                if (!GoodPosition(position))
+                {
+                    throw new IndexOutOfRangeException();
+                }
+            }
+            catch
+            {
+                throw;
             }
 
             if (position == 1)
@@ -92,7 +103,6 @@ namespace Homework_2
         {
             if (!GoodPosition(position))
             {
-                Console.WriteLine("Ошибка!!!");
                 return false;
             }
 
@@ -102,12 +112,18 @@ namespace Homework_2
 
         public string GetValue(int position)
         {
-            if (!GoodPosition(position)) 
+            try
             {
-                Console.WriteLine("Ошибка!!!");
-                return null;
+                if (!GoodPosition(position))
+                {
+                    throw new IndexOutOfRangeException();
+                }
             }
- 
+            catch
+            {
+                throw;
+            }
+
             return FindNode(position).Data;
         }
 
@@ -118,6 +134,7 @@ namespace Homework_2
             {
                 buffer = buffer.Next;
             }
+
             return buffer;
         }
 
@@ -134,7 +151,6 @@ namespace Homework_2
 
                 buffer = buffer.Next;
             }
-
             return -1;
         }
         
