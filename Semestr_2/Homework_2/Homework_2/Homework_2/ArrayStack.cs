@@ -45,9 +45,16 @@ namespace Homework_2
 
         public int Remove()
         {
-            if(IsEmpty())
+            try
             {
-                return -1;
+                if (IsEmpty())
+                {
+                    throw new NullReferenceException();
+                }
+            }
+            catch
+            {
+                throw;
             }
 
             size--;
