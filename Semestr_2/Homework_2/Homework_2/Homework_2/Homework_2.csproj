@@ -44,8 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditiveHashFunction.cs" />
+    <Compile Include="AddlerHashFunction.cs" />
     <Compile Include="ArrayStack.cs" />
     <Compile Include="HashTable.cs" />
+    <Compile Include="IHashFunction.cs" />
+    <Compile Include="IHashTable.cs" />
     <Compile Include="IStack.cs" />
     <Compile Include="IStackCalculator.cs" />
     <Compile Include="List.cs" />
