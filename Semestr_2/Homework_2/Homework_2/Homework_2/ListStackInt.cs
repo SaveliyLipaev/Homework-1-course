@@ -29,10 +29,16 @@ namespace Homework_2
 
         public int Remove()
         {
-            if (this.IsEmpty())
+            try
             {
-                Console.WriteLine("Ошибка, список пуст!!!");
-                return -1;
+                if (this.IsEmpty())
+                {
+                    throw new NullReferenceException();
+                }
+            }
+            catch
+            {
+                throw;
             }
 
             var value = head.Data;
