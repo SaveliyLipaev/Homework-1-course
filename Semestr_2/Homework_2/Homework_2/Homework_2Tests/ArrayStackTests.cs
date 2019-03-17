@@ -37,6 +37,7 @@ namespace Homework_2.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(System.NullReferenceException))]
         public void RemoveFromEmptyStackTest()
         {
             stack.Remove();

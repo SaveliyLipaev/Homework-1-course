@@ -14,15 +14,17 @@ namespace Homework_2.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(System.ArgumentException))]
         public void DoCalculationBadCharactersTest()
         {
-            Assert.AreEqual(-1, calc.DoCalculation("3 3 s +"));
+            calc.DoCalculation("3 3 s +");
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(System.ArgumentException))]
         public void DoCalculationInvalidInputTest()
         {
-            Assert.AreEqual(-1, calc.DoCalculation("3 3 3 + "));
+            calc.DoCalculation("3 3 3 + ");
         }
 
         [TestMethod()]
@@ -38,6 +40,7 @@ namespace Homework_2.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(System.DivideByZeroException))]
         public void DivisionByZeroTest()
         {
             Assert.AreEqual(-1, calc.DoCalculation("3 0 /"));
