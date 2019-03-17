@@ -6,7 +6,7 @@ namespace Homework_2
     {
         private ListString[] buckets;
         private IHashFunction hashFunction;
-        private long amountElements;
+        public long amountElements { get; private set; }
 
         public HashTable(int initialSize, IHashFunction hashFunction)
         {
