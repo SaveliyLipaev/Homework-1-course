@@ -25,7 +25,14 @@ namespace Homework_2
                 case "*":
                     return firstNumber * secondNumber;
                 case "/":
-                    return firstNumber / secondNumber;
+                    try
+                    {
+                        return firstNumber / secondNumber;
+                    }
+                    catch
+                    {
+                        throw;
+                    }
             }
             return 0;
         }
@@ -33,7 +40,8 @@ namespace Homework_2
         public int DoCalculation(string expression)
         {
             string[] literals = expression.Split(' ');
-
+            try
+            {
                 foreach (var literal in literals)
                 {
                     if (int.TryParse(literal, out int result))
@@ -44,25 +52,21 @@ namespace Homework_2
                     {
                         int secondNumber = stack.Remove();
                         int firstNumber = stack.Remove();
-                        if(secondNumber == 0 && literal == "/")
-                        {
-                            return -1;
-                        }
                         stack.Add(DoOperation(firstNumber, secondNumber, literal));
                     }
                     else
                     {
-                        return -1;
+                        throw new ArgumentException();
                     }
                 }
 
                 var buffer = stack.Remove();
-                if (!stack.IsEmpty())
-                {
-                    return -1;
-                }
-
                 return buffer;
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }
