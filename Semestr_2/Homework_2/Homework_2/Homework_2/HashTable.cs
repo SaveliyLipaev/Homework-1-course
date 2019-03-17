@@ -60,6 +60,10 @@ namespace Homework_2
 
         public void Add(string str)
         {
+            if(str == null)
+            {
+                return;
+            }
             buckets[hashFunction.HashFunction(str) % buckets.Length].Add(str);
             ++amountElements;
             CheckDimension();
@@ -67,6 +71,10 @@ namespace Homework_2
 
         public void Remove(string str)
         {
+            if (str == null) 
+            {
+                return;
+            }
             var hash = hashFunction.HashFunction(str) % buckets.Length;
             var position = buckets[hash].FindPosition(str);
 
