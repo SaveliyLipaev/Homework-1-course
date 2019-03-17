@@ -61,6 +61,11 @@ namespace Homework_2
                 }
 
                 var buffer = stack.Remove();
+                if (!stack.IsEmpty())
+                {
+                    throw new ArgumentException();
+                }
+
                 return buffer;
             }
             catch
