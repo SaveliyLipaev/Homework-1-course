@@ -6,10 +6,7 @@ namespace Homework_2
     {
         static void Main(string[] args)
         {
-            var calc = new StackCalculator(new ListStackInt());
-
-            Console.WriteLine(calc.DoCalculation("4 0 /"));
-            
+           
         }
     }
 }
