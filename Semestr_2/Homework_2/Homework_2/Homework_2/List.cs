@@ -50,17 +50,11 @@ namespace Homework_2
 
         public string Remove()
         {
-            try
+            if (this.IsEmpty())
             {
-                if (this.IsEmpty())
-                {
-                    throw new NullReferenceException("Стек пуст");
-                }
+                throw new NullReferenceException("Стек пуст");
             }
-            catch
-            {
-                throw;
-            }
+
             var value = head.Data;
             head = head.Next;
             --size;
@@ -69,16 +63,9 @@ namespace Homework_2
 
         public string RemovePosition(int position)
         {
-            try
+            if (!GoodPosition(position))
             {
-                if (!GoodPosition(position))
-                {
-                    throw new IndexOutOfRangeException();
-                }
-            }
-            catch
-            {
-                throw;
+                throw new IndexOutOfRangeException();
             }
 
             if (position == 1)
@@ -112,16 +99,9 @@ namespace Homework_2
 
         public string GetValue(int position)
         {
-            try
+            if (!GoodPosition(position))
             {
-                if (!GoodPosition(position))
-                {
-                    throw new IndexOutOfRangeException();
-                }
-            }
-            catch
-            {
-                throw;
+                throw new IndexOutOfRangeException();
             }
 
             return FindNode(position).Data;

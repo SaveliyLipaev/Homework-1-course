@@ -45,17 +45,10 @@ namespace Homework_2
 
         public int Remove()
         {
-            try
-            {
-                if (IsEmpty())
-                {
-                    throw new NullReferenceException();
-                }
-            }
-            catch
-            {
-                throw;
-            }
+           if (IsEmpty())
+           {
+               throw new NullReferenceException();
+           }
 
             size--;
             int buffer = nodes[size];

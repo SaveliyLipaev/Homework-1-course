@@ -29,16 +29,10 @@ namespace Homework_2
 
         public int Remove()
         {
-            try
+
+            if (this.IsEmpty())
             {
-                if (this.IsEmpty())
-                {
-                    throw new NullReferenceException();
-                }
-            }
-            catch
-            {
-                throw;
+                throw new NullReferenceException();
             }
 
             var value = head.Data;
