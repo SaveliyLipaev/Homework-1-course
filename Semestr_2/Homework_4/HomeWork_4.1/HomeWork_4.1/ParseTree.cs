@@ -2,7 +2,7 @@
 
 namespace HomeWork_4._1
 {
-    public class ParseTree
+    public class ParseTree : IParseTree
     {
         private Node head;
         private string[] expression;
