@@ -117,7 +117,7 @@ namespace HomeWork_4._1
             string result = null;
             foreach(var i in expression)
             {
-                result += i;
+                result += i + ' ';
             }
             return result;
         }
