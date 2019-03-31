@@ -31,9 +31,10 @@ namespace HomeWork_4._1.Tests
 
         [TestMethod()]
         [ExpectedException(typeof(System.ArgumentException))]
-        public void ParseTreeCreateArgumentExceptioNnumberInsteadOfOperatorTest()
+        public void ParseTreeCreateArgumentExceptioNumberInsteadOfOperatorTest()
         {
             var tree = new ParseTree("( 4 ( + 4 4 ) 4");
+            tree.Result();
         }
 
         [TestMethod()]

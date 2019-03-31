@@ -61,7 +61,7 @@ namespace HomeWork_4._1
             if (expression[index] == "(")
             {
 
-                if(int.TryParse(expression[index + 1], out int buffer) )
+                if (int.TryParse(expression[index + 1], out int buffer))
                 {
                     throw new ArgumentException("Невозможно преобразовать выражение в дерево");
                 }
