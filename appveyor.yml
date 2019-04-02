@@ -1,0 +1,12 @@
+image: Visual Studio 2017
+
+enviroment:
+  matrix:
+  - solution_path: Semestr_2\Homework_1\Task_1-5\Task_1-5.sln
+
+
+before_build:
+  - nuget restore %solution_path%
+
+build_script:
+  - msbuild %solution_path%
