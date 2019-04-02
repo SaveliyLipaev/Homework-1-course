@@ -24,35 +24,35 @@ namespace Homework_2.Tests
             {
                 hashTableAdditive.Add(i.ToString());
             }
-            Assert.AreEqual(1500, hashTableAdditive.amountElements);
+            Assert.AreEqual(1500, hashTableAdditive.AmountElements);
         }
 
         [TestMethod]
         public void IsBelongsFalseInAddlerHashTableTest()
         {
             hashTableAddler.Add("999989");
-            Assert.AreEqual(false, hashTableAddler.IsBelongs("999988"));
+            Assert.IsFalse(hashTableAddler.IsBelongs("999988"));
         }
 
         [TestMethod]
         public void IsBelongsTrueInAddlerHashTableTest()
         {
             hashTableAddler.Add("999989");
-            Assert.AreEqual(true, hashTableAddler.IsBelongs("999989"));
+            Assert.IsTrue(hashTableAddler.IsBelongs("999989"));
         }
 
         [TestMethod]
         public void IsBelongsFalseInAdditiveHashTableTest()
         {
             hashTableAddler.Add("999989");
-            Assert.AreEqual(false, hashTableAdditive.IsBelongs("999988"));
+            Assert.IsFalse(hashTableAdditive.IsBelongs("999988"));
         }
 
         [TestMethod]
         public void IsBelongsTrueInAdditiveHashTableTest()
         {
             hashTableAdditive.Add("999989");
-            Assert.AreEqual(true, hashTableAdditive.IsBelongs("999989"));
+            Assert.IsTrue(hashTableAdditive.IsBelongs("999989"));
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@ namespace Homework_2.Tests
                 hashTableAddler.Add(i.ToString());
             }
             hashTableAddler.Remove(10.ToString());
-            Assert.AreEqual(false, hashTableAddler.IsBelongs(10.ToString()));
+            Assert.IsFalse(hashTableAddler.IsBelongs(10.ToString()));
         }
 
         [TestMethod]
@@ -74,7 +74,7 @@ namespace Homework_2.Tests
                 hashTableAdditive.Add(i.ToString());
             }
             hashTableAdditive.Remove(10.ToString());
-            Assert.AreEqual(false, hashTableAdditive.IsBelongs(10.ToString()));
+            Assert.IsFalse(hashTableAdditive.IsBelongs(10.ToString()));
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace Homework_2.Tests
                 hashTableAdditive.Add(i.ToString());
             }
             hashTableAdditive.Remove(10.ToString());
-            Assert.AreEqual(14, hashTableAdditive.amountElements);
+            Assert.AreEqual(14, hashTableAdditive.AmountElements);
         }
     }
 }

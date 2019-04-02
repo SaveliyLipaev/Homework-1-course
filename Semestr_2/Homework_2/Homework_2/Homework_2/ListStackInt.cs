@@ -21,13 +21,13 @@ namespace Homework_2
 
         private bool GoodPosition(int position) => position > 0 && position <= size;
 
-        public void Add(int data)
+        public void Push(int data)
         {
             head = new Node(data, head);
             ++size;
         }
 
-        public int Remove()
+        public int Pop()
         {
 
             if (this.IsEmpty())

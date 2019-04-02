@@ -25,14 +25,7 @@ namespace Homework_2
                 case "*":
                     return firstNumber * secondNumber;
                 case "/":
-                    try
-                    {
-                        return firstNumber / secondNumber;
-                    }
-                    catch
-                    {
-                        throw;
-                    }
+                    return firstNumber / secondNumber;
             }
             return 0;
         }
@@ -46,24 +39,24 @@ namespace Homework_2
                 {
                     if (int.TryParse(literal, out int result))
                     {
-                        stack.Add(result);
+                        stack.Push(result);
                     }
                     else if (IsOperator(literal))
                     {
-                        int secondNumber = stack.Remove();
-                        int firstNumber = stack.Remove();
-                        stack.Add(DoOperation(firstNumber, secondNumber, literal));
+                        int secondNumber = stack.Pop();
+                        int firstNumber = stack.Pop();
+                        stack.Push(DoOperation(firstNumber, secondNumber, literal));
                     }
                     else
                     {
-                        throw new ArgumentException();
+                        throw new ArgumentException("Невозможно вычислить, проверьте правильность записи");
                     }
                 }
 
-                var buffer = stack.Remove();
+                var buffer = stack.Pop();
                 if (!stack.IsEmpty())
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Невозможно вычислить, проверьте правильность записи");
                 }
 
                 return buffer;

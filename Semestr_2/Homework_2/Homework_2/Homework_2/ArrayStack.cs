@@ -15,7 +15,7 @@ namespace Homework_2
         public ArrayStack() : this(3)
         { }
 
-        public void Add(int data)
+        public void Push(int data)
         {
             CheckDimension();
             nodes[size] = data;
@@ -43,7 +43,7 @@ namespace Homework_2
 
         public bool IsEmpty() => size == 0;
 
-        public int Remove()
+        public int Pop()
         {
            if (IsEmpty())
            {

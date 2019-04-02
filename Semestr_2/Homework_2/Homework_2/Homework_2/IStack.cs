@@ -8,13 +8,13 @@ namespace Homework_2
         /// Этот метод добавляет значение в начало списка
         /// </summary>
         /// <param name="data">Значение, передаваемое в список</param>
-        void Add(int data);
+        void Push(int data);
 
         /// <summary>
         /// Удаляет и возвращает первую позцицию в списке
         /// </summary>
         /// <returns>Возвращает удаленное значение</returns>
-        int Remove();
+        int Pop();
 
         /// <summary>
         /// Проверка пустоты списка

@@ -6,7 +6,7 @@ namespace Homework_2
     {
         private ListString[] buckets;
         private IHashFunction hashFunction;
-        public long amountElements { get; private set; }
+        public long AmountElements { get; private set; }
 
         public HashTable(int initialSize, IHashFunction hashFunction)
         {
@@ -28,7 +28,7 @@ namespace Homework_2
         public HashTable(IHashFunction hashFunction) : this(20, hashFunction)
         { }
 
-        private double LoadFactor() => (double)amountElements / buckets.Length;
+        private double LoadFactor() => (double)AmountElements / buckets.Length;
 
         private void Extension()
         {
@@ -65,7 +65,7 @@ namespace Homework_2
                 return;
             }
             buckets[hashFunction.HashFunction(str) % buckets.Length].Add(str);
-            ++amountElements;
+            ++AmountElements;
             CheckDimension();
         }
 
@@ -81,7 +81,7 @@ namespace Homework_2
             if (position != -1)
             {
                 buckets[hash].RemovePosition(position);
-                --amountElements;
+                --AmountElements;
             }
         }
 
