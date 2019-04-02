@@ -90,8 +90,6 @@ namespace HomeWork_4._1
 
         private static int CalculateExpression(Node node)
         {
-            try
-            {
                 if (int.TryParse(node.ToString(), out int number))
                 {
                     return number;
@@ -100,11 +98,6 @@ namespace HomeWork_4._1
                 {
                     return DoOperation.Arithmetic.Result(CalculateExpression((node as Operator).Left), CalculateExpression((node as Operator).Right), node.ToString());
                 }
-            }
-            catch
-            {
-                throw;
-            }
         }
 
         public int Result()
