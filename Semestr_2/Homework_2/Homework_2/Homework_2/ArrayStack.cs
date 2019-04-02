@@ -32,7 +32,7 @@ namespace Homework_2
 
         private void Extension()
         {
-            int[] newNodes = new int[nodes.Length * 2 + 1];
+            var newNodes = new int[nodes.Length * 2 + 1];
 
             for (var i = 0; i < nodes.Length; ++i)
             {

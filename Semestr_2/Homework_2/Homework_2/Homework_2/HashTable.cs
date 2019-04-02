@@ -32,7 +32,7 @@ namespace Homework_2
 
         private void Extension()
         {
-            ListString[] newBuckets = new ListString[2 * buckets.Length + 1] ;
+            var newBuckets = new ListString[2 * buckets.Length + 1] ;
 
             for (var i = 0; i < newBuckets.Length; ++i)
             {

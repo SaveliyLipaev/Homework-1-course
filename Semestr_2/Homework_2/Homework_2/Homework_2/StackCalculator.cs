@@ -33,38 +33,31 @@ namespace Homework_2
         public int DoCalculation(string expression)
         {
             string[] literals = expression.Split(' ');
-            try
+            foreach (var literal in literals)
             {
-                foreach (var literal in literals)
+                if (int.TryParse(literal, out int result))
                 {
-                    if (int.TryParse(literal, out int result))
-                    {
-                        stack.Push(result);
-                    }
-                    else if (IsOperator(literal))
-                    {
-                        int secondNumber = stack.Pop();
-                        int firstNumber = stack.Pop();
-                        stack.Push(DoOperation(firstNumber, secondNumber, literal));
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Невозможно вычислить, проверьте правильность записи");
-                    }
+                    stack.Push(result);
                 }
-
-                var buffer = stack.Pop();
-                if (!stack.IsEmpty())
+                else if (IsOperator(literal))
+                {
+                    int secondNumber = stack.Pop();
+                    int firstNumber = stack.Pop();
+                    stack.Push(DoOperation(firstNumber, secondNumber, literal));
+                }
+                else
                 {
                     throw new ArgumentException("Невозможно вычислить, проверьте правильность записи");
                 }
+            }
 
-                return buffer;
-            }
-            catch
+            var buffer = stack.Pop();
+            if (!stack.IsEmpty())
             {
-                throw;
+                throw new ArgumentException("Невозможно вычислить, проверьте правильность записи");
             }
+
+            return buffer;
         }
     }
 }
