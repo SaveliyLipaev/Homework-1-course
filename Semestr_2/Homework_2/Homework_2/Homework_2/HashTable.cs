@@ -6,7 +6,7 @@ namespace Homework_2
     {
         private ListString[] buckets;
         private IHashFunction hashFunction;
-        public long AmountElements { get; private set; }
+        public long AmountOfElements { get; private set; }
 
         public HashTable(int initialSize, IHashFunction hashFunction)
         {
@@ -28,7 +28,7 @@ namespace Homework_2
         public HashTable(IHashFunction hashFunction) : this(20, hashFunction)
         { }
 
-        private double LoadFactor() => (double)AmountElements / buckets.Length;
+        private double LoadFactor() => (double)AmountOfElements / buckets.Length;
 
         private void Extension()
         {
@@ -44,7 +44,9 @@ namespace Homework_2
                 for (var i = 0; i < oldList.Size(); ++i)
                 {
                     var str = oldList.Remove();
-                    newBuckets[hashFunction.HashFunction(str) % newBuckets.Length].Add(str);
+                    var hash = hashFunction.HashFunction(str) % newBuckets.Length;
+                    hash = hash >= 0 ? hash : -hash;
+                    newBuckets[hash].Add(str);
                 }
             }
             buckets = newBuckets;
@@ -60,12 +62,16 @@ namespace Homework_2
 
         public void Add(string str)
         {
-            if(str == null)
+            if (str == null) 
             {
                 return;
             }
-            buckets[hashFunction.HashFunction(str) % buckets.Length].Add(str);
-            ++AmountElements;
+
+            var hash = hashFunction.HashFunction(str) % buckets.Length;
+            hash = hash >= 0 ? hash : -hash;
+            buckets[hash].Add(str);
+
+            ++AmountOfElements;
             CheckDimension();
         }
 
@@ -76,16 +82,22 @@ namespace Homework_2
                 return;
             }
             var hash = hashFunction.HashFunction(str) % buckets.Length;
+            hash = hash >= 0 ? hash : -hash;
             var position = buckets[hash].FindPosition(str);
 
             if (position != -1)
             {
                 buckets[hash].RemovePosition(position);
-                --AmountElements;
+                --AmountOfElements;
             }
         }
 
-        public bool IsBelongs(string str) => buckets[hashFunction.HashFunction(str) % buckets.Length].FindPosition(str) != -1;
+        public bool IsBelongs(string str)
+        {
+            var hash = hashFunction.HashFunction(str) % buckets.Length;
+            hash = hash >= 0 ? hash : -hash;
+            return buckets[hash].FindPosition(str) != -1;
+        }
 
         public void PrintHashTable()
         {

@@ -32,7 +32,7 @@ namespace Homework_2
 
             if (this.IsEmpty())
             {
-                throw new NullReferenceException();
+                throw new InvalidOperationException();
             }
 
             var value = head.Data;

@@ -7,8 +7,7 @@ namespace Homework_2
         /// <summary>
         /// Функция, генерирущая хэш код
         /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
+        /// <param name="str">Данные по которым получается хэш код</param>
         int HashFunction(string str);
     }
 }

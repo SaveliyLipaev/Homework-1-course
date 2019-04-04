@@ -21,17 +21,17 @@ namespace Homework_2
 
         private bool GoodPosition(int position) => position > 0 && position <= size;
 
-        public bool AddPosition(int position, string data)
+        public void AddPosition(int position, string data)
         {
             if (!GoodPosition(position))
             {
-                return false;
+                throw new IndexOutOfRangeException();
             }
 
             if (position == 1)
             {
                 Add(data);
-                return true;
+                return;
             }
 
             var buffer = FindNode(position - 1);
@@ -39,7 +39,7 @@ namespace Homework_2
 
             ++size;
 
-            return true;
+            return;
         }
 
         public void Add(string data)
@@ -52,7 +52,7 @@ namespace Homework_2
         {
             if (this.IsEmpty())
             {
-                throw new NullReferenceException("Стек пуст");
+                throw new InvalidOperationException("Список пуст");
             }
 
             var value = head.Data;

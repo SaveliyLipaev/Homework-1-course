@@ -47,7 +47,7 @@ namespace Homework_2
         {
            if (IsEmpty())
            {
-               throw new NullReferenceException();
+               throw new InvalidOperationException();
            }
 
             size--;

@@ -37,7 +37,7 @@ namespace Homework_2.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.NullReferenceException))]
+        [ExpectedException(typeof(System.InvalidOperationException))]
         public void RemoveFromEmptyStackTest()
         {
             stack.Pop();

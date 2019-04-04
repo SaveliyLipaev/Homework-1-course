@@ -7,7 +7,7 @@ namespace Homework_2
         /// <summary>
         /// Из введеного набора чисел и операторов в постфиксной форме через пробел, производит вычисление
         /// </summary>
-        /// <param name="expression"> набора чисел и операторов в постфиксной форме через пробел</param>
+        /// <param name="expression"> набор чисел и операторов в постфиксной форме через пробел</param>
         /// <returns>вычисленное значение</returns>
         int DoCalculation(string expression);
     }

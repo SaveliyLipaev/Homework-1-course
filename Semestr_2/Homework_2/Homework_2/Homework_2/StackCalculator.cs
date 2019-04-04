@@ -16,7 +16,7 @@ namespace Homework_2
 
         private static int DoOperation(int firstNumber, int secondNumber, string operation)
         {
-            switch(operation)
+            switch (operation)
             {
                 case "+":
                     return firstNumber + secondNumber;

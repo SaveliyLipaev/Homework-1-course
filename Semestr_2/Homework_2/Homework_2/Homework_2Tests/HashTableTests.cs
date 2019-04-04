@@ -24,7 +24,7 @@ namespace Homework_2.Tests
             {
                 hashTableAdditive.Add(i.ToString());
             }
-            Assert.AreEqual(1500, hashTableAdditive.AmountElements);
+            Assert.AreEqual(1500, hashTableAdditive.AmountOfElements);
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace Homework_2.Tests
                 hashTableAdditive.Add(i.ToString());
             }
             hashTableAdditive.Remove(10.ToString());
-            Assert.AreEqual(14, hashTableAdditive.AmountElements);
+            Assert.AreEqual(14, hashTableAdditive.AmountOfElements);
         }
     }
 }
