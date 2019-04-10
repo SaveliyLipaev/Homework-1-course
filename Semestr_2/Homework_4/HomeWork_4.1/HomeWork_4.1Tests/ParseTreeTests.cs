@@ -66,5 +66,29 @@ namespace HomeWork_4._1.Tests
             var tree = new ParseTree("( ^ ( + 7 8 ) ( - 3 5 )");
             tree.Result();
         }
+
+        [TestMethod()]
+        [ExpectedException(typeof(System.ArgumentException))]
+        public void ParseTreeMoreNumberWithoutOperandTest()
+        {
+            var tree = new ParseTree("( * ( + 1 1 2 ) 2 )");
+            tree.Result();
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(System.ArgumentException))]
+        public void ParseTreeExtraLeftBracketOneTest()
+        {
+            var tree = new ParseTree("( * ( + ( 1 2 ) 2 )");
+            tree.Result();
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(System.ArgumentException))]
+        public void ParseTreeExtraLeftBracketTwoTest()
+        {
+            var tree = new ParseTree("( * ( + 1 ( 2 ) 2 )");
+            tree.Result();
+        }
     }
 }

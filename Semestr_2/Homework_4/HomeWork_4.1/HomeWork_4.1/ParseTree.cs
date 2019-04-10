@@ -52,35 +52,45 @@ namespace HomeWork_4._1
         {
             this.expression = expression.Split(' ');
             int index = -1;
-            head = СreatureNode(ref index);
+            int counterNumber = 0;
+            head = СreatureNode(ref index, ref counterNumber);
         }
 
-        private Node СreatureNode(ref int index)
+        private Node СreatureNode(ref int index, ref int counterNumber)
         {
             ++index;
             if (expression[index] == "(")
             {
-
-                if (int.TryParse(expression[index + 1], out int buffer))
+                if (int.TryParse(expression[index + 1], out int buffer)) 
                 {
                     throw new ArgumentException("Невозможно преобразовать выражение в дерево");
                 }
 
+                counterNumber = 0;
+
                 var newNode = new Operator(expression[++index]);
 
-                newNode.Left = СreatureNode(ref index);
+                newNode.Left = СreatureNode(ref index, ref counterNumber);
 
-                newNode.Right = СreatureNode(ref index);
+                newNode.Right = СreatureNode(ref index, ref counterNumber);
 
                 return newNode;
             }
             else if (int.TryParse(expression[index], out int operand))
             {
+                ++counterNumber;
+
+                if(counterNumber == 3)
+                {
+                    throw new ArgumentException("Невозможно преобразовать выражение в дерево");
+                }
+
                 return new Operand(operand);
             }
             else if (expression[index] == ")")
             {
-                return СreatureNode(ref index);
+                counterNumber = 0;
+                return СreatureNode(ref index, ref counterNumber);
             }
             else
             {
