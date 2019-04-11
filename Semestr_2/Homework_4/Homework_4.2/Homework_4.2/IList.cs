@@ -2,6 +2,9 @@
 
 namespace Homework_4._2
 {
+    /// <summary>
+    /// Интерфейс списка
+    /// </summary>
     interface IList
     {
         /// <summary>

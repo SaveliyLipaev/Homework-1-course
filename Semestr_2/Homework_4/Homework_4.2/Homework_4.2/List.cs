@@ -3,11 +3,21 @@
 
 namespace Homework_4._2
 {
+    /// <summary>
+    /// Класс реализующий список
+    /// </summary>
     public class List : IList
     {
         protected Node head;
+
+        /// <summary>
+        /// Свойство хранящее количесвто элементов в списке
+        /// </summary>
         public int amountElements { get; private set; }
         
+        /// <summary>
+        /// Класс реализующий элемент списка
+        /// </summary>
         protected class Node
         {
             public int data { get; set; }
@@ -20,12 +30,18 @@ namespace Homework_4._2
             }
         }
         
+        /// <summary>
+        /// Добавление в список элемента в начало
+        /// </summary>
         public virtual void Add(int data)
         {
             head = new Node(data, head);
             ++amountElements;
         }
 
+        /// <summary>
+        /// ВОзвращает и удляет первый элемент списка
+        /// </summary>
         public int Remove()
         {
             if(IsEmpty())
@@ -39,6 +55,9 @@ namespace Homework_4._2
             return buffer;
         }
 
+        /// <summary>
+        /// Удаляет элемент из списка, если элемент не найден кидает исключение
+        /// </summary>
         public void RemoveElement(int data)
         {
             if (head != null && head.data == data)
@@ -64,6 +83,9 @@ namespace Homework_4._2
             throw new MissingItemException("Такого элемента не существует в списке");
         }
 
+        /// <summary>
+        /// Возвращает true если список пуст
+        /// </summary>
         public bool IsEmpty() => head == null;
 
     }
