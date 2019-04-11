@@ -11,22 +11,22 @@ namespace _6._1.Tests
     [TestClass()]
     public class FunctionForTaskTests
     {
-        [TestMethod()]
-        public void MapTest()
-        {
-            Assert.Fail();
-        }
+        //[TestMethod()]
+        //public void MapTest()
+        //{
+        //    Assert.Fail();
+        //}
 
-        [TestMethod()]
-        public void FilterTest()
-        {
-            Assert.Fail();
-        }
+        //[TestMethod()]
+        //public void FilterTest()
+        //{
+        //    Assert.Fail();
+        //}
 
-        [TestMethod()]
-        public void FoldTest()
-        {
-            Assert.Fail();
-        }
+        //[TestMethod()]
+        //public void FoldTest()
+        //{
+        //    Assert.Fail();
+        //}
     }
 }
