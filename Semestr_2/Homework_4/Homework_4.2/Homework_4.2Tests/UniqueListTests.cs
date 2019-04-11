@@ -4,7 +4,7 @@ using System;
 
 namespace Homework_4._2.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class UniqueListTests
     {
         private UniqueList list;
@@ -18,7 +18,7 @@ namespace Homework_4._2.Tests
         [TestMethod()]
         public void AddTest()
         {
-            list.Add(4);
+            list.Add("4");
             Assert.IsFalse(list.IsEmpty());
         }
 
@@ -27,7 +27,7 @@ namespace Homework_4._2.Tests
         {
             for (var i = 0; i < 1555; ++i)
             {
-                list.Add(i);
+                list.Add(i.ToString());
             }
             Assert.IsFalse(list.IsEmpty());
         }
@@ -36,8 +36,30 @@ namespace Homework_4._2.Tests
         [ExpectedException(typeof(AttemptAddAnExistingItemException))]
         public void AddTwoExistingItemTest()
         {
-            list.Add(2);
-            list.Add(2);
+            list.Add("2");
+            list.Add("2");
+        }
+
+        [TestMethod()]
+        public void AddPositionTest()
+        {
+            for (var i = 0; i < 3; ++i)
+            {
+                list.AddPosition(i + 1, i.ToString());
+            }
+
+            for (var i = 0; i < 3; ++i)
+            {
+                Assert.AreEqual(i.ToString(), list.Remove());
+            }
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(AttemptAddAnExistingItemException))]
+        public void AddPositionTwoExistingItemTest()
+        {
+            list.AddPosition(1, "2");
+            list.AddPosition(2, "2");
         }
     }
 }

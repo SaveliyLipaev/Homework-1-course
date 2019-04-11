@@ -1,66 +1,137 @@
 ﻿using System;
 
-
 namespace Homework_4._2
 {
     /// <summary>
-    /// Класс реализующий список
+    /// Класс реализующий список хранящий строки
     /// </summary>
-    public class List : IList
+    public class List
     {
-        protected Node head;
-
         /// <summary>
-        /// Свойство хранящее количесвто элементов в списке
-        /// </summary>
-        public int amountElements { get; private set; }
-        
-        /// <summary>
-        /// Класс реализующий элемент списка
+        /// Класс реализующий элемент в списке
         /// </summary>
         protected class Node
         {
-            public int data { get; set; }
-            public Node next { get; set; }
+            public string Data { get; set; }
+            public Node Next { get; set; }
 
-            public Node(int data, Node next)
+            public Node(string data, Node next)
             {
-                this.data = data;
-                this.next = next;
+                Data = data;
+                Next = next;
             }
+        }
+
+        private int size;
+        protected Node head;
+
+        /// <summary>
+        /// Возвращает true если позиция находится вне диапозона существования
+        /// </summary>
+        private bool GoodPosition(int position) => position > 0 && position <= size + 1;
+
+        /// <summary>
+        /// Добавление по введеной позиции
+        /// </summary>
+        public virtual void AddPosition(int position, string data)
+        {
+            if (!GoodPosition(position))
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (position == 1)
+            {
+                Add(data);
+                return;
+            }
+
+            var buffer = FindNode(position - 1);
+            buffer.Next = new Node(data, buffer.Next);
+
+            ++size;
+        }
+
+        /// <summary>
+        /// Добавление в начало списка
+        /// </summary>
+        public virtual void Add(string data)
+        {
+            head = new Node(data, head);
+            ++size;
+        }
+
+        /// <summary>
+        /// Удаление первого элемента в списке 
+        /// </summary>
+        /// <returns></returns>
+        public string Remove()
+        {
+            if (this.IsEmpty())
+            {
+                throw new InvalidOperationException("Список пуст");
+            }
+
+            var value = head.Data;
+            head = head.Next;
+            --size;
+
+            return value;
+        }
+
+        /// <summary>
+        /// Удаление по позиции, возвращает удаленное значение
+        /// </summary>
+        public string RemovePosition(int position)
+        {
+            if (!GoodPosition(position))
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (position == 1)
+            {
+                return this.Remove();
+            }
+
+            var buffer = FindNode(position - 1);
+
+            var value = buffer.Next.Data;
+            buffer.Next = buffer.Next.Next;
+            --size;
+
+            return value;
+        }
+
+        /// <summary>
+        /// Возвращает true если список пуст
+        /// </summary>
+        public bool IsEmpty() => size == 0;
+
+        /// <summary>
+        /// Возвращает размер списка
+        /// </summary>
+        public int Size() => size;
+
+        /// <summary>
+        /// Получение значения по позиции
+        /// </summary>
+        public string GetValue(int position)
+        {
+            if (!GoodPosition(position))
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            return FindNode(position).Data;
         }
         
         /// <summary>
-        /// Добавление в список элемента в начало
+        /// Удаляет элемент если он найден, в противном случае кидает исключение
         /// </summary>
-        public virtual void Add(int data)
+        public void RemoveElement(string data)
         {
-            head = new Node(data, head);
-            ++amountElements;
-        }
-
-        /// <summary>
-        /// ВОзвращает и удляет первый элемент списка
-        /// </summary>
-        public int Remove()
-        {
-            if(IsEmpty())
-            {
-                throw new NullReferenceException("Невозможно удалить элемент, список пуст");
-            }
-
-            int buffer = head.data;
-            head = head.next;
-            --amountElements;
-            return buffer;
-        }
-
-        /// <summary>
-        /// Удаляет элемент из списка, если элемент не найден кидает исключение
-        /// </summary>
-        public void RemoveElement(int data)
-        {
-            if (head != null && head.data == data)
+            if (head != null && head.Data == data)
             {
                 Remove();
                 return;
@@ -71,22 +142,31 @@ namespace Homework_4._2
 
             while (element != null)
             {
-                if (element.data == data)
+                if (element.Data == data)
                 {
-                    previousElement.next = element.next;
-                    --amountElements;
+                    previousElement.Next = element.Next;
+                    --size;
                     return;
                 }
-                previousElement = element; 
-                element = element.next;
+                previousElement = element;
+                element = element.Next;
             }
+
             throw new MissingItemException("Такого элемента не существует в списке");
         }
 
         /// <summary>
-        /// Возвращает true если список пуст
+        /// Возвращает Node по заданой позиции
         /// </summary>
-        public bool IsEmpty() => head == null;
+        private Node FindNode(int position)
+        {
+            var buffer = head;
+            for (var i = 0; i < position - 1; ++i)
+            {
+                buffer = buffer.Next;
+            }
 
+            return buffer;
+        }
     }
 }

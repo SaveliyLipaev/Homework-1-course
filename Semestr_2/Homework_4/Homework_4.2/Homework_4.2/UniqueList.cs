@@ -10,16 +10,16 @@ namespace Homework_4._2
         /// <summary>
         /// Функция возвращает возвращает true если элемент найден
         /// </summary>
-        private bool FindNode(int data)
+        private bool FindNode(string data)
         {
             var ptr = head;
-            while(ptr != null)
+            while (ptr != null) 
             {
-                if (ptr.data == data) 
+                if (ptr.Data == data) 
                 {
                     return true;
                 }
-                ptr = ptr.next;
+                ptr = ptr.Next;
             }
             return false;
         }
@@ -27,8 +27,7 @@ namespace Homework_4._2
         /// <summary>
         /// Добавление элемента в начало списка, если такой элемент уже есть в списке кидается исключение AttemptAddAnExistingItemException
         /// </summary>
-        /// <param name="data"></param>
-        public override void Add(int data)
+        public override void Add(string data)
         {
             if (FindNode(data))
             {
@@ -36,6 +35,19 @@ namespace Homework_4._2
             }
 
             base.Add(data);
+        }
+
+        /// <summary>
+        /// Добавление по введеной позиции
+        /// </summary>
+        public override void AddPosition(int position, string data)
+        {
+            if (FindNode(data))
+            {
+                throw new AttemptAddAnExistingItemException("Невозможно добавить элемент в список, он уже существует");
+            }
+
+            base.AddPosition(position, data);
         }
     }
 }
