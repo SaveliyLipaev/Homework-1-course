@@ -17,75 +17,75 @@ namespace Homework_2.Tests
             hashTableAdditive = new HashTable(new AdditiveHashFunction());
         }
 
-        [TestMethod]
-        public void AddMoreElementInHashTable()
+        public void AddMoreElementInHashTable(HashTable hashTable)
         {
             for (var i = 0; i < 1500; ++i)
             {
-                hashTableAdditive.Add(i.ToString());
+                hashTable.Add(i.ToString());
             }
-            Assert.AreEqual(1500, hashTableAdditive.AmountOfElements);
+            Assert.AreEqual(1500, hashTable.AmountOfElements);
         }
 
-        [TestMethod]
-        public void IsBelongsFalseInAddlerHashTableTest()
+        public void IsBelongsFalseInHashTableTest(HashTable hashTable)
         {
-            hashTableAddler.Add("999989");
-            Assert.IsFalse(hashTableAddler.IsBelongs("999988"));
+            hashTable.Add("999989");
+            Assert.IsFalse(hashTable.IsBelongs("999988"));
         }
 
-        [TestMethod]
-        public void IsBelongsTrueInAddlerHashTableTest()
+        public void IsBelongsTrueInHashTableTest(HashTable hashTable)
         {
-            hashTableAddler.Add("999989");
-            Assert.IsTrue(hashTableAddler.IsBelongs("999989"));
+            hashTable.Add("999989");
+            Assert.IsTrue(hashTable.IsBelongs("999989"));
         }
 
-        [TestMethod]
-        public void IsBelongsFalseInAdditiveHashTableTest()
-        {
-            hashTableAddler.Add("999989");
-            Assert.IsFalse(hashTableAdditive.IsBelongs("999988"));
-        }
-
-        [TestMethod]
-        public void IsBelongsTrueInAdditiveHashTableTest()
-        {
-            hashTableAdditive.Add("999989");
-            Assert.IsTrue(hashTableAdditive.IsBelongs("999989"));
-        }
-
-        [TestMethod]
-        public void RemoveElementsAddlerHashTest()
+        public void RemoveElementsHashTableTest(HashTable hashTable)
         {
             for (var i = 0; i < 15; ++i)
             {
-                hashTableAddler.Add(i.ToString());
+                hashTable.Add(i.ToString());
             }
-            hashTableAddler.Remove(10.ToString());
-            Assert.IsFalse(hashTableAddler.IsBelongs(10.ToString()));
+            hashTable.Remove(10.ToString());
+            Assert.IsFalse(hashTable.IsBelongs(10.ToString()));
         }
 
-        [TestMethod]
-        public void RemoveElementsAdditiveHashTest()
+        public void RemoveElemntsAmountElementsHashTableTest(HashTable hashTable)
         {
             for (var i = 0; i < 15; ++i)
             {
-                hashTableAdditive.Add(i.ToString());
+                hashTable.Add(i.ToString());
             }
-            hashTableAdditive.Remove(10.ToString());
-            Assert.IsFalse(hashTableAdditive.IsBelongs(10.ToString()));
+            hashTable.Remove(10.ToString());
+            Assert.AreEqual(14, hashTable.AmountOfElements);
         }
 
         [TestMethod]
-        public void RemoveElemntsAmountElementsTest()
-        {
-            for (var i = 0; i < 15; ++i)
-            {
-                hashTableAdditive.Add(i.ToString());
-            }
-            hashTableAdditive.Remove(10.ToString());
-            Assert.AreEqual(14, hashTableAdditive.AmountOfElements);
-        }
+        public void AddMoreElementInAdditiveHashTable() => AddMoreElementInHashTable(hashTableAdditive);
+
+        [TestMethod]
+        public void AddMoreElementInAddlerHashTable() => AddMoreElementInHashTable(hashTableAddler);
+
+        [TestMethod]
+        public void IsBelongsFalseInAddlerHashTableTest() => IsBelongsFalseInHashTableTest(hashTableAddler);
+
+        [TestMethod]
+        public void IsBelongsFalseInAdditiveHashTableTest() => IsBelongsFalseInHashTableTest(hashTableAdditive);
+
+        [TestMethod]
+        public void IsBelongsTrueInAddlerHashTableTest() => IsBelongsTrueInHashTableTest(hashTableAddler);
+
+        [TestMethod]
+        public void IsBelongsTrueInAdditiveHashTableTest() => IsBelongsTrueInHashTableTest(hashTableAdditive);
+
+        [TestMethod]
+        public void RemoveElementsAddlerHashTest() => RemoveElementsHashTableTest(hashTableAddler);
+
+        [TestMethod]
+        public void RemoveElementsAdditiveHashTest() => RemoveElementsHashTableTest(hashTableAdditive);
+
+        [TestMethod]
+        public void RemoveElemntsAmountElementsAdditiveHashTest() => RemoveElemntsAmountElementsHashTableTest(hashTableAdditive);
+
+        [TestMethod]
+        public void RemoveElemntsAmountElementsAddlerHashTest() => RemoveElemntsAmountElementsHashTableTest(hashTableAddler);
     }
 }

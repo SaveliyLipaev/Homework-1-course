@@ -56,11 +56,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="ArrayStackTests.cs" />
     <Compile Include="HashTableTests.cs" />
-    <Compile Include="ListStackIntTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StackCalculatorTests.cs" />
+    <Compile Include="StackTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
