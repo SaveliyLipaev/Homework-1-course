@@ -2,6 +2,9 @@
 
 namespace Homework_2
 {
+    /// <summary>
+    /// Интерфейс стекового калькулятора
+    /// </summary>
     interface IStackCalculator
     {
         /// <summary>

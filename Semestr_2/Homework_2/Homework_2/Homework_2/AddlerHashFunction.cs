@@ -3,8 +3,14 @@
 
 namespace Homework_2
 {
+    /// <summary>
+    /// Класс реализующий метод возвращения хэш значения методом Адлера
+    /// </summary>
     public class AddlerHashFunction : IHashFunction
     {
+        /// <summary>
+        /// Метод возвращает хэш значение от полученной строки
+        /// </summary>
         public int HashFunction(string str)
         {
             int s1 = 1;

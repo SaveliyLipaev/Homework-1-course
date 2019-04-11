@@ -3,6 +3,9 @@
 
 namespace Homework_2
 {
+    /// <summary>
+    /// Интерфейс хэш таблицы
+    /// </summary>
     public interface IHashTable
     {
         /// <summary>

@@ -3,8 +3,14 @@
 
 namespace Homework_2
 {
+    /// <summary>
+    /// Класс реализующий аддитивный метод возвращения хэш значения
+    /// </summary>
     public class AdditiveHashFunction : IHashFunction
     {
+        /// <summary>
+        /// Метод возвращает хэш значение от полученной строки
+        /// </summary>
         public int HashFunction(string str)
         {
             int prime = 31;

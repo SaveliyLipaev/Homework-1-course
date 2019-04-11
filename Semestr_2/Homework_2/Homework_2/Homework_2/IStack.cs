@@ -2,6 +2,9 @@
 
 namespace Homework_2
 {
+    /// <summary>
+    /// Интерфейс стэка
+    /// </summary>
     public interface IStack
     {
         /// <summary>

@@ -2,10 +2,17 @@
 
 namespace Homework_2
 {
+    /// <summary>
+    /// Класс реализующий хэш таблицу
+    /// </summary>
     public class HashTable : IHashTable
     {
         private ListString[] buckets;
         private IHashFunction hashFunction;
+        
+        /// <summary>
+        /// Свойство хранящее количество элементов в хэш таблице
+        /// </summary>
         public long AmountOfElements { get; private set; }
 
         public HashTable(int initialSize, IHashFunction hashFunction)
@@ -28,8 +35,14 @@ namespace Homework_2
         public HashTable(IHashFunction hashFunction) : this(20, hashFunction)
         { }
 
+        /// <summary>
+        /// Приватный метод возвращающий лоад фактор хэш таблицы
+        /// </summary>
         private double LoadFactor() => (double)AmountOfElements / buckets.Length;
 
+        /// <summary>
+        /// Приватный метод который расширяет хэш таблицу при необходимости
+        /// </summary>
         private void Extension()
         {
             var newBuckets = new ListString[2 * buckets.Length + 1] ;
@@ -52,6 +65,9 @@ namespace Homework_2
             buckets = newBuckets;
         }
 
+        /// <summary>
+        /// Метод проверяющий нужно ли расширить хэш таблицу
+        /// </summary>
         private void CheckDimension()
         {
             if (LoadFactor() > 0.76)
@@ -60,6 +76,9 @@ namespace Homework_2
             }
         }
 
+        /// <summary>
+        /// Добавление элемента в хэш таблицу
+        /// </summary>
         public void Add(string str)
         {
             if (str == null) 
@@ -75,6 +94,9 @@ namespace Homework_2
             CheckDimension();
         }
 
+        /// <summary>
+        /// Удаляет введеный элемент из хэш таблицы
+        /// </summary>
         public void Remove(string str)
         {
             if (str == null) 
@@ -92,6 +114,9 @@ namespace Homework_2
             }
         }
 
+        /// <summary>
+        /// Возвращает true если введеный элемент есть в хэш таблице
+        /// </summary>
         public bool IsBelongs(string str)
         {
             var hash = hashFunction.HashFunction(str) % buckets.Length;
@@ -99,6 +124,9 @@ namespace Homework_2
             return buckets[hash].FindPosition(str) != -1;
         }
 
+        /// <summary>
+        /// Метод распечатывает хэш таблицу
+        /// </summary>
         public void PrintHashTable()
         {
             foreach(var list in buckets)

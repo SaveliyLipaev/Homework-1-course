@@ -2,8 +2,14 @@
 
 namespace Homework_2
 {
+    /// <summary>
+    /// Класс реализующий список хранящий строки
+    /// </summary>
     class ListString
     {
+        /// <summary>
+        /// Класс реализующий элемент в списке
+        /// </summary>
         private class Node
         {
             public string Data { get; set; }
@@ -19,8 +25,14 @@ namespace Homework_2
         private int size;
         private Node head;
 
+        /// <summary>
+        /// Возвращает true если позиция находится вне диапозона существования
+        /// </summary>
         private bool GoodPosition(int position) => position > 0 && position <= size;
 
+        /// <summary>
+        /// Добавление по введеной позиции
+        /// </summary>
         public void AddPosition(int position, string data)
         {
             if (!GoodPosition(position))
@@ -42,12 +54,19 @@ namespace Homework_2
             return;
         }
 
+        /// <summary>
+        /// Добавление в начало списка
+        /// </summary>
         public void Add(string data)
         {
             head = new Node(data, head);
             ++size;
         }
 
+        /// <summary>
+        /// Удаление первого элемента в списке 
+        /// </summary>
+        /// <returns></returns>
         public string Remove()
         {
             if (this.IsEmpty())
@@ -61,6 +80,9 @@ namespace Homework_2
             return value;
         }
 
+        /// <summary>
+        /// Удаление по позиции, возвращает удаленное значение
+        /// </summary>
         public string RemovePosition(int position)
         {
             if (!GoodPosition(position))
@@ -82,10 +104,19 @@ namespace Homework_2
             return value;
         }
 
+        /// <summary>
+        /// Возвращает true если список пуст
+        /// </summary>
         public bool IsEmpty() => size == 0;
 
+        /// <summary>
+        /// Возвращает размер списка
+        /// </summary>
         public int Size() => size;
 
+        /// <summary>
+        /// Изменияет значение на заданной позиции, возвращает true если все успешно
+        /// </summary>
         public bool ChangeValue(int position, string value)
         {
             if (!GoodPosition(position))
@@ -97,6 +128,9 @@ namespace Homework_2
             return true;
         }
 
+        /// <summary>
+        /// Получение значения по позиции
+        /// </summary>
         public string GetValue(int position)
         {
             if (!GoodPosition(position))
@@ -107,6 +141,9 @@ namespace Homework_2
             return FindNode(position).Data;
         }
 
+        /// <summary>
+        /// Возвращает Node по заданой позиции
+        /// </summary>
         private Node FindNode(int position)
         {
             var buffer = head;
@@ -118,6 +155,9 @@ namespace Homework_2
             return buffer;
         }
 
+        /// <summary>
+        /// Возвращает позицию по значению
+        /// </summary>
         public int FindPosition(string str)
         {
             var buffer = head;
@@ -134,6 +174,9 @@ namespace Homework_2
             return -1;
         }
         
+        /// <summary>
+        /// Распечатывание списка
+        /// </summary>
         public void PrintList()
         {
             var buffer = head;
