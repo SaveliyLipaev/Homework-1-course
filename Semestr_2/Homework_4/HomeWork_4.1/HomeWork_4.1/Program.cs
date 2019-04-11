@@ -20,15 +20,15 @@ namespace HomeWork_4._1
                 Console.WriteLine(tree.GetExpression());
                 Console.WriteLine(tree.Result());
             }
-            catch(ArgumentException exp)
+            catch (ArgumentException exp)
             {
                 Console.WriteLine(exp.Message);
             }
-            catch(DivideByZeroException exp)
+            catch (DivideByZeroException exp)
             {
                 Console.WriteLine(exp.Message);
             }
-            catch(FileNotFoundException exp)
+            catch (FileNotFoundException exp)
             {
                 Console.WriteLine(exp.Message);
             }
