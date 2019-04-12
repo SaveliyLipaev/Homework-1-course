@@ -8,6 +8,7 @@ namespace Test_1.Tests
     public class PriorityQueueTests
     {
         private PriorityQueue priorityOueue;
+
         [TestInitialize]
         public void Initialize()
         {
