@@ -1,18 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _6._2
 {
+    /// <summary>
+    /// Класс реализующий цикл обработки событий
+    /// </summary>
     class EventLoop
     {
-        public event EventHandler LeftHandler = (sender, args) => { };
-        public event EventHandler RightHandler = (sender, args) => { };
-        public event EventHandler UpHandler = (sender, args) => { };
-        public event EventHandler DownHandler = (sender, args) => { };
+        public event EventHandler<KeyEventArgs> LeftHandler = (sender, args) => { };
+        public event EventHandler<KeyEventArgs> RightHandler = (sender, args) => { };
+        public event EventHandler<KeyEventArgs> UpHandler = (sender, args) => { };
+        public event EventHandler<KeyEventArgs> DownHandler = (sender, args) => { };
 
+        /// <summary>
+        /// Метод запускает цикл обработки событий
+        /// </summary>
         public void Run()
         {
             while (true)
@@ -21,16 +23,16 @@ namespace _6._2
                 switch (key.Key)
                 {
                     case ConsoleKey.LeftArrow:
-                        LeftHandler(this, EventArgs.Empty);
+                        LeftHandler(this, new KeyEventArgs(key.Key));
                         break;
                     case ConsoleKey.RightArrow:
-                        RightHandler(this, EventArgs.Empty);
+                        RightHandler(this, new KeyEventArgs(key.Key));
                         break;
                     case ConsoleKey.UpArrow:
-                        UpHandler(this, EventArgs.Empty);
+                        UpHandler(this, new KeyEventArgs(key.Key));
                         break;
                     case ConsoleKey.DownArrow:
-                        DownHandler(this, EventArgs.Empty);
+                        DownHandler(this, new KeyEventArgs(key.Key));
                         break;
                 }
             }

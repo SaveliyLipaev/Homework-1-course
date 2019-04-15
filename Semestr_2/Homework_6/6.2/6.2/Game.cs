@@ -4,47 +4,22 @@ using System.IO;
 
 namespace _6._2
 {
-    class Game
+    /// <summary>
+    /// Класс реализующий механику игры, а так же рисует все на консоль
+    /// </summary>
+    public class Game
     {
         private List<List<char>> map;
-        private (int x, int y) characterСoordinates;
+        private bool gameHasBegun = false;
+        public int CharacterСoordinatesX { get; private set; }
+        public int CharacterСoordinatesY { get; private set; }
 
-        public Game()
-        {
-            Console.CursorVisible = false;
-            characterСoordinates.x = 10;
-            characterСoordinates.y = 10;
-
-            map = new List<List<char>>();
-
-            for (var i = 0; i < 20; ++i)
-            {
-                map.Add(new List<char>());
-            }
-
-            for (var i = 0; i < 20; ++i)
-            {
-                for (var j = 0; j < 20; ++j)
-                {
-                    if (i == 0 || j == 0 || i == 19 || j == 19)
-                    {
-                        map[i].Add('#');
-                    }
-                    else
-                    {
-                        map[i].Add(' ');
-                    }
-                    Console.Write(map[i][j]);
-                }
-                Console.WriteLine();
-            }
-
-            this.RespCharacter(characterСoordinates.y, characterСoordinates.x);
-        }
-
+        /// <summary>
+        /// Конструктор, выгружает из файла, имя которое введено, и заполняет map
+        /// </summary>
         public Game(string fileName)
         {
-            Console.CursorVisible = false;
+            bool heroOnMap = false;
             map = new List<List<char>>();
             using (StreamReader reader = new StreamReader(fileName))
             {
@@ -54,78 +29,163 @@ namespace _6._2
                     map.Add(new List<char>());
                     for (var j = 0; j < buffer.Length; ++j)
                     {
-                        map[i].Add(buffer[j]);
                         if (buffer[j] == '@')
                         {
-                            characterСoordinates = (j, i);
+                            if (heroOnMap)
+                            {
+                                throw new TwoHeroOnMapException("Два персонажа на карте, ошибка!!");
+                            }
+                            CharacterСoordinatesX = j;
+                            CharacterСoordinatesY = i;
+                            heroOnMap = true;
                         }
+                        else if (IsBadSymbols(buffer[j]))
+                        {
+                            throw new UnforeseenMapSymbolException("Ошибка в загруженной карте, непредвиденные символы");
+                        }
+                        map[i].Add(buffer[j]);
                     }
-                    Console.WriteLine(buffer);
                 }
             }
-            RespCharacter(characterСoordinates.x, characterСoordinates.y);
+            RespCharacter(CharacterСoordinatesX, CharacterСoordinatesY);
+            Console.WriteLine("Управление: стрелочки клавиатуры\nДля того чтобы начать нажмите на любую из стрелочек");
         }
 
-        public void OnLeft(object sender, EventArgs args)
+       /// <summary>
+       /// Возвращает true если символ не входит в список дпоустимых символов
+       /// </summary>
+        private bool IsBadSymbols(char symbol) => symbol != '@' && symbol != ' ' && symbol != '#';
+
+        /// <summary>
+        /// Метод рисует передвижение персонажа
+        /// </summary>
+        public void PrintGame(object sender, KeyEventArgs args)
         {
-            if (ThereIsWall(characterСoordinates.x - 1, characterСoordinates.y))
+            if (!gameHasBegun)
             {
-                return;
+                ClearAllAndPrintMap();
+                gameHasBegun = true;
+                Console.CursorVisible = false;
             }
-            ClearCharacter();
-            characterСoordinates.x -= 1;
-            RespCharacter(characterСoordinates.x, characterСoordinates.y);
-        }
-
-        public void OnRight(object sender, EventArgs args)
-        {
-            if (ThereIsWall(characterСoordinates.x + 1, characterСoordinates.y))
+            else if (args.Key == ConsoleKey.LeftArrow) 
             {
-                return;
+                PrintCage(CharacterСoordinatesX + 1, CharacterСoordinatesY);
+                PrintCage(CharacterСoordinatesX, CharacterСoordinatesY);
             }
-            ClearCharacter();
-            characterСoordinates.x += 1;
-            RespCharacter(characterСoordinates.x, characterСoordinates.y);
-        }
-
-        public void OnUp(object sender, EventArgs args)
-        {
-            if (ThereIsWall(characterСoordinates.x, characterСoordinates.y - 1))
+            else if (args.Key == ConsoleKey.RightArrow)
             {
-                return;
+                PrintCage(CharacterСoordinatesX - 1, CharacterСoordinatesY);
+                PrintCage(CharacterСoordinatesX, CharacterСoordinatesY);
             }
-            ClearCharacter();
-            characterСoordinates.y -= 1;
-            RespCharacter(characterСoordinates.x, characterСoordinates.y);
-        }
-
-        public void OnDown(object sender, EventArgs args)
-        {
-            if (ThereIsWall(characterСoordinates.x, characterСoordinates.y + 1))
+            else if (args.Key == ConsoleKey.UpArrow)
             {
-                return;
+                PrintCage(CharacterСoordinatesX, CharacterСoordinatesY + 1);
+                PrintCage(CharacterСoordinatesX, CharacterСoordinatesY);
             }
-            ClearCharacter();
-            characterСoordinates.y += 1;
-            RespCharacter(characterСoordinates.x, characterСoordinates.y);
+            else if (args.Key == ConsoleKey.DownArrow)
+            {
+                PrintCage(CharacterСoordinatesX, CharacterСoordinatesY - 1);
+                PrintCage(CharacterСoordinatesX, CharacterСoordinatesY);
+            }
         }
 
-        private void ClearCharacter()
+        /// <summary>
+        /// Печатает в консоль координату из карты
+        /// </summary>
+        /// <param name="xCord"></param>
+        /// <param name="yCord"></param>
+        private void PrintCage(int xCord, int yCord)
         {
-            map[characterСoordinates.y][characterСoordinates.x] = ' ';
-            Console.Write(' ');
-            Console.CursorLeft -= 1;
-        }
-
-        private void RespCharacter(int xCord, int yCord)
-        {
-            map[yCord][xCord] = '@';
             Console.CursorLeft = xCord;
             Console.CursorTop = yCord;
-            Console.Write('@');
-            Console.CursorLeft -= 1;
+            Console.Write(map[yCord][xCord]);
         }
 
+        /// <summary>
+        /// Чистит консоль и распечатывает map
+        /// </summary>
+        private void ClearAllAndPrintMap()
+        {
+            Console.Clear();
+            for (var i = 0; i < map.Count; ++i)
+            {
+                for (var j = 0; j < map[i].Count; ++j)
+                {
+                    Console.Write(map[i][j]);
+                }
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// Шаг влево
+        /// </summary>
+        public void OnLeft(object sender, EventArgs args)
+        {
+            if (ThereIsWall(CharacterСoordinatesX - 1, CharacterСoordinatesY))
+            {
+                return;
+            }
+            KillCharacter();
+            CharacterСoordinatesX -= 1;
+            RespCharacter(CharacterСoordinatesX, CharacterСoordinatesY);
+        }
+
+        /// <summary>
+        /// Шаг вправо
+        /// </summary>
+        public void OnRight(object sender, EventArgs args)
+        {
+            if (ThereIsWall(CharacterСoordinatesX + 1, CharacterСoordinatesY))
+            {
+                return;
+            }
+            KillCharacter();
+            CharacterСoordinatesX += 1;
+            RespCharacter(CharacterСoordinatesX, CharacterСoordinatesY);
+        }
+
+        /// <summary>
+        /// Шаг вверх
+        /// </summary>
+        public void OnUp(object sender, EventArgs args)
+        {
+            if (ThereIsWall(CharacterСoordinatesX, CharacterСoordinatesY - 1))
+            {
+                return;
+            }
+            KillCharacter();
+            CharacterСoordinatesY -= 1;
+            RespCharacter(CharacterСoordinatesX, CharacterСoordinatesY);
+        }
+
+        /// <summary>
+        /// Шаг вниз
+        /// </summary>
+        public void OnDown(object sender, EventArgs args)
+        {
+            if (ThereIsWall(CharacterСoordinatesX, CharacterСoordinatesY + 1))
+            {
+                return;
+            }
+            KillCharacter();
+            CharacterСoordinatesY += 1;
+            RespCharacter(CharacterСoordinatesX, CharacterСoordinatesY);
+        }
+
+        /// <summary>
+        /// Стерает персонажа с карты
+        /// </summary>
+        private void KillCharacter() => map[CharacterСoordinatesY][CharacterСoordinatesX] = ' ';
+
+        /// <summary>
+        /// СОздает персонажа в заданном месте
+        /// </summary>
+        private void RespCharacter(int xCord, int yCord) => map[yCord][xCord] = '@';
+
+        /// <summary>
+        /// Возвращает true если в введеной клетке стена
+        /// </summary>
         private bool ThereIsWall(int xCord, int yCord) => map[yCord][xCord] == '#';
     }
 }
