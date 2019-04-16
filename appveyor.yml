@@ -3,7 +3,7 @@ image: Visual Studio 2017
 environment:
   matrix:
   - solution_path: Semestr_2\Homework_1\Task_1-5\Task_1-5.sln
-
+  - solution_path: Semestr_2\Homework_7\Calculator\Calculator.sln
 
 before_build:
   - nuget restore %solution_path%
