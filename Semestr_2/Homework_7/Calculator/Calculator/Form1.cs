@@ -41,7 +41,7 @@ namespace Calculator
         {
             Button button = (Button)sender;
 
-            if (button.Text == ".") 
+            if (button.Text == ",") 
             {
                 if (wasPoint || LastInTextOperator(result.Text) || LastInTextBracket(result.Text))  
                 {
@@ -50,7 +50,7 @@ namespace Calculator
                 wasPoint = true;
             }
 
-            if (ThisStandartStr(result.Text) && button.Text != ".") 
+            if (ThisStandartStr(result.Text) && button.Text != ",") 
             {
                 result.Clear();
             }
@@ -64,7 +64,7 @@ namespace Calculator
         private void ButtonClickOperator(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            if (result.Text[result.Text.Length - 1] == '.' || result.Text[result.Text.Length - 1] == '(') 
+            if (result.Text[result.Text.Length - 1] == ',' || result.Text[result.Text.Length - 1] == '(') 
             {
                 return;
             }
@@ -108,7 +108,7 @@ namespace Calculator
         private void ButtonClickRightBranch(object sender, EventArgs e)
         {
             if (quantityLeftBracket <= quantityRightBracket || LastInTextOperator(result.Text)
-                || result.Text[result.Text.Length - 1] == '.' || result.Text[result.Text.Length - 1] == '('
+                || result.Text[result.Text.Length - 1] == ',' || result.Text[result.Text.Length - 1] == '('
                 || !wasOperator)  
             {
                 return;
