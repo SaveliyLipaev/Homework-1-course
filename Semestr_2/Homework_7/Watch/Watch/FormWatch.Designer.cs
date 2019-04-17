@@ -35,11 +35,10 @@
             // 
             // tablo
             // 
-            this.tablo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tablo.AutoSize = true;
+            this.tablo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablo.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tablo.Location = new System.Drawing.Point(12, 9);
+            this.tablo.Location = new System.Drawing.Point(0, 0);
             this.tablo.Name = "tablo";
             this.tablo.Size = new System.Drawing.Size(347, 91);
             this.tablo.TabIndex = 0;
@@ -54,7 +53,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 103);
+            this.ClientSize = new System.Drawing.Size(375, 95);
             this.Controls.Add(this.tablo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
