@@ -2,20 +2,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace List
 {
-    class MyList<T> : IList<T>
+    /// <summary>
+    /// Класс реализующий интерфейс IList
+    /// </summary>
+    public class MyList<T> : IList<T> 
     {
         private Node head;
         private Node tail;
 
+        /// <summary>
+        /// Свойство отвечающее за колличество эллементов в List
+        /// </summary>
         public int Count { get; private set; }
 
+        /// <summary>
+        ///Возвращает или задает элемент по указанному индексу
+        /// </summary>
         public T this[int index] { get => TakeNodeIndex(index).Data; set => TakeNodeIndex(index).Data = this[index]; }
 
+        /// <summary>
+        ///Получает значение, указывающее, является ли объект IList доступным только для чтения.
+        /// </summary>
         public bool IsReadOnly => false;
 
         private class Node
@@ -30,11 +40,9 @@ namespace List
             }
         }
 
-        public MyList()
-        {
-            Count = 0;
-        }
-
+        /// <summary>
+        /// Возвращает адрес Нода по данному индексу
+        /// </summary>
         private Node TakeNodeIndex(int index)
         {
             if (ThisBadIndex(index))
@@ -54,6 +62,9 @@ namespace List
 
         private bool ThisBadIndex(int index) => index < 0 || index >= Count;
 
+        /// <summary>
+        /// Добавляет эллемент в коллекцию
+        /// </summary>
         public void Add(T item)
         {
             if (head == null)
@@ -70,6 +81,9 @@ namespace List
             ++Count;
         }
 
+        /// <summary>
+        /// Удаляет все элементы из коллекции
+        /// </summary>
         public void Clear()
         {
             head = null;
@@ -77,14 +91,29 @@ namespace List
             Count = 0;
         }
 
-        //public bool Contains(T item)
-        //{
-            
-        //}
+        /// <summary>
+        /// Определяет, содержит ли коллекция указаное значение
+        /// </summary>
+        public bool Contains(T item)
+        {
+            var temp = head;
+            while (temp != null)
+            {
+                if (EqualityComparer<T>.Default.Equals(temp.Data, item)) 
+                {
+                    return true;
+                }
+                temp = temp.Next;
+            }
+            return false;
+        }
 
+        /// <summary>
+        /// Копирует элементы коллекции ICollection в массив Array, начиная с указанного индекса массива
+        /// </summary>
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (arrayIndex < 0)
+            if (arrayIndex < 0 || arrayIndex >= array.Count()) 
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -104,6 +133,9 @@ namespace List
             }
         }
 
+        /// <summary>
+        /// Определяет индекс заданного элемента в списке
+        /// </summary>
         public int IndexOf(T item)
         {
             var buffer = head;
@@ -119,6 +151,9 @@ namespace List
             return -1;
         }
 
+        /// <summary>
+        /// Вставляет элемент в список по указанному индексу
+        /// </summary>
         public void Insert(int index, T item)
         {
             if (index < 0 || index >= Count + 1) 
@@ -147,6 +182,9 @@ namespace List
             ++Count;
         }
 
+        /// <summary>
+        /// Удаляет первое вхождение указанного обьекта из коллекции
+        /// </summary>
         public bool Remove(T item)
         {
             if(head == null)
@@ -172,6 +210,7 @@ namespace List
                             tail = buffer;
                         }
                         buffer.Next = buffer.Next.Next;
+                        --Count;
                         return true;
                     }
                     buffer = buffer.Next;
@@ -180,25 +219,51 @@ namespace List
             return false;
         }
 
+        /// <summary>
+        /// Удаляет элемент, расположенный по указанному индексу
+        /// </summary>
+        /// <param name="index"></param>
+        public void RemoveAt(int index)
+        {
+            if (ThisBadIndex(index))
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            if (index == 0)
+            {
+                head = head.Next;
+            }
+            else
+            {
+                var buffer = head;
+                for (var i = 0; i < index - 1; i++)
+                {
+                    buffer = buffer.Next;
+                }
 
+                if (index == Count - 1)
+                {
+                    tail = buffer;
+                }
+
+                buffer.Next = buffer.Next.Next;
+            }
+            --Count;
+        }
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveAt(int index)
-        {
-            throw new NotImplementedException();
+            Node current = head;
+            while (current != null)
+            {
+                yield return current.Data;
+                current = current.Next;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
-
-        
-
-        
     }
 }
