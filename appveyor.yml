@@ -4,7 +4,7 @@ environment:
   matrix:
   - solution_path: Semestr_2\Homework_1\Task_1-5\Task_1-5.sln
   - solution_path: Semestr_2\Test\Test_1\Test_1.sln
-
+  - solution_path: Semestr_2\Homework_8\Set\Set.sln
 
 before_build:
   - nuget restore %solution_path%
