@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Set
+﻿namespace Set
 {
     class Program
     {

@@ -271,7 +271,7 @@ namespace Set
         public void IntersectWith(IEnumerable<T> other)
         {
             var newSet = new MySet<T>();
-            foreach (var element in other) 
+            foreach (var element in other)
             {
                 if (FindNode(head, element))
                 {
@@ -289,7 +289,7 @@ namespace Set
         public bool IsProperSubsetOf(IEnumerable<T> other)
         {
             var tempSet = new MySet<T>();
-            foreach (var element in other) 
+            foreach (var element in other)
             {
                 tempSet.Add(element);
             }
