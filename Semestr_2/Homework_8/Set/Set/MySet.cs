@@ -4,12 +4,21 @@ using System.Collections.Generic;
 
 namespace Set
 {
+    /// <summary>
+    /// Класс реализующий интерфейс ISet<>
+    /// </summary>
     public class MySet<T> : ISet<T> where T : IComparable<T>
     {
         private Node head;
 
+        /// <summary>
+        /// Получает число элементов, содержащихся в множестве
+        /// </summary>
         public int Count { get; private set; }
 
+        /// <summary>
+        /// Получает значение, указывающее, является ли объект доступным только для чтения
+        /// </summary>
         public bool IsReadOnly => false;
 
         private class Node
@@ -23,6 +32,9 @@ namespace Set
             }
         }
 
+        /// <summary>
+        /// Добавляет элемент в текущий набор и возвращает значение, указывающее, что элемент был добавлен успешно
+        /// </summary>
         public bool Add(T item)
         {
             if (head == null)
@@ -37,6 +49,9 @@ namespace Set
             }
         }
 
+        /// <summary>
+        /// Находит позицию и добавляет элемент
+        /// </summary>
         private bool FindPositionAndAdd(Node node, T item)
         {
             if (item.CompareTo(node.Item) == 0)
@@ -65,12 +80,18 @@ namespace Set
             }
         }
 
+        /// <summary>
+        /// Удаляет все элементы из коллекции
+        /// </summary>
         public void Clear()
         {
             head = null;
             Count = 0;
         }
 
+        /// <summary>
+        /// Определяет, содержит ли коллекция указанное значение
+        /// </summary>
         public bool Contains(T item)
         {
             var temp = head;
@@ -95,6 +116,9 @@ namespace Set
             }
         }
 
+        /// <summary>
+        /// Копирует элементы коллекции в массив Array, начиная с указанного индекса массива Array
+        /// </summary>
         public void CopyTo(T[] array, int arrayIndex)
         {
             if (arrayIndex < 0 || arrayIndex >= array.Length)
@@ -128,6 +152,9 @@ namespace Set
             }
         }
 
+        /// <summary>
+        /// Возвращает true если элемент присутвствует в коллекции
+        /// </summary>
         private bool FindNode(Node node, T item)
         {
             if (item.CompareTo(node.Item) == 0)
@@ -152,6 +179,9 @@ namespace Set
             }
         }
 
+        /// <summary>
+        /// Удаляет первое вхождение указанного объекта из коллекции
+        /// </summary>
         public bool Remove(T item)
         {
             if (head == null)
@@ -170,6 +200,9 @@ namespace Set
             return true;
         }
 
+        /// <summary>
+        /// Собственно сам метод удаления
+        /// </summary>
         private Node DoDeleteNode(Node node, T item)
         {
             if (node == null)
@@ -221,6 +254,9 @@ namespace Set
             return node;
         }
 
+        /// <summary>
+        /// Удаляет все элементы указанной коллекции из текущего набора
+        /// </summary>
         public void ExceptWith(IEnumerable<T> other)
         {
             foreach (var temp in other)
@@ -229,6 +265,9 @@ namespace Set
             }
         }
 
+        /// <summary>
+        /// Изменяет текущий набор, чтобы он содержал только элементы, которые также имеются в заданной коллекции
+        /// </summary>
         public void IntersectWith(IEnumerable<T> other)
         {
             var newSet = new MySet<T>();
@@ -244,6 +283,9 @@ namespace Set
             newSet.Clear();
         }
 
+        /// <summary>
+        /// Определяет, является ли текущий набор строгим подмножеством заданной коллекции
+        /// </summary>
         public bool IsProperSubsetOf(IEnumerable<T> other)
         {
             var tempSet = new MySet<T>();
@@ -271,6 +313,9 @@ namespace Set
             return false;
         }
 
+        /// <summary>
+        /// Определяет, является ли текущий набор строгим надмножеством заданной коллекции
+        /// </summary>
         public bool IsProperSupersetOf(IEnumerable<T> other)
         {
             var count = 0;
@@ -291,6 +336,9 @@ namespace Set
             return true;
         }
 
+        /// <summary>
+        /// Определяет, является ли текущий набор подмножеством заданной коллекции
+        /// </summary>
         public bool IsSubsetOf(IEnumerable<T> other)
         {
             var tempSet = new MySet<T>();
@@ -312,6 +360,9 @@ namespace Set
             return true;
         }
 
+        /// <summary>
+        /// Определяет, является ли текущий набор надмножеством заданной коллекции
+        /// </summary>
         public bool IsSupersetOf(IEnumerable<T> other)
         {
             foreach (var element in other)
@@ -325,6 +376,9 @@ namespace Set
             return true;
         }
 
+        /// <summary>
+        /// Определяет, пересекаются ли текущий набор и указанная коллекция
+        /// </summary>
         public bool Overlaps(IEnumerable<T> other)
         {
             foreach (var element in other)
@@ -338,6 +392,9 @@ namespace Set
             return false;
         }
 
+        /// <summary>
+        /// Определяет, содержат ли текущий набор и указанная коллекция одни и те же элементы
+        /// </summary>
         public bool SetEquals(IEnumerable<T> other)
         {
             var countOther = 0;
@@ -358,6 +415,9 @@ namespace Set
             return false;
         }
 
+        /// <summary>
+        /// Изменяет текущий набор, чтобы он содержал только элементы, которые имеются либо в текущем наборе, либо в указанной коллекции, но не одновременно в них обоих
+        /// </summary>
         public void SymmetricExceptWith(IEnumerable<T> other)
         {
             foreach (var element in other)
@@ -373,6 +433,9 @@ namespace Set
             }
         }
 
+        /// <summary>
+        /// Изменяет текущий набор так, чтобы он содержал все элементы, которые имеются в текущем наборе, в указанной коллекции либо в них обоих.
+        /// </summary>
         public void UnionWith(IEnumerable<T> other)
         {
             foreach (var element in other)
@@ -391,11 +454,17 @@ namespace Set
             return GetEnumerator();
         }
 
+        /// <summary>
+        /// Возвращает перечислитель, который осуществляет итерацию по коллекции
+        /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
             return new SetEnumerator<T>(this);
         }
 
+        /// <summary>
+        /// Осуществление перечесления
+        /// </summary>
         private class SetEnumerator<T> : IEnumerator<T>
         {
             private T[] mas;
