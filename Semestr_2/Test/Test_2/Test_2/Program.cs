@@ -6,7 +6,7 @@ namespace Test_2
     {
         static void Main(string[] args)
         {
-            var masString = new string[] { "1111 2222", "33", "1111 2222 3333 4444", "1111 2222 3333 4444", "1111 2222 33333" };
+            var masString = new string[] { "1111 2222", "33", "1111 2   222 3333 4444", "1111 2222 3333 4444", "1111 2222 33333" };
 
             var set = ArrayInSet(masString);
 
