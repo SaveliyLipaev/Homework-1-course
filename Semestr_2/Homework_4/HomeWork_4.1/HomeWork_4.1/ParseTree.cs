@@ -18,7 +18,6 @@ namespace HomeWork_4._1
             /// <summary>
             /// Функция производящая подсчет в данном узле
             /// </summary>
-            /// <returns></returns>
             abstract public int Calculate();
 
             /// <summary>
@@ -95,7 +94,7 @@ namespace HomeWork_4._1
         /// Функция для рекурсивного заполнения дерева
         /// </summary>
         /// <param name="index">номер обрабатываемого в строке символа</param>
-        /// <param name="counterNumber">колличество чисел идущих подряд</param>
+        /// <param name="counterNumber">количество чисел идущих подряд</param>
         private Node СreateNode(ref int index, ref int counterNumber)
         {
             ++index;
@@ -144,14 +143,7 @@ namespace HomeWork_4._1
         /// </summary>
         private static int CalculateExpression(Node node)
         {
-            if (int.TryParse(node.ToString(), out int number))
-            {
-                return number;
-            }
-            else
-            {
-                return DoOperation.Arithmetic.Result(CalculateExpression((node as Operator).Left), CalculateExpression((node as Operator).Right), node.ToString());
-            }
+            return node.Calculate();
         }
 
         /// <summary>
