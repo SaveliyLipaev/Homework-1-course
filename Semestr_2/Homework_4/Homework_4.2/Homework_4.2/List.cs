@@ -10,7 +10,7 @@ namespace Homework_4._2
         /// <summary>
         /// Класс реализующий элемент в списке
         /// </summary>
-        protected class Node
+        private class Node
         {
             public string Data { get; set; }
             public Node Next { get; set; }
@@ -23,12 +23,12 @@ namespace Homework_4._2
         }
 
         private int size;
-        protected Node head;
+        private Node head;
 
         /// <summary>
         /// Возвращает true если позиция находится вне диапозона существования
         /// </summary>
-        private bool GoodPosition(int position) => position > 0 && position <= size + 1;
+        protected bool GoodPosition(int position) => position > 0 && position <= size + 1;
 
         /// <summary>
         /// Добавление по введеной позиции
@@ -167,6 +167,37 @@ namespace Homework_4._2
             }
 
             return buffer;
+        }
+
+        /// <summary>
+        /// Функция возвращает возвращает true если элемент найден
+        /// </summary>
+        public bool ExistsNode(string data)
+        {
+            var ptr = head;
+            while (ptr != null)
+            {
+                if (ptr.Data == data)
+                {
+                    return true;
+                }
+                ptr = ptr.Next;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Изменияет значение на заданной позиции, возвращает true если все успешно
+        /// </summary>
+        public virtual bool ChangeValue(int position, string value)
+        {
+            if (!GoodPosition(position))
+            {
+                return false;
+            }
+
+            FindNode(position).Data = value;
+            return true;
         }
     }
 }

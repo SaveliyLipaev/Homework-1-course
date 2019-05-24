@@ -7,29 +7,14 @@ namespace Homework_4._2
     /// </summary>
     public class UniqueList : List
     {
-        /// <summary>
-        /// Функция возвращает возвращает true если элемент найден
-        /// </summary>
-        private bool FindNode(string data)
-        {
-            var ptr = head;
-            while (ptr != null) 
-            {
-                if (ptr.Data == data) 
-                {
-                    return true;
-                }
-                ptr = ptr.Next;
-            }
-            return false;
-        }
+      
 
         /// <summary>
         /// Добавление элемента в начало списка, если такой элемент уже есть в списке кидается исключение AttemptAddAnExistingItemException
         /// </summary>
         public override void Add(string data)
         {
-            if (FindNode(data))
+            if (ExistsNode(data))
             {
                 throw new AttemptAddAnExistingItemException("Невозможно добавить элемент в список, он уже существует");
             }
@@ -42,12 +27,25 @@ namespace Homework_4._2
         /// </summary>
         public override void AddPosition(int position, string data)
         {
-            if (FindNode(data))
+            if (ExistsNode(data))
             {
                 throw new AttemptAddAnExistingItemException("Невозможно добавить элемент в список, он уже существует");
             }
 
             base.AddPosition(position, data);
+        }
+
+        /// <summary>
+        /// Изменияет значение на заданной позиции, возвращает true если все успешно
+        /// </summary>
+        public override bool ChangeValue(int position, string value)
+        {
+            if (ExistsNode(value))
+            {
+                throw new AttemptAddAnExistingItemException("Невозможно добавить элемент в список, он уже существует");
+            }
+
+            return base.ChangeValue(position, value);
         }
     }
 }

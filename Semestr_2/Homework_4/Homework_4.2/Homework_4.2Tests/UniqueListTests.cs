@@ -61,5 +61,7 @@ namespace Homework_4._2.Tests
             list.AddPosition(1, "2");
             list.AddPosition(2, "2");
         }
+
+
     }
 }
