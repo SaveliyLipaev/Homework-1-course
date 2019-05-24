@@ -24,22 +24,22 @@ namespace _6._2
 
                 eventLoop.Run();
             }
-            catch(UnforeseenMapSymbolException e)
+            catch (UnforeseenMapSymbolException e)
             {
                 Console.Clear();
                 Console.WriteLine(e);
             }
-            catch(TwoHeroOnMapException e)
+            catch (TwoHeroOnMapException e)
             {
                 Console.Clear();
                 Console.WriteLine(e);
             }
-            catch(ArgumentOutOfRangeException e)
+            catch (ArgumentOutOfRangeException e)
             {
                 Console.Clear();
                 Console.WriteLine("Неправильно составленная карта");
             }
-            catch(FileNotFoundException e)
+            catch (FileNotFoundException e)
             {
                 Console.Clear();
                 Console.WriteLine(e);

@@ -78,5 +78,14 @@ namespace _6._2.Tests
         {
             game = new Game(@"..\..\BadMap2Test.txt");
         }
+
+        [TestMethod]
+        public void GoInVoidTest()
+        {
+            game.OnDown(this, EventArgs.Empty);
+            game.OnRight(this, EventArgs.Empty);
+            game.OnRight(this, EventArgs.Empty);
+        }
+
     }
 }

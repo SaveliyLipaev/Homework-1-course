@@ -21,7 +21,7 @@ namespace _6._2
         {
             bool heroOnMap = false;
             map = new List<List<char>>();
-            using (StreamReader reader = new StreamReader(fileName))
+            using (var reader = new StreamReader(fileName))
             {
                 string buffer;
                 for (var i = 0; (buffer = reader.ReadLine()) != null; ++i) 
@@ -92,8 +92,6 @@ namespace _6._2
         /// <summary>
         /// Печатает в консоль координату из карты
         /// </summary>
-        /// <param name="xCord"></param>
-        /// <param name="yCord"></param>
         private void PrintCage(int xCord, int yCord)
         {
             Console.CursorLeft = xCord;
@@ -186,6 +184,6 @@ namespace _6._2
         /// <summary>
         /// Возвращает true если в введеной клетке стена
         /// </summary>
-        private bool ThereIsWall(int xCord, int yCord) => map[yCord][xCord] == '#';
-    }
+        private bool ThereIsWall(int xCord, int yCord) => yCord >= map.Count || xCord >= map[yCord].Count || map[yCord][xCord] == '#';
+    } 
 }
