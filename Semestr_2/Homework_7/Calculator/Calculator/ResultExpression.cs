@@ -78,7 +78,7 @@ namespace Calculator
                 }
                 else if (expression[index] == "+" || expression[index] == "-")
                 {
-                    if (stack.Count ==0 || stack.Peek() == "(")
+                    if (stack.Count == 0 || stack.Peek() == "(")
                     {
                         stack.Push(expression[index]);
                         ++index;
@@ -100,7 +100,7 @@ namespace Calculator
                         postfix += stack.Pop() + " ";
                     }
                 }
-                else if (double.TryParse(expression[index], out double result)) 
+                else if (double.TryParse(expression[index], out double _)) 
                 {
                     postfix += expression[index] + " ";
                     ++index;
