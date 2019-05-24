@@ -99,7 +99,7 @@ namespace List
             var temp = head;
             while (temp != null)
             {
-                if (EqualityComparer<T>.Default.Equals(temp.Data, item)) 
+                if (temp.Data.Equals(item)) 
                 {
                     return true;
                 }
@@ -141,7 +141,7 @@ namespace List
             var buffer = head;
             for (var index = 0; buffer != null; ++index) 
             {
-                if (EqualityComparer<T>.Default.Equals(buffer.Data, item))
+                if (buffer.Data.Equals(item))
                 {
                     return index;
                 }
@@ -187,7 +187,7 @@ namespace List
         /// </summary>
         public bool Remove(T item)
         {
-            if(head == null)
+            if (head == null)
             {
                 return false;
             }
@@ -203,7 +203,7 @@ namespace List
                 var buffer = head;
                 while (buffer.Next != null)
                 {
-                    if(EqualityComparer<T>.Default.Equals(buffer.Next.Data, item))
+                    if (EqualityComparer<T>.Default.Equals(buffer.Next.Data, item))
                     {
                         if (tail == buffer.Next)
                         {
@@ -261,9 +261,6 @@ namespace List
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
