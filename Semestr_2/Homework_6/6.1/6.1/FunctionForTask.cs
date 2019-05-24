@@ -15,9 +15,14 @@ namespace _6._1
         /// </summary>
         public static List<int> Map(List<int> list, Func<int, int> func)
         {
+            if (list == null || func == null)
+            {
+                throw new ArgumentException();
+            }
+
             var newList = new List<int>();
 
-            foreach(var element in list)
+            foreach (var element in list)
             {
                 newList.Add(func(element));
             }
@@ -32,6 +37,11 @@ namespace _6._1
         /// </summary>
         public static List<int> Filter(List<int> list, Func<int, bool> func)
         {
+            if (list == null || func == null)
+            {
+                throw new ArgumentException();
+            }
+
             var newList = new List<int>();
 
             foreach (var element in list)
@@ -53,6 +63,11 @@ namespace _6._1
         /// </summary>
         public static int Fold(List<int> list, int presentValue, Func<int, int, int> func)
         {
+            if (list == null || func == null)
+            {
+                throw new ArgumentException();
+            }
+
             foreach (var element in list)
             {
                 presentValue = func(presentValue, element);

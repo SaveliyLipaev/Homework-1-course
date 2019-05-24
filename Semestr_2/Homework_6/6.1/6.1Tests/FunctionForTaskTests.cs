@@ -46,5 +46,19 @@ namespace _6._1.Tests
         {
             Assert.AreEqual(362880, FunctionForTask.Fold(listForTest, 1, (acc, elem) => acc * elem));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.ArgumentException))]
+        public void ArgumentExceptionInFuncTest()
+        {
+            var result = FunctionForTask.Filter(listForTest, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.ArgumentException))]
+        public void ArgumentExceptionInListTest()
+        {
+            var result = FunctionForTask.Filter(null, x => x % 2 == 0);
+        }
     }
 }
