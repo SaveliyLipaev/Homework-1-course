@@ -193,11 +193,7 @@ namespace Set
 
             head = DoDeleteNode(head, item);
 
-            if (countBefore == Count)
-            {
-                return false;
-            }
-            return true;
+            return countBefore != Count;
         }
 
         /// <summary>
@@ -224,31 +220,28 @@ namespace Set
                 {
                     return node.LeftChild;
                 }
+                var right = node.RightChild;
+                var left = node.LeftChild;
+                var min = node.RightChild;
+                var parentMin = node;
+
+                while (min.LeftChild != null)
+                {
+                    parentMin = min;
+                    min = min.LeftChild;
+                }
+
+                if (node.RightChild == min)
+                {
+                    min.LeftChild = left;
+                    return min;
+                }
                 else
                 {
-                    var right = node.RightChild;
-                    var left = node.LeftChild;
-                    var min = node.RightChild;
-                    var parentMin = node;
-
-                    while (min.LeftChild != null)
-                    {
-                        parentMin = min;
-                        min = min.LeftChild;
-                    }
-
-                    if (node.RightChild == min)
-                    {
-                        min.LeftChild = left;
-                        return min;
-                    }
-                    else
-                    {
-                        parentMin.LeftChild = min.RightChild;
-                        min.LeftChild = left;
-                        min.RightChild = right;
-                        return min;
-                    }
+                    parentMin.LeftChild = min.RightChild;
+                    min.LeftChild = left;
+                    min.RightChild = right;
+                    return min;
                 }
             }
             return node;
@@ -298,19 +291,12 @@ namespace Set
             {
                 if (!tempSet.FindNode(tempSet.head, element))
                 {
-                    tempSet.Clear();
+
                     return false;
                 }
             }
 
-            if (tempSet.Count > Count)
-            {
-                tempSet.Clear();
-                return true;
-            }
-
-            tempSet.Clear();
-            return false;
+            return tempSet.Count > Count;
         }
 
         /// <summary>
@@ -328,12 +314,7 @@ namespace Set
                 ++count;
             }
 
-            if (count == Count)
-            {
-                return false;
-            }
-
-            return true;
+            return count != Count;
         }
 
         /// <summary>
@@ -351,12 +332,10 @@ namespace Set
             {
                 if (!tempSet.FindNode(tempSet.head, element))
                 {
-                    tempSet.Clear();
                     return false;
                 }
             }
 
-            tempSet.Clear();
             return true;
         }
 
@@ -407,12 +386,7 @@ namespace Set
                 ++countOther;
             }
 
-            if (countOther == Count)
-            {
-                return true;
-            }
-
-            return false;
+            return countOther == Count;
         }
 
         /// <summary>
@@ -444,28 +418,19 @@ namespace Set
             }
         }
 
-        void ICollection<T>.Add(T item)
-        {
-            Add(item);
-        }
+        void ICollection<T>.Add(T item) => Add(item);
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
         /// Возвращает перечислитель, который осуществляет итерацию по коллекции
         /// </summary>
-        public IEnumerator<T> GetEnumerator()
-        {
-            return new SetEnumerator<T>(this);
-        }
+        public IEnumerator<T> GetEnumerator() => new SetEnumerator(this);
 
         /// <summary>
         /// Осуществление перечесления
         /// </summary>
-        private class SetEnumerator<T> : IEnumerator<T>
+        private class SetEnumerator : IEnumerator<T>
         {
             private T[] mas;
             private int position = -1;
