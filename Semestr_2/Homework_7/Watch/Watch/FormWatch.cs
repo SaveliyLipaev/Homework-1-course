@@ -18,6 +18,7 @@ namespace Watch
         public FormWatch()
         {
             InitializeComponent();
+            tablo.Text = DateTime.Now.ToString("T");
         }
 
         /// <summary>
