@@ -2,6 +2,9 @@
 
 namespace Calculator
 {
+    /// <summary>
+    /// Класс, реализующий логику формы
+    /// </summary>
     public class LogicForm
     {
         private bool wasPoint = false;
