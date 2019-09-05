@@ -8,6 +8,7 @@ environment:
   - solution_path: Semestr_2\Homework_8\List\List.sln  
   - solution_path: Semestr_2\Homework_7\Watch\Watch.sln
   - solution_path: Semestr_2\Homework_7\Calculator\Calculator.sln
+  - solution_path: Semestr_2\Homework_6\6.2\6.2.sln
   - nuget restore %solution_path%
 
 build_script:
