@@ -1,7 +1,11 @@
 image: Visual Studio 2017
 
+
+
 environment:
+
   matrix:
+
   - solution_path: Semestr_2\Homework_1\Task_1-5\Task_1-5.sln
   - solution_path: Semestr_2\Test\Test_1\Test_1.sln  
   - solution_path: Semestr_2\Homework_8\Set\Set.sln  
@@ -10,7 +14,13 @@ environment:
   - solution_path: Semestr_2\Homework_7\Calculator\Calculator.sln
   - solution_path: Semestr_2\Homework_6\6.2\6.2.sln
   - solution_path: Semestr_2\Homework_6\6.1\6.1.sln
+  - solution_path: Semestr_2\Homework_4\HomeWork_4.1\HomeWork_4.1.sln
+
+
   - nuget restore %solution_path%
 
+
+
 build_script:
+
   - msbuild %solution_path%
