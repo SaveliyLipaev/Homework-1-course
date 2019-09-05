@@ -7,7 +7,7 @@ environment:
   - solution_path: Semestr_2\Homework_8\Set\Set.sln  
   - solution_path: Semestr_2\Homework_8\List\List.sln  
   - solution_path: Semestr_2\Homework_7\Watch\Watch.sln
-  before_build:
+  - solution_path: Semestr_2\Homework_7\Calculator\Calculator.sln
   - nuget restore %solution_path%
 
 build_script:
